@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addItem } from '../actions/actions'
+import RenderTracks from './RenderTracks.jsx'
 
 class App extends Component {
   constructor(props){
@@ -23,7 +24,7 @@ class App extends Component {
         {
           items.map(item => {
             return (
-              <li key=''>
+              <li key={Math.random()}>
                 <div className='list-item'>
                   <div>{item.text}</div>
                 </div>
@@ -49,6 +50,7 @@ class App extends Component {
             </button>
           </div>
           { this.renderItems() }
+          <RenderTracks />
         </div>
       </div>
     )
