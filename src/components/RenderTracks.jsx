@@ -11,13 +11,16 @@ export class RenderTracks extends Component {
 	}	
 
 	loadTracks(){
-		this.props.loadTracks()
+		this.props.loadTracks(this.state.tracks)
 	}
 
 	componentDidMount() {
-		console.log('componentDidMount', this.props)
 		this.props.loadTracks()
 	}	
+
+	 componentWillMount() {
+    
+  }
 
 	render() {
 		return <h2>RenderTracks Component</h2>
@@ -25,7 +28,6 @@ export class RenderTracks extends Component {
 }
 
 function mapStateToProps(state) {
-	console.log('render tracks state', state)
 	return {
 		tracks: state
 	}

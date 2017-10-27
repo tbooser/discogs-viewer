@@ -6,9 +6,12 @@ const express = require('express'),
 			db = new Discogs().database(),
 			col = new Discogs().user().collection(),
 			Path = require('path')
+      bodyParser = require('body-parser')
 
 const assetFolder = Path.resolve(__dirname, '../public');
   routes.use(express.static(assetFolder));
+
+console.log(assetFolder)
 
 if (process.env.NODE_ENV !== 'test') {
   routes.get('/*', function(req, res){
@@ -17,13 +20,15 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 app.get('/music', function(req, res){
+  console.log('got here')
 	col.getReleases('tboos', 0, {page: 1, per_page: 75}, function(err, data){
-		console.log(data.releases);
+		console.log('data releases:', data.releases);
 		res.send(data.releases);
 	});
 })
 
 app.use( require('body-parser').json() )
+app.use(bodyParser.text({type: 'text/html'}))
 app.use('/', routes);
 
 const server = app.listen(3000, () => {
@@ -32,4 +37,7 @@ const server = app.listen(3000, () => {
 
 
 
+routes.get('/', function (req, res) {
+  res.sendFile(path.join( __dirname + '/dist/index.html' ));
+});
 
