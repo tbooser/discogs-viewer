@@ -1,5 +1,4 @@
 export const ADD_ITEM = 'ADD_ITEM'
 
-export const LOAD_TRACKS = 'LOAD_TRACKS'
 export const LOAD_TRACKS_SUCCESS = 'LOAD_TRACKS_SUCCESS'
 export const LOAD_TRACKS_ERROR = 'LOAD_TRACKS_ERROR'

@@ -12,13 +12,19 @@ class App extends Component {
   }
 
   addItem() {
-    console.log('this.state.text', this.state.text)
     this.props.addItem(this.state.text)
   }
 
+  componentWillMount() {
+
+  }
+
+  componentDidMount() {
+    
+  }
+
   renderItems() {
-    const { items } = this.props.items
-    console.log('this.props --->>>', items)
+    const items  = this.props.app.loadItems.items
     return (
       <ul className='list-group col-sm-4'>
         {
@@ -58,9 +64,8 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state', state)
   return {
-    items: state
+    app: state
   }
 }
 
