@@ -31,7 +31,7 @@ app.use( require('body-parser').json() )
 app.use(bodyParser.text({type: 'text/html'}))
 app.use('/', routes);
 
-const server = app.listen(3000, () => {
+const server = app.listen(3001, () => {
   console.log('Listening on port ' + server.address().port)
 })
 
