@@ -9,6 +9,7 @@ const item = {
 function loadItems (state = item, action) {
   switch (action.type) {
     case ADD_ITEM:
+      console.log('LOAD ITEM REDUCER')
       return Object.assign({}, state, {
         items: [...state.items, {
           text: action.text
