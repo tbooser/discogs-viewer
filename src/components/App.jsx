@@ -16,11 +16,9 @@ class App extends Component {
   }
 
   componentWillMount() {
-
   }
 
   componentDidMount() {
-    
   }
 
   renderItems() {
@@ -46,7 +44,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>App Component</h1>
+        <h1></h1>
         <div className='form-inline'>
           <div className='form-group'>
             <input className='form-control' placeholder='Add item' onChange={event=> this.setState({text:event.target.value})}>

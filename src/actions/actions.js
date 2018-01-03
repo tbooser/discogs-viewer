@@ -13,9 +13,12 @@ export const addItem = (text, id) => {
 }
 
 export const loadTracksSuccess = (response) => {
-	return dispatch => {
-		dispatch({response, type: LOAD_TRACKS_SUCCESS})
+	const action = {
+		type: LOAD_TRACKS_SUCCESS,
+		response
 	}
+	console.log('Action in loadTracksSuccess', action)
+	return action
 }
 
 export const loadTracksError = (error) => {
@@ -31,6 +34,7 @@ export const loadTracks = (data) => {
 		}).then(response => {
 			return response.json()
 		}).then(response => {
+			loadTracksSuccess(response)
 			console.log('Response ', response)
 		})
 	}

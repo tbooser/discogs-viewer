@@ -11,19 +11,24 @@ export class RenderTracks extends Component {
 	}	
 
 	loadTracks(){
-		this.props.loadTracks(this.state.tracks)
+		this.props.loadTracks()
+		console.log('this.props ', this.props)
 	}
 
 	componentDidMount() {
-		this.props.loadTracks()
+				this.loadTracks()
 	}	
 
 	 componentWillMount() {
-    
+
   }
 
 	render() {
-		return <h2>RenderTracks Component</h2>
+		return (
+			<div>
+
+			</div>
+		)
 	}
 }
 
