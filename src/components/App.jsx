@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { addItem } from '../actions/actions'
 import RenderTracks from './RenderTracks.jsx'
 
-class App extends Component {
+export class App extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -13,12 +13,12 @@ class App extends Component {
 
   addItem() {
     this.props.addItem(this.state.text)
+        console.log('this.props ADD ITEM-- >> ', this.props)
   }
 
-  componentWillMount() {
-  }
-
-  componentDidMount() {
+  getTracks() {
+    // this.props.loadTracks()
+    console.log('this.props ADD ITEM-- >> ', this.props)
   }
 
   renderItems() {
@@ -38,7 +38,6 @@ class App extends Component {
         }
       </ul>
     )
-
   }
 
   render() {

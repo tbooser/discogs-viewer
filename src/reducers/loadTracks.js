@@ -3,30 +3,28 @@ import {
   LOAD_TRACKS_ERROR 
 } from '../constants'
 
-const tracks = {
+const trackList = {
   tracks: ['']
 }
 
-function loadTracks(state = tracks, action){
-  console.log('action ', action.type)
-  switch(action.type) {
+function loadTracksReducer (state = trackList, action){
+  switch (action.type) {
     case LOAD_TRACKS_SUCCESS:
       console.log('LOAD_TRACKS_SUCCESS')
-      let answer = action.response
-      console.log('Action.response -->> ', answer)
-        return Object.assign({}, state, {
-          tracks: [...state.tracks, {
-            tracks: action.response
-          }]
-        })
+      return Object.assign({}, state, {
+        tracks: [...state.trackList, {
+          response: action.response
+        }]
+      })
     case LOAD_TRACKS_ERROR:
       console.log('LOAD_TRACKS_ERROR')
      	return state 
     default:
-      console.log('returning default')
+      console.log('RETURNING DEFAULT')
+      console.log('Action SDFS', action)
       return state  
   }
 }
 
 
-export default loadTracks
+export default loadTracksReducer

@@ -1,22 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { loadTracks } from '../actions/actions'
+import { loadTracks } from '../actions/loadTracksActions'
 
 export class RenderTracks extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			tracks: ['']
+			trackList: ['']
 		}
 	}	
 
 	loadTracks(){
 		this.props.loadTracks()
-		console.log('this.props ', this.props)
+		console.log('this.props RENDER TRACKS ', this.props)
 	}
 
 	componentDidMount() {
-				this.loadTracks()
+		this.loadTracks()
 	}	
 
 	 componentWillMount() {
@@ -26,7 +26,9 @@ export class RenderTracks extends Component {
 	render() {
 		return (
 			<div>
-
+        <button type='button' className='btn btn-success' onClick={() => this.loadTracks() }>
+          Tracks
+        </button>
 			</div>
 		)
 	}
@@ -34,7 +36,7 @@ export class RenderTracks extends Component {
 
 function mapStateToProps(state) {
 	return {
-		tracks: state
+		app: state
 	}
 }
 
