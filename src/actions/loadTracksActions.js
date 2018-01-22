@@ -22,9 +22,8 @@ export const loadTracks = () => {
 		}).then(response => {
 			return response.json()
 		}).then(response => {
-			loadTracksSuccess(response)
+			dispatch(loadTracksSuccess(response))
 			console.log('Response ', response)
 		})
 	}
 }
-

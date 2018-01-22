@@ -19,14 +19,30 @@ export class RenderTracks extends Component {
 		this.loadTracks()
 	}	
 
-	 componentWillMount() {
-
+  renderItems() {
+    const tracks  = this.props.app.loadTracks.tracks
+    console.log('tracks ', tracks)
+    return (
+      <ul className='list-group col-sm-4'>
+        {
+          tracks.map(item => {
+            return (
+              <li key={Math.random()}>
+                <div className='list-item'>
+                  <div>{item.instance_id}</div>
+                </div>
+              </li>
+            )
+          })
+        }
+      </ul>
+    )
   }
 
 	render() {
 		return (
 			<div>
-        <button type='button' className='btn btn-success' onClick={() => this.loadTracks() }>
+        <button type='button' className='btn btn-success' onClick={() => this.renderItems() }>
           Tracks
         </button>
 			</div>

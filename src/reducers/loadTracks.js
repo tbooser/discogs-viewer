@@ -1,5 +1,4 @@
-import { 
-  LOAD_TRACKS_SUCCESS,
+import { LOAD_TRACKS_SUCCESS,
   LOAD_TRACKS_ERROR 
 } from '../constants'
 
@@ -11,6 +10,7 @@ function loadTracksReducer (state = trackList, action){
   switch (action.type) {
     case LOAD_TRACKS_SUCCESS:
       console.log('LOAD_TRACKS_SUCCESS')
+      console.log('Action ', action)
       return Object.assign({}, state, {
         tracks: [...state.trackList, {
           response: action.response
@@ -21,7 +21,6 @@ function loadTracksReducer (state = trackList, action){
      	return state 
     default:
       console.log('RETURNING DEFAULT')
-      console.log('Action SDFS', action)
       return state  
   }
 }
