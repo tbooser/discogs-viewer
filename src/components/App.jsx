@@ -43,18 +43,7 @@ export class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1></h1>
-        <div className='form-inline'>
-          <div className='form-group'>
-            <input className='form-control' placeholder='Add item' onChange={event=> this.setState({text:event.target.value})}>
-            </input>
-            <button type='button' className='btn btn-success' onClick={() => this.addItem() }>
-              Submit
-            </button>
-          </div>
-          { this.renderItems() }
-          <RenderTracks />
-        </div>
+        <RenderTracks />
       </div>
     )
   }

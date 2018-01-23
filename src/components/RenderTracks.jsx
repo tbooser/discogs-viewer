@@ -10,44 +10,42 @@ export class RenderTracks extends Component {
 		}
 	}	
 
-	loadTracks(){
-		this.props.loadTracks()
-		console.log('this.props RENDER TRACKS ', this.props)
-	}
-
 	componentDidMount() {
-		this.loadTracks()
+		this.props.loadTracks()
 	}	
 
   renderItems() {
     const tracks  = this.props.app.loadTracks.tracks
-    console.log('tracks ', tracks)
-    return (
-      <ul className='list-group col-sm-4'>
-        {
-          tracks.map(item => {
-            return (
-              <li key={Math.random()}>
-                <div className='list-item'>
-                  <div>{item.instance_id}</div>
-                </div>
-              </li>
-            )
-          })
-        }
-      </ul>
-    )
+    for (var i = 0; i < tracks.length; i++){
+    	if (tracks.length > 1 && tracks[i].response !== undefined){
+    		console.log('Data -> ', tracks[i].response)
+    		return (
+		    	<ul className='list-group'>
+		        {
+		          tracks[i].response.map(item => {
+		            return (
+		            	<div className='col-sm-3' key={Math.random()}>
+		              	<img className='record-image' src={item.basic_information.cover_image} />
+		              </div>
+		            )
+		          })
+		        }
+		      </ul>
+	      )
+    	}
+    }
   }
 
 	render() {
 		return (
-			<div>
-        <button type='button' className='btn btn-success' onClick={() => this.renderItems() }>
-          Tracks
-        </button>
+ 			<div className='container'>
+ 				<div className='row'>
+ 					{ this.renderItems() }
+ 				</div>
 			</div>
 		)
 	}
+
 }
 
 function mapStateToProps(state) {

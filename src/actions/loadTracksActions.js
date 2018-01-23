@@ -4,7 +4,7 @@ import {
 } from '../constants.js'
 
 export const loadTracksSuccess = (response) => {
-	console.log('Action in loadTracksSuccess', response)
+	// console.log('Action in loadTracksSuccess', response)
   return dispatch => {
     dispatch({ response, type: LOAD_TRACKS_SUCCESS });
   };
@@ -23,7 +23,7 @@ export const loadTracks = () => {
 			return response.json()
 		}).then(response => {
 			dispatch(loadTracksSuccess(response))
-			console.log('Response ', response)
+			// console.log('Response ', response)
 		})
 	}
 }

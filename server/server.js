@@ -19,7 +19,7 @@ if (process.env.NODE_ENV !== 'test') {
 
 app.get('/music', function(req, res){
 	col.getReleases('tboos', 0, {page: 1, per_page: 75}, function(err, data){
-		console.log('data releases:', data.releases);
+		// console.log('data releases:', data.releases);
 		res.send(data.releases);
 	});
 })
