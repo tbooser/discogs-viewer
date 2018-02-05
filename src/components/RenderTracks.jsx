@@ -20,17 +20,14 @@ export class RenderTracks extends Component {
     	if (tracks.length > 1 && tracks[i].response !== undefined){
     		console.log('Data -> ', tracks[i].response)
     		return (
-		    	<ul className='list-group'>
-		        {
-		          tracks[i].response.map(item => {
-		            return (
-		            	<div className='col-sm-3' key={Math.random()}>
-		              	<img className='record-image' src={item.basic_information.cover_image} />
-		              </div>
-		            )
-		          })
-		        }
-		      </ul>
+          tracks[i].response.map(item => {
+          	var counter = 1;
+            return (
+            	<div className='record-image-container col-sm-3' key={Math.random()}>
+              	<img className='record-image' src={item.basic_information.cover_image} />
+              </div>
+            )
+          })
 	      )
     	}
     }
