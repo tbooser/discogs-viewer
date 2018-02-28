@@ -17,12 +17,14 @@ if (process.env.NODE_ENV !== 'test') {
   })
 }
 
-app.get('/music', function(req, res){
-	col.getReleases('tboos', 0, {page: 1, per_page: 200}, function(err, data){
-		// console.log('data releases:', data.releases);
-		res.send(data.releases);
-	});
-})
+const musicController = require('./api/musicController');
+
+console.log(musicController)
+
+//Routes
+app.get('/music', musicController.getMusicByCollection)
+app.get('/id', musicController.getMusicById)
+
 
 app.use( require('body-parser').json() )
 app.use(bodyParser.text({type: 'text/html'}))
@@ -31,7 +33,6 @@ app.use('/', routes);
 const server = app.listen(3001, () => {
   console.log('Listening on port ' + server.address().port)
 })
-
 
 
 routes.get('/', function (req, res) {
