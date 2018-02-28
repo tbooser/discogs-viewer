@@ -7,9 +7,9 @@
   margin-top: 15px;
   max-height: 255px;
   width: 100%; }
-
-.record-image:hover {
-  border: 1px solid #cec439; }
+  .record-image:hover {
+    border: 1px solid #cec439;
+    cursor: pointer; }
 
 li {
   list-style-type: none; }
