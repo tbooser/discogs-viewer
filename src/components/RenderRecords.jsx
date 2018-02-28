@@ -16,15 +16,14 @@ export class RenderRecords extends Component {
 	}	
 
   renderRecords() {
-    const records  = this.props.app.loadRecords.records
+    let records  = this.props.app.loadRecords.records
+    console.log('records', records)
     for (var i = 0; i < records.length; i++){
     	if (records.length > 1 && records[i].response !== undefined){
-    		console.log('Data -> ', records[i].response)
     		return (
           records[i].response.map(item => {
-          	var counter = 1;
             return (
-            	<RecordItem imgSrc={item.basic_information.cover_image} key={Math.random()}/>
+            	<RecordItem imgSrc={item.basic_information.cover_image} id={item.id} key={Math.random()}/>
             )
           })
 	      )
