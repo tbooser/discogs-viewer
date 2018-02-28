@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addItem } from '../actions/actions'
-import RenderTracks from './RenderTracks.jsx'
+import RenderRecords from './RenderRecords.jsx'
 
 export class App extends Component {
   constructor(props){
@@ -16,8 +16,7 @@ export class App extends Component {
         console.log('this.props ADD ITEM-- >> ', this.props)
   }
 
-  getTracks() {
-    // this.props.loadTracks()
+  getRecords() {
     console.log('this.props ADD ITEM-- >> ', this.props)
   }
 
@@ -40,10 +39,11 @@ export class App extends Component {
     )
   }
 
+
   render() {
     return (
       <div className="App">
-        <RenderTracks />
+        <RenderRecords />
       </div>
     )
   }
