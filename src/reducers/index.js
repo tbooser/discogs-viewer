@@ -1,8 +1,10 @@
 import loadItems from './loadItems'
-import loadRecords from './loadRecords'
+import loadRecordsByUsername from './loadRecordsByUsername'
+import loadRecordById from './loadRecordById'
 import { combineReducers } from 'redux'
 
 export default combineReducers({
   loadItems,
-  loadRecords
+  loadRecordsByUsername,
+  loadRecordById
 })

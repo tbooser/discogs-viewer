@@ -17,16 +17,14 @@ if (process.env.NODE_ENV !== 'test') {
   })
 }
 
-const musicController = require('./api/musicController');
-
-console.log(musicController)
-
 //Routes
-app.get('/music', musicController.getMusicByCollection)
-app.get('/id', musicController.getMusicById)
+const musicController = require('./api/musicController')
+
+app.get('/music',  musicController.getMusicByCollection)
+app.post('/id',    musicController.getMusicById)
 
 
-app.use( require('body-parser').json() )
+app.use(require('body-parser').json() )
 app.use(bodyParser.text({type: 'text/html'}))
 app.use('/', routes);
 
@@ -36,6 +34,6 @@ const server = app.listen(3001, () => {
 
 
 routes.get('/', function (req, res) {
-  res.sendFile(path.join( __dirname + '/dist/index.html' ));
+  res.sendFile(path.join( __dirname + '/dist/index.html' ))
 });
 
