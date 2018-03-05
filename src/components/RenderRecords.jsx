@@ -10,7 +10,8 @@ export class RenderRecords extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			recordList: ['']
+			recordList: [''],
+			hovering: false
 		}
 	}	
 
@@ -21,15 +22,26 @@ export class RenderRecords extends Component {
 
   renderRecords() {
     let records  = this.props.app.loadRecordsByUsername.records
-    // console.log('records', records)
     for (var i = 0; i < records.length; i++){
     	if (records.length > 1 && records[i].response !== undefined){
     		return (
           records[i].response.map(item => {
+          	if(item.basic_information.cover_image === 'https://img.discogs.com/images/spacer.gif'){
+          		item.basic_information.cover_image = 'https://en.wikipedia.org/wiki/Phonograph_record#/media/File:12in-Vinyl-LP-Record-Angle.jpg'
+          	}
             return (
-            	<RecordItem handleChange={this.props.actions.recordActions.getRecordById} imgSrc={item.basic_information.cover_image} id={item.id} key={Math.random()}/>
+            	<RecordItem 
+            		handleChange={this.props.actions.recordActions.getRecordById} 
+            		recordTitle={item.basic_information.title}
+            		artistName={item.basic_information.artists[0].name}
+  							imgSrc={item.basic_information.cover_image} 
+  							label={item.basic_information.labels[0].name}
+  							year={item.basic_information.year} 
+  							id={item.id} 
+  							key={Math.random()}
+  						/>
             )
-          })
+          }) 
 	      )
     	}
     }

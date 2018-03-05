@@ -1,23 +1,58 @@
 .App {
-	background: #f2f2f2;
+	background: #688AB7;
+	font-family: "Helvetica Neue", Helvetica, Arial;
 }
 
 .record-image-container {
+	position: relative;
+	height: 100%;
+	width: auto;
+	float: left;
+	display: table;
+}
+
+.record-details-container {
+	position: relative;
 }
 
 .record-image {
-	border: 1px solid #637a91;
+	// border: 2px solid transparent;
 	height: 100%;
 	margin-top: 15px;
 	max-height: 255px;
 	width: 100%;
+	top: 0;
+	// position: relative;
+	display: block;
 
 	&:hover {
-		border: 1px solid #cec439;
+		// border: 2px solid #EF8354;
 		cursor: pointer;
+		// box-shadow: 5px 5px;
 	}
 }
 
 li {
 	list-style-type: none;
 } 
+
+.record-info {
+  width: 100% !important;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: #D5AE73;
+  // left: 30px;
+  position: absolute;
+  pointer-events: none;
+  background: #4F5D75;
+  opacity: .95;
+  padding: 20px 0 0 20px;
+
+}
+
+.record-text {
+	color: #C6D8D3;
+}
