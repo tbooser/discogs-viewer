@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getRecordById } from '../actions/loadRecordsActions'
+import RecordInfo from './RecordInfo'
 
 export class RecordItem extends Component {
 	constructor(props){
@@ -9,28 +10,57 @@ export class RecordItem extends Component {
 			recordList: [''],
 			clicked: false,
 			currentID: '',
+			hovering: false
 		}
 		
-		this.setClickId    = this.setClickId.bind(this)
-		this.addClickEvent = this.addClickEvent.bind(this)
+		this.setClickId      = this.setClickId.bind(this)
+		this.addClickEvent   = this.addClickEvent.bind(this)
 
 	}
 
 	setClickId(){
-		this.setState({currentID: this.props.id})
+		this.setState({ currentID: this.props.id })
 		this.addClickEvent()
 	}
 
 	addClickEvent(){
 		console.log(this.props, 'this.props')
-		this.props.handleChange(this.props.id)
+	}
+
+	handleMouseover(){
+		this.setState({ hovering: true })
+		// console.log('Hover over ', this)
+	}
+
+	handleMouseOut(){
+		this.setState({ hovering: false })
+		console.log('mouseout')
 	}
 
 	render() {
 	  return (
 	  	<div className='record-image-container col-sm-3' onClick={this.setClickId} key={Math.random()}>
-	    	<img className='record-image' alt='Record' id={this.props.id} src={this.props.imgSrc} />
-	    </div>
+  			<div className='record-details-container'>
+	  			<img className='record-image' 
+	  				onClick={ this.handleMouseover.bind(this) } 
+	  				onMouseLeave={ this.handleMouseOut.bind(this) } 
+	  				src={ this.props.imgSrc } 
+	  				alt='Record' 
+	  				id={ this.props.id } 
+	  				/>
+					{
+						this.state.hovering === true
+							? <RecordInfo
+									artistName={this.props.artistName}
+									recordTitle={this.props.recordTitle}
+									label={this.props.label}
+									year={this.props.year}
+								/>
+							: null
+					}
+				</div>
+	  	</div>
+
 	  )
 	}
 }
