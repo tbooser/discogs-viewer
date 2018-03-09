@@ -19,9 +19,8 @@
   width: 100%;
   top: 0;
   display: block; }
-
-.record-image:hover {
-  cursor: pointer; }
+  .record-image:hover {
+    cursor: pointer; }
 
 li {
   list-style-type: none; }

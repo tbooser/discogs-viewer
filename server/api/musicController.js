@@ -1,6 +1,6 @@
 	exports.getMusicByCollection = (req, res) => {
 		console.log('Getting music by collection')
-		col.getReleases('tboos', 0, {page: 1, per_page: 200}, function(err, data){
+		col.getReleases('tboos', 0, {page: 1, per_page: 300}, function(err, data){
 			res.send(data.releases);
 		})
 	}
