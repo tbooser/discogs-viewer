@@ -49,7 +49,7 @@ export class RenderRecords extends Component {
 
 	render() {
 		return (
- 			<div className='container'>
+ 			<div className='container record-list-container'>
  				<div className='row'>
  					{ this.renderRecords() }
  				</div>

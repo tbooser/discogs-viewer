@@ -1,6 +1,21 @@
 .App {
-  background: #688AB7;
-  font-family: "Helvetica Neue", Helvetica, Arial; }
+  background: #BFD8D2;
+  font-family: 'Libre Franklin', sans-serif;
+  padding: 50px 30px; }
+
+.header-image {
+  height: 120px;
+  width: 200px; }
+
+.header-image img {
+  height: auto;
+  width: 100%; }
+
+.record-list-container {
+  background: #F4F4F4;
+  border: 1px solid grey;
+  box-shadow: 8px 8px 6px -6px black;
+  padding: 30px 50px; }
 
 .record-image-container {
   position: relative;
@@ -13,14 +28,17 @@
   position: relative; }
 
 .record-image {
+  border: 1px solid grey;
+  box-shadow: 8px 8px 6px -6px black;
+  display: block;
   height: 100%;
-  margin-top: 15px;
   max-height: 255px;
-  width: 100%;
+  margin-top: 15px;
   top: 0;
-  display: block; }
-  .record-image:hover {
-    cursor: pointer; }
+  width: 100%; }
+
+.record-image:hover {
+  cursor: pointer; }
 
 li {
   list-style-type: none; }
@@ -32,12 +50,12 @@ li {
   bottom: 0;
   left: 0;
   right: 0;
-  color: #D5AE73;
   position: absolute;
   pointer-events: none;
-  background: #4F5D75;
+  background: #E1E8F2;
   opacity: .95;
   padding: 20px 0 0 20px; }
 
 .record-text {
-  color: #C6D8D3; }
+  color: #170E15;
+  opacity: 1; }
