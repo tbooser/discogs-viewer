@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addItem } from '../actions/actions'
 import RenderRecords from './RenderRecords.jsx'
+import Header from './Header'
 
 export class App extends Component {
   constructor(props){
@@ -43,6 +44,7 @@ export class App extends Component {
   render() {
     return (
       <div className="App">
+        <Header />
         <RenderRecords />
       </div>
     )
