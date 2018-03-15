@@ -3,6 +3,12 @@
   font-family: 'Libre Franklin', sans-serif;
   padding: 50px 30px; }
 
+.loading-spinner-container {
+  margin: 0 auto; }
+
+.header {
+  font-family: 'Rubik', sans-serif; }
+
 .header-image {
   height: 120px;
   width: 200px; }
@@ -13,8 +19,6 @@
 
 .record-list-container {
   background: #F4F4F4;
-  border: 1px solid grey;
-  box-shadow: 8px 8px 6px -6px black;
   padding: 30px 50px; }
 
 .record-image-container {
@@ -44,17 +48,22 @@ li {
   list-style-type: none; }
 
 .record-info {
-  width: 100% !important;
-  height: 100%;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  position: absolute;
-  pointer-events: none;
   background: #E1E8F2;
+  bottom: 0;
+  height: 100%;
+  left: 0;
   opacity: .95;
-  padding: 20px 0 0 20px; }
+  padding: 20px 0 0 20px;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100% !important;
+  transition: height 500ms ease;
+  -moz-transition: height 500ms ease;
+  -ms-transition: height 500ms ease;
+  -o-transition: height 500ms ease;
+  -webkit-transition: height 500ms ease; }
 
 .record-text {
   color: #170E15;
