@@ -5,8 +5,11 @@ export default function Header() {
 	return (
 		<div className='container'>
 			<div className='row'>
-				<div className='header-image'>
-					<img src={discogsImage}/>
+				<div className='header'>
+					Tim's
+					<div className='header-image'>
+						<img src={discogsImage}/>
+					</div>
 				</div>
 			</div>
 		</div>

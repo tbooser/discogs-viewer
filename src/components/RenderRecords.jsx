@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { getRecordsByUsername } from '../actions/loadRecordsActions'
 import { getRecordById } from '../actions/loadRecordsActions'
 import RecordItem from './RecordItem'
+import LoadingSpinner from './LoadingSpinner'
 import * as recordActions from '../actions/loadRecordsActions'
 
 export class RenderRecords extends Component {
@@ -11,14 +12,32 @@ export class RenderRecords extends Component {
 		super(props)
 		this.state = {
 			recordList: [''],
-			hovering: false
+			hovering: false,
+			isFetching: true,
 		}
+
+		this.loadingSpinner = this.loadingSpinner.bind(this)
 	}	
+
+	componentWillMount() {
+		this.loadingSpinner()
+	}
 
 	componentDidMount() {
 		this.props.actions.recordActions.getRecordsByUsername()
+		this.state.isFetching = false
 		console.log(this.props, 'thidassd')
 	}	
+
+	loadingSpinner(){
+		if(this.state.isFetching) {
+			return(
+				<LoadingSpinner />
+				)
+		} else {
+			return
+		}
+	}
 
   renderRecords() {
     let records  = this.props.app.loadRecordsByUsername.records
@@ -26,9 +45,6 @@ export class RenderRecords extends Component {
     	if (records.length > 1 && records[i].response !== undefined){
     		return (
           records[i].response.map(item => {
-          	if(item.basic_information.cover_image === 'https://img.discogs.com/images/spacer.gif'){
-          		item.basic_information.cover_image = 'https://en.wikipedia.org/wiki/Phonograph_record#/media/File:12in-Vinyl-LP-Record-Angle.jpg'
-          	}
             return (
             	<RecordItem 
             		handleChange={this.props.actions.recordActions.getRecordById} 
@@ -51,6 +67,7 @@ export class RenderRecords extends Component {
 		return (
  			<div className='container record-list-container'>
  				<div className='row'>
+					{ this.loadingSpinner() } 				
  					{ this.renderRecords() }
  				</div>
 			</div>
