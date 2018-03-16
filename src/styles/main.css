@@ -1,32 +1,42 @@
+html {
+  height: 100%; }
+
+body {
+  min-height: 100%; }
+
+#root {
+  height: 100vh; }
+
 .App {
   background: #BFD8D2;
   font-family: 'Libre Franklin', sans-serif;
-  padding: 50px 30px; }
+  padding: 50px 30px;
+  min-height: 100%; }
 
-.loading-spinner-container {
-  margin: 0 auto; }
+.bg-color {
+  background: #BFD8D2; }
 
 .header {
   font-family: 'Rubik', sans-serif; }
-
-.header-image {
-  height: 120px;
-  width: 200px; }
-
-.header-image img {
-  height: auto;
-  width: 100%; }
+  .header .header-image {
+    height: 120px;
+    width: 200px; }
+  .header .header-image img {
+    height: auto;
+    width: 100%; }
 
 .record-list-container {
   background: #F4F4F4;
   padding: 30px 50px; }
+  .record-list-container .loading-spinner-container {
+    margin: 0 auto; }
 
 .record-image-container {
-  position: relative;
-  height: 100%;
-  width: auto;
+  display: table;
   float: left;
-  display: table; }
+  height: 100%;
+  position: relative;
+  width: auto; }
 
 .record-details-container {
   position: relative; }
@@ -40,9 +50,8 @@
   margin-top: 15px;
   top: 0;
   width: 100%; }
-
-.record-image:hover {
-  cursor: pointer; }
+  .record-image:hover {
+    cursor: pointer; }
 
 li {
   list-style-type: none; }
@@ -58,12 +67,7 @@ li {
   position: absolute;
   right: 0;
   top: 0;
-  width: 100% !important;
-  transition: height 500ms ease;
-  -moz-transition: height 500ms ease;
-  -ms-transition: height 500ms ease;
-  -o-transition: height 500ms ease;
-  -webkit-transition: height 500ms ease; }
+  width: 100% !important; }
 
 .record-text {
   color: #170E15;

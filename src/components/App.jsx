@@ -14,7 +14,7 @@ export class App extends Component {
 
   addItem() {
     this.props.addItem(this.state.text)
-        console.log('this.props ADD ITEM-- >> ', this.props)
+      console.log('this.props ADD ITEM-- >> ', this.props)
   }
 
   getRecords() {
