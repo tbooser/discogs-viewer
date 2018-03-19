@@ -8,7 +8,6 @@ import {
 ////////// LOAD RECORD COLLECTION BY USERNAME
 
 export const loadRecordsByUsernameSuccess = (response) => {
-	console.log('Action in loadRecordsByUsernameSuccess', response)
   return dispatch => {
     dispatch({ response, type: LOAD_RECORDS_BY_USERNAME_SUCCESS });
   };

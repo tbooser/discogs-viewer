@@ -9,7 +9,7 @@ const recordList = {
 function loadRecordsByUsername (state = recordList, action) {
   switch (action.type) {
     case LOAD_RECORDS_BY_USERNAME_SUCCESS:
-      console.log('LOAD_RECORDS_BY_USERNAME_SUCCESS')
+      // console.log('LOAD_RECORDS_BY_USERNAME_SUCCESS')
       return Object.assign({}, state, {
         records: [...state.records, {
           response: action.response
