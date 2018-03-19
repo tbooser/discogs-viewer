@@ -29,12 +29,10 @@ export class RecordItem extends Component {
 
 	handleMouseover(){
 		this.setState({ hovering: true })
-		// console.log('Hover over ', this)
 	}
 
 	handleMouseOut(){
 		this.setState({ hovering: false })
-		console.log('mouseout')
 	}
 
 	render() {

@@ -7,17 +7,17 @@ const clickedRecord = {
 }
 
 function loadRecordById (state = clickedRecord, action) {
-	console.log('action', action)
+	// console.log('action', action)
   switch(action.type) {
     case LOAD_RECORD_BY_ID_SUCCESS:
-      console.log('LOAD_RECORD_BY_ID_SUCCESS')
+      // console.log('LOAD_RECORD_BY_ID_SUCCESS')
       return Object.assign({}, {
         record: [...state.clickedRecord, {
           response: action.response
         }]
       })
     case LOAD_RECORD_BY_ID_ERROR:
-      console.log('LOAD_RECORD_BY_ID_ERROR')
+      // console.log('LOAD_RECORD_BY_ID_ERROR')
       return state
     default:
       return state

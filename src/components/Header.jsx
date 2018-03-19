@@ -8,7 +8,7 @@ export default function Header() {
 				<div className='header'>
 					Tim's
 					<div className='header-image'>
-						<img src={discogsImage}/>
+						<img alt='header-discogs' src={discogsImage}/>
 					</div>
 				</div>
 			</div>

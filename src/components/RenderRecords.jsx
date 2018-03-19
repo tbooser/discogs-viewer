@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { getRecordsByUsername } from '../actions/loadRecordsActions'
-import { getRecordById } from '../actions/loadRecordsActions'
 import RecordItem from './RecordItem'
 import LoadingSpinner from './LoadingSpinner'
 import * as recordActions from '../actions/loadRecordsActions'
@@ -26,7 +24,6 @@ export class RenderRecords extends Component {
 	componentDidMount() {
 		this.props.actions.recordActions.getRecordsByUsername()
 		this.state.isFetching = false
-		console.log(this.props, 'thidassd')
 	}	
 
 	loadingSpinner(){
