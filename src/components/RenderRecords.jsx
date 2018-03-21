@@ -14,7 +14,8 @@ export class RenderRecords extends Component {
 			isFetching: true,
 		}
 
-		this.loadingSpinner = this.loadingSpinner.bind(this)
+		this.loadingSpinner   = this.loadingSpinner.bind(this)
+		this.openYoutubeVideo = this.openYoutubeVideo.bind(this)
 	}	
 
 	componentWillMount() {
@@ -24,7 +25,21 @@ export class RenderRecords extends Component {
 	componentDidMount() {
 		this.props.actions.recordActions.getRecordsByUsername()
 		this.state.isFetching = false
+		console.log(this.props, 'dfsdf')
 	}	
+
+	componentDidUpdate(prevProps){
+		console.log(this.props, 'Updated')
+
+		// let currentVideoIndex = this.props.app.loadYoutubeVideos.videos.length
+		// let currentVideo = this.props.app.loadYoutubeVideos.videos[currentVideoIndex - 1].response.videos[0].uri
+		// this.openYoutubeVideo(currentVideo)
+	}
+
+	openYoutubeVideo(video){
+		var newTab = window.open(video, '_blank')
+		newTab.focus()
+	}
 
 	loadingSpinner(){
 		if(this.state.isFetching) {
@@ -38,20 +53,23 @@ export class RenderRecords extends Component {
 
   renderRecords() {
     let records  = this.props.app.loadRecordsByUsername.records
+    console.log('records ', records)
     for (var i = 0; i < records.length; i++){
     	if (records.length > 1 && records[i].response !== undefined){
     		return (
           records[i].response.map(item => {
             return (
             	<RecordItem 
+            	  id={item.id}
+            	  key={Math.random()}
+            	  year={item.basic_information.year}
+            	  recordTitle={item.basic_information.title} 
+            	  imgSrc={item.basic_information.cover_image} 
+            	  label={item.basic_information.labels[0].name}
+            	  resource_url={item.basic_information.resource_url} 
+            	  artistName={item.basic_information.artists[0].name}
             		handleChange={this.props.actions.recordActions.getRecordById} 
-            		recordTitle={item.basic_information.title}
-            		artistName={item.basic_information.artists[0].name}
-  							imgSrc={item.basic_information.cover_image} 
-  							label={item.basic_information.labels[0].name}
-  							year={item.basic_information.year} 
-  							id={item.id} 
-  							key={Math.random()}
+            		getYoutubeVideo={this.props.actions.recordActions.fetchYoutubeVideos}
   						/>
             )
           }) 
