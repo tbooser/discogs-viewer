@@ -10,22 +10,32 @@ export class RecordItem extends Component {
 			recordList: [''],
 			clicked: false,
 			currentID: '',
-			hovering: false
+			hovering: false,
+			current_youtube_video: null,
+			videoList: []
 		}
 		
-		this.setClickId      = this.setClickId.bind(this)
-		this.addClickEvent   = this.addClickEvent.bind(this)
+		this.handleRecordClick       					= this.handleRecordClick.bind(this)
+		this.getYoutubeVideos        					= this.getYoutubeVideos.bind(this)
+		// this.updateCurrentYoutubeVideos				= this.updateCurrentYoutubeVideos.bind(this)
+		// this.openYoutubeVideo									= this.openYoutubeVideo.bind(this)
 
 	}
 
-	setClickId(){
-		this.setState({ currentID: this.props.id })
-		this.addClickEvent()
+	handleRecordClick(){
+		this.getYoutubeVideos()
 	}
 
-	addClickEvent(){
-		console.log(this.props, 'this.props')
+	getYoutubeVideos(){
+  	this.props.getYoutubeVideo(this.props.resource_url)
 	}
+
+	openYoutubeVideo(video){
+		// var video = 
+		var newTab = window.open(video, '_blank')
+		newTab.focus()
+	}
+
 
 	handleMouseover(){
 		this.setState({ hovering: true })
@@ -37,10 +47,10 @@ export class RecordItem extends Component {
 
 	render() {
 	  return (
-	  	<div className='record-image-container col-sm-3' onClick={this.setClickId} key={Math.random()}>
+	  	<div className='record-image-container col-sm-3' onClick={this.handleRecordClick} key={Math.random()}>
   			<div className='record-details-container'>
 	  			<img className='record-image' 
-	  				onClick={ this.handleMouseover.bind(this) } 
+	  				onMouseEnter={ this.handleMouseover.bind(this) } 
 	  				onMouseLeave={ this.handleMouseOut.bind(this) } 
 	  				src={ this.props.imgSrc } 
 	  				alt='Record' 
@@ -53,6 +63,8 @@ export class RecordItem extends Component {
 									recordTitle={this.props.recordTitle}
 									label={this.props.label}
 									year={this.props.year}
+									resource_url={this.props.resource_url}
+									youtube_videos={this.props.youtube_videos_array}
 								/>
 							: null
 					}
@@ -66,7 +78,7 @@ export class RecordItem extends Component {
 
 function mapStateToProps(state) {
 	return {
-		app: state
+		app: state,
 	}
 }
 

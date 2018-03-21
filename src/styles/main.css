@@ -8,7 +8,7 @@ body {
   height: 100vh; }
 
 .App {
-  background: #BFD8D2;
+  background: #A1C4C4;
   font-family: 'Libre Franklin', sans-serif;
   padding: 50px 30px;
   min-height: 100%; }
@@ -57,8 +57,11 @@ li {
   list-style-type: none; }
 
 .record-info {
-  background: #E1E8F2;
+  background: #111112;
   bottom: 0;
+  color: #E0E0E0;
+  font-size: 16px;
+  font-weight: 700;
   height: 100%;
   left: 0;
   opacity: .95;
@@ -69,6 +72,11 @@ li {
   top: 0;
   width: 100% !important; }
 
+.fa-external-link-alt {
+  margin-right: 15px;
+  position: absolute;
+  right: 0; }
+
 .record-text {
-  color: #170E15;
+  color: #9e5a75;
   opacity: 1; }
