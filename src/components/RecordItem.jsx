@@ -11,14 +11,12 @@ export class RecordItem extends Component {
 			clicked: false,
 			currentID: '',
 			hovering: false,
-			current_youtube_video: null,
+			current_youtube_video_artist: null,
 			videoList: []
 		}
 		
 		this.handleRecordClick       					= this.handleRecordClick.bind(this)
 		this.getYoutubeVideos        					= this.getYoutubeVideos.bind(this)
-		// this.updateCurrentYoutubeVideos				= this.updateCurrentYoutubeVideos.bind(this)
-		// this.openYoutubeVideo									= this.openYoutubeVideo.bind(this)
 
 	}
 
@@ -28,14 +26,8 @@ export class RecordItem extends Component {
 
 	getYoutubeVideos(){
   	this.props.getYoutubeVideo(this.props.resource_url)
+  	this.setState({current_youtube_video_artist:this.props.artistName})
 	}
-
-	openYoutubeVideo(video){
-		// var video = 
-		var newTab = window.open(video, '_blank')
-		newTab.focus()
-	}
-
 
 	handleMouseover(){
 		this.setState({ hovering: true })
@@ -64,7 +56,7 @@ export class RecordItem extends Component {
 									label={this.props.label}
 									year={this.props.year}
 									resource_url={this.props.resource_url}
-									youtube_videos={this.props.youtube_videos_array}
+									youtube_videos={this.props.videoArray}
 								/>
 							: null
 					}

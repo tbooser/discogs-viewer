@@ -25,15 +25,19 @@ export class RenderRecords extends Component {
 	componentDidMount() {
 		this.props.actions.recordActions.getRecordsByUsername()
 		this.state.isFetching = false
-		console.log(this.props, 'dfsdf')
 	}	
 
 	componentDidUpdate(prevProps){
-		console.log(this.props, 'Updated')
-
-		// let currentVideoIndex = this.props.app.loadYoutubeVideos.videos.length
-		// let currentVideo = this.props.app.loadYoutubeVideos.videos[currentVideoIndex - 1].response.videos[0].uri
-		// this.openYoutubeVideo(currentVideo)
+		let currentVideoIndex = this.props.app.loadYoutubeVideos.videos.length - 1
+		let currentVideo = this.props.app.loadYoutubeVideos.videos[currentVideoIndex].response
+		if(currentVideo){
+			if(currentVideo.videos.length > 1){
+				var randomVideo = currentVideo.videos[Math.floor(Math.random()*currentVideo.videos.length)].uri;
+				this.openYoutubeVideo(randomVideo)
+			} else {
+				this.openYoutubeVideo(currentVideo.videos[0].uri)
+			}
+		}
 	}
 
 	openYoutubeVideo(video){
