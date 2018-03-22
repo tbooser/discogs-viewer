@@ -1,12 +1,15 @@
+var config = require('./config')
 const express = require('express'),
       app = express(),
       routes = express.Router(),
       request = require('request')
       Discogs = require('disconnect').Client
-			db = new Discogs().database(),
-			col = new Discogs().user().collection(),
+      var dis = new Discogs(config)
+			db = dis.database(),
+			col = dis.user().collection(),
 			Path = require('path')
       bodyParser = require('body-parser')
+
 
 const assetFolder = Path.resolve(__dirname, '../public');
   routes.use(express.static(assetFolder));
