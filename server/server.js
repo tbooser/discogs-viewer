@@ -5,9 +5,9 @@ const config = require('./config')
       request = require('request')
       Discogs = require('disconnect').Client
       var dis = new Discogs(config)
-			db = dis.database(),
-			col = dis.user().collection(),
-			Path = require('path')
+      db = dis.database(),
+      col = dis.user().collection(),
+      Path = require('path')
       bodyParser = require('body-parser')
 
 
