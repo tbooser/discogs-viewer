@@ -16,6 +16,8 @@ export class RenderRecords extends Component {
 
 		this.loadingSpinner   = this.loadingSpinner.bind(this)
 		this.openYoutubeVideo = this.openYoutubeVideo.bind(this)
+		this.shuffle          = this.shuffle.bind(this)
+
 	}	
 
 	componentWillMount() {
@@ -27,14 +29,17 @@ export class RenderRecords extends Component {
 		this.state.isFetching = false
 	}	
 
-	componentDidUpdate(prevProps){
+	componentDidUpdate(){
 		let currentVideoIndex = this.props.app.loadYoutubeVideos.videos.length - 1
 		let currentVideo = this.props.app.loadYoutubeVideos.videos[currentVideoIndex].response
 		if(currentVideo){
-			if(currentVideo.videos.length > 1){
+			if(currentVideo.videos === undefined){ // If no videos have been uploaded to Discogs for this record
+				return
+			}
+			if(currentVideo.videos.length > 1){ // If there is more than one video uploaded for this record, i.e. for multiple tracks, select one randomly to open
 				var randomVideo = currentVideo.videos[Math.floor(Math.random()*currentVideo.videos.length)].uri;
 				this.openYoutubeVideo(randomVideo)
-			} else {
+			} else { // If there is only one video uploaded for this record, open it
 				this.openYoutubeVideo(currentVideo.videos[0].uri)
 			}
 		}
@@ -53,6 +58,14 @@ export class RenderRecords extends Component {
 		} else {
 			return
 		}
+	}
+
+	shuffle(a){
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
 	}
 
   renderRecords() {

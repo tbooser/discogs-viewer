@@ -1,9 +1,6 @@
 import { 
 	LOAD_RECORDS_BY_USERNAME_SUCCESS,
 	LOAD_RECORDS_BY_USERNAME_ERROR,
-	// LOAD_RECORD_BY_ID_SUCCESS,
-	// LOAD_RECORD_BY_ID_ERROR
-	// FETCH_YOUTUBE_VIDEOS,
 	RECEIVE_YOUTUBE_VIDEOS_SUCCESS,
 	HOVER_STATE_ACTIVE,
 	HOVER_STATE_INACTIVE,
@@ -21,7 +18,6 @@ export const loadRecordsByUsernameSuccess = (response) => {
 
 export const receiveYoutubeVideosSuccess = (response) => {
 	return dispatch => {
-		// console.log('RECEIVE_YOUTUBE_VIDEOS_SUCCESS')
 		dispatch({ response, type: RECEIVE_YOUTUBE_VIDEOS_SUCCESS })
 	}
 }
@@ -38,7 +34,6 @@ export const getRecordsByUsername = () => {
 		}).then(response => {
 			return response.json()
 		}).then(response => {
-			console.log(response, 'getRecordsByUsername response')
 			dispatch(loadRecordsByUsernameSuccess(response))
 		})
 	}
@@ -54,7 +49,6 @@ export const fetchYoutubeVideos = (resource_url) => {
 			return response.json()
 		}).then(response => {
 			dispatch(receiveYoutubeVideosSuccess(response))
-			console.log('Youtube videos response', response)
 		})
 	}
 }

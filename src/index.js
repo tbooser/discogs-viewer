@@ -8,8 +8,7 @@ import combineReducers from './reducers'
 import './styles/main.css';
 
 const store = createStore(combineReducers, applyMiddleware(ReduxThunk))
-console.log('Store --->>> ', store.getState())
-// store.subscribe()
+// console.log('Store --->>> ', store.getState())
 
 ReactDOM.render(
   <Provider store={store}>

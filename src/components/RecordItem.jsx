@@ -7,12 +7,9 @@ export class RecordItem extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			recordList: [''],
 			clicked: false,
-			currentID: '',
 			hovering: false,
 			current_youtube_video_artist: null,
-			videoList: []
 		}
 		
 		this.handleRecordClick       					= this.handleRecordClick.bind(this)
@@ -22,6 +19,7 @@ export class RecordItem extends Component {
 
 	handleRecordClick(){
 		this.getYoutubeVideos()
+		console.log(this.props)
 	}
 
 	getYoutubeVideos(){
@@ -56,7 +54,7 @@ export class RecordItem extends Component {
 									label={this.props.label}
 									year={this.props.year}
 									resource_url={this.props.resource_url}
-									youtube_videos={this.props.videoArray}
+									key={this.props.key}
 								/>
 							: null
 					}
