@@ -18,18 +18,21 @@ body {
 
 .header {
   font-family: 'Rubik', sans-serif; }
-  .header .header-image {
-    height: 120px;
-    width: 200px; }
-  .header .header-image img {
-    height: auto;
-    width: 100%; }
+
+.header .header-image {
+  height: 120px;
+  width: 200px; }
+
+.header .header-image img {
+  height: auto;
+  width: 100%; }
 
 .record-list-container {
   background: #F4F4F4;
   padding: 30px 50px; }
-  .record-list-container .loading-spinner-container {
-    margin: 0 auto; }
+
+.record-list-container .loading-spinner-container {
+  margin: 0 auto; }
 
 .record-image-container {
   display: table;
@@ -50,8 +53,9 @@ body {
   margin-top: 15px;
   top: 0;
   width: 100%; }
-  .record-image:hover {
-    cursor: pointer; }
+
+.record-image:hover {
+  cursor: pointer; }
 
 li {
   list-style-type: none; }
@@ -73,9 +77,10 @@ li {
   width: 100% !important; }
 
 .fa-external-link-alt {
-  margin-right: 15px;
+  margin-right: 5px;
   position: absolute;
-  right: 0; }
+  right: 0;
+  top: 5px; }
 
 .record-text {
   color: #9e5a75;

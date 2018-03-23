@@ -1,5 +1,5 @@
-var config = require('./config')
-const express = require('express'),
+const config = require('./config')
+      express = require('express'),
       app = express(),
       routes = express.Router(),
       request = require('request')
