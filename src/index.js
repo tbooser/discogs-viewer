@@ -12,7 +12,7 @@ const store = createStore(combineReducers, applyMiddleware(ReduxThunk))
 
 ReactDOM.render(
   <Provider store={store}>
-  	<App />
+    <App />
   </Provider>,
-  	document.getElementById('root')
+    document.getElementById('root')
 )
