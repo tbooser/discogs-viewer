@@ -7,9 +7,40 @@ body {
 #root {
   height: 100vh; }
 
+.homepage-container {
+  font-family: 'Rubik', sans-serif; }
+
+.homepage-container a {
+  color: inherit; }
+
+.homepage-container .homepage-header {
+  background: paleturquoise;
+  font-weight: 700;
+  left: 10px;
+  top: 10px; }
+
+.homepage-container .hero-section-left {
+  font-size: 29px;
+  padding: 10% 0; }
+
+.homepage-container .hero-section-right {
+  padding: 10% 0; }
+
+.homepage-container .nav-link {
+  text-decoration: none;
+  padding: 10px 0; }
+
+.homepage-container .github-logo {
+  max-height: 50px;
+  max-width: 50px;
+  margin: 15px; }
+
+.homepage-container .linkedin-logo {
+  max-height: 50px;
+  max-width: 50px; }
+
 .App {
-  background: #A1C4C4;
-  font-family: 'Libre Franklin', sans-serif;
+  font-family: 'Rubik', sans-serif;
   padding: 50px 30px;
   min-height: 100%; }
 

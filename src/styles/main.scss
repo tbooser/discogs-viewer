@@ -10,10 +10,57 @@ body {
   height: 100vh;
 }
 
+
+
+///// Homepage
+.homepage-container {
+  // font-family: 'Libre Franklin', sans-serif;
+  font-family: 'Rubik', sans-serif;
+  
+  a { color: inherit; } 
+
+  .homepage-header {
+    background: paleturquoise;
+    font-weight: 700;
+    left: 10px;
+    top: 10px;
+  }
+
+  .hero-section-left {
+    // border: 2px solid red;
+    font-size: 29px;
+    padding: 10% 0;
+  }
+
+  .hero-section-right {
+    padding: 10% 0;
+  }
+
+  .nav-link {
+    text-decoration: none;
+    padding: 10px 0;
+  }
+
+  .github-logo {
+    max-height: 50px; 
+    max-width: 50px;
+    margin: 15px;
+  }
+
+  .linkedin-logo {
+    max-height: 50px; 
+    max-width: 50px;
+  }
+}
+
+
+
+
 .App {
   // background: #BFD8D2;
-  background: #A1C4C4;
-  font-family: 'Libre Franklin', sans-serif;
+  // background: #A1C4C4;
+  // font-family: 'Libre Franklin', sans-serif;
+  font-family: 'Rubik', sans-serif;
   padding: 50px 30px;
   min-height: 100%;
 }
