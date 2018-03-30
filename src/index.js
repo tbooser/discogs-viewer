@@ -18,8 +18,8 @@ ReactDOM.render(
     <BrowserRouter>
       <Switch>
         <Route exact path='/' component={HomepageContainer}/>
-        <Route exact path='/discogsView' component={App}/>
-        <Route exact path='/discogsData' component={DiscogsDataContainer}/>
+        <Route exact path='/discogs-view' component={App}/>
+        <Route exact path='/discogs-data' component={DiscogsDataContainer}/>
       </Switch>
     </BrowserRouter>
   </Provider>,

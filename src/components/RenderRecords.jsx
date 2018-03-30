@@ -120,7 +120,10 @@ export class RenderRecords extends Component {
   render() {
     return (
       <div className='container record-list-container'>
-        <div className='row'>
+        <div className='record-container-intro-copy'>
+          Hover over a record to find out more info, and click on a record to load a random track from it!
+        </div>
+        <div className='mt-4 row'>
           { this.loadingSpinner() }         
           { this.renderRecords() }
         </div>

@@ -39,6 +39,10 @@ body {
   max-height: 50px;
   max-width: 50px; }
 
+.homepage-container .portfolio-item-image img {
+  height: 100%;
+  width: 100%; }
+
 .App {
   font-family: 'Rubik', sans-serif;
   padding: 50px 30px;
@@ -57,6 +61,11 @@ body {
 .header .header-image img {
   height: auto;
   width: 100%; }
+
+.record-container-intro-copy {
+  font-size: 21px;
+  font-weight: 700;
+  text-align: center; }
 
 .record-list-container {
   background: #F4F4F4;

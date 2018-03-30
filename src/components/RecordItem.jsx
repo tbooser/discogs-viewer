@@ -19,7 +19,6 @@ export class RecordItem extends Component {
 
   handleRecordClick(){
     this.getYoutubeVideos()
-    console.log(this.props)
   }
 
   getYoutubeVideos(){

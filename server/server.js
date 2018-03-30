@@ -1,14 +1,17 @@
 const config = require('./config')
-      express = require('express'),
-      app = express(),
-      routes = express.Router(),
-      request = require('request')
-      Discogs = require('disconnect').Client
-      var dis = new Discogs(config)
-      db = dis.database(),
-      col = dis.user().collection(),
+      express = require('express')
+      app = express()
+      routes = express.Router()
       Path = require('path')
       bodyParser = require('body-parser')
+       _ = require('underscore')
+      
+      Discogs = require('disconnect').Client
+      dis = new Discogs(config)
+      db = dis.database()
+      col = dis.user().collection()
+      wantList = dis.user().wantlist()
+
 
 
 const assetFolder = Path.resolve(__dirname, '../public');
@@ -28,7 +31,7 @@ app.post('/id',    musicController.getMusicById)
 
 
 app.use(require('body-parser').json() )
-app.use(bodyParser.text({type: 'text/html'}))
+  app.use(bodyParser.text({type: 'text/html'})) 
 app.use('/', routes);
 
 const server = app.listen(3001, () => {
