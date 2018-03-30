@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import RenderRecords from './RenderRecords.jsx'
-import Header from './Header'
+import RenderRecords from './DiscogsCollectionView/RenderRecords.jsx'
+import Header from './DiscogsCollectionView/Header'
 
 export class App extends Component {
   constructor(props){
