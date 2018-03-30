@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import RecordItem from './RecordItem'
 import LoadingSpinner from './LoadingSpinner'
-import * as recordActions from '../actions/loadRecordsActions'
+import * as recordActions from '../../actions/loadRecordsActions'
 
 export class RenderRecords extends Component {
   constructor(props){

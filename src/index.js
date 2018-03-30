@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from 'redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import ReduxThunk from 'redux-thunk'
 import App from './components/App.jsx'
-import DiscogsDataContainer from './components/DiscogsDataContainer.jsx'
+import DiscogsDataContainer from './components/DiscogsCollectionView/DiscogsDataContainer.jsx'
 import HomepageContainer from './components/Homepage/HomepageContainer.jsx'
 import combineReducers from './reducers'
 import './styles/main.css';

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getRecordById } from '../actions/loadRecordsActions'
+import { getRecordById } from '../../actions/loadRecordsActions'
 import RecordInfo from './RecordInfo'
 
 export class RecordItem extends Component {
@@ -40,7 +40,7 @@ export class RecordItem extends Component {
         <div className='record-details-container'>
           <img className='record-image' 
             onMouseEnter={ this.handleMouseover.bind(this) } 
-            onMouseLeave={ this.handleMouseOut.bind(this) } 
+            onMouseOut={ this.handleMouseOut.bind(this) } 
             src={ this.props.imgSrc } 
             alt='Record' 
             id={ this.props.id } 
