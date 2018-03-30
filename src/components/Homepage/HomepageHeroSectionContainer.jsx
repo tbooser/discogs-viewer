@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import HomepageHeroSectionLeft from './HomepageHeroSectionLeft'
 import HomepageHeroSectionRight from './HomepageHeroSectionRight'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 export class HomepageHeroSectionContainer extends Component {
 	constructor(props){
@@ -15,10 +16,10 @@ export class HomepageHeroSectionContainer extends Component {
 		return (
 			<div className='container my-4'>
 				<div className='row'>
-					<div className='col-sm-3 col-md-6'>
+					<div className='col-sm-12 col-md-6'>
 						<HomepageHeroSectionLeft />
 					</div>
-					<div className='col-sm-3 col-md-6'>
+					<div className='col-sm-12 col-md-6'>
 						<HomepageHeroSectionRight />
 					</div>
 				</div>
@@ -34,3 +35,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(HomepageHeroSectionContainer)
+
