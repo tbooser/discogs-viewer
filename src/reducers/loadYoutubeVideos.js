@@ -1,24 +1,25 @@
-import { FETCH_YOUTUBE_VIDEOS,
-  RECEIVE_YOUTUBE_VIDEOS_SUCCESS,
-} from '../constants'
+import { FETCH_YOUTUBE_VIDEOS, RECEIVE_YOUTUBE_VIDEOS_SUCCESS } from "../constants";
 
 const videoList = {
-  videos: [''],
-}
+  videos: [""]
+};
 
-function loadYoutubeVideos (state = videoList, action) {
+function loadYoutubeVideos(state = videoList, action) {
   switch (action.type) {
     case RECEIVE_YOUTUBE_VIDEOS_SUCCESS:
       return Object.assign({}, state, {
-    		videos: [...state.videos, {
-    			response: action.response
-    		}]
-    	})
+        videos: [
+          ...state.videos,
+          {
+            response: action.response
+          }
+        ]
+      });
     case FETCH_YOUTUBE_VIDEOS:
-    	return
+      return;
     default:
-    	return state
+      return state;
   }
 }
 
-export default loadYoutubeVideos
+export default loadYoutubeVideos;

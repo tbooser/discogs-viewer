@@ -1,4 +1,4 @@
-import { 
+import {
   LOAD_RECORDS_BY_USERNAME_SUCCESS,
   LOAD_RECORDS_BY_USERNAME_ERROR,
   RECEIVE_YOUTUBE_VIDEOS_SUCCESS,
@@ -6,80 +6,83 @@ import {
   HOVER_STATE_INACTIVE,
   LOADING_SPINNER_ACTIVE,
   LOADING_SPINNER_INACTIVE
-} from '../constants.js'
+} from "../constants.js";
 
 ////////// LOAD RECORD COLLECTION BY USERNAME
 
-export const loadRecordsByUsernameSuccess = (response) => {
+export const loadRecordsByUsernameSuccess = response => {
   return dispatch => {
     dispatch({ response, type: LOAD_RECORDS_BY_USERNAME_SUCCESS });
   };
-}
+};
 
-export const receiveYoutubeVideosSuccess = (response) => {
+export const receiveYoutubeVideosSuccess = response => {
   return dispatch => {
-    dispatch({ response, type: RECEIVE_YOUTUBE_VIDEOS_SUCCESS })
-  }
-}
+    dispatch({ response, type: RECEIVE_YOUTUBE_VIDEOS_SUCCESS });
+  };
+};
 
-export const loadRecordsByUsernameError = (error) => {
-  return { error, type: LOAD_RECORDS_BY_USERNAME_ERROR }
-}
+export const loadRecordsByUsernameError = error => {
+  return { error, type: LOAD_RECORDS_BY_USERNAME_ERROR };
+};
 
 export const getRecordsByUsername = () => {
   return dispatch => {
-    fetch('/music', {
-      accept: 'application/json',
-      method: 'GET'
-    }).then(response => {
-      return response.json()
-    }).then(response => {
-      dispatch(loadRecordsByUsernameSuccess(response))
+    fetch("/music", {
+      accept: "application/json",
+      method: "GET"
     })
-  }
-}
+      .then(response => {
+        return response.json();
+      })
+      .then(response => {
+        dispatch(loadRecordsByUsernameSuccess(response));
+      });
+  };
+};
 
-export const fetchYoutubeVideos = (resource_url) => {
-  // console.log('fetchYoutubeVideos action')
+export const fetchYoutubeVideos = resource_url => {
   return dispatch => {
     fetch(resource_url, {
-      accept: 'application/json',
-      method: 'GET'
-    }).then(response => {
-      return response.json()
-    }).then(response => {
-      dispatch(receiveYoutubeVideosSuccess(response))
+      accept: "application/json",
+      method: "GET"
     })
-  }
-}
+      .then(response => {
+        return response.json();
+      })
+      .then(response => {
+        dispatch(receiveYoutubeVideosSuccess(response));
+      });
+  };
+};
 
 export const hoverStateActive = () => {
   return dispatch => {
-    console.log('HOVER_STATE_ACTIVE')
-    dispatch({type: HOVER_STATE_ACTIVE })
-  }
-}
+    console.log("HOVER_STATE_ACTIVE");
+    dispatch({ type: HOVER_STATE_ACTIVE });
+  };
+};
 
 export const hoverStateInactive = () => {
   return dispatch => {
-    console.log('HOVER_STATE_INACTIVE')
-    dispatch({type: HOVER_STATE_INACTIVE })
-  }
-}
+    console.log("HOVER_STATE_INACTIVE");
+    dispatch({ type: HOVER_STATE_INACTIVE });
+  };
+};
 
 export const loadingSpinnerActive = () => {
   return dispatch => {
-    console.log('LOADING_SPINNER_ACTIVE')
-    dispatch({type: LOADING_SPINNER_ACTIVE })
-  }
-}
+    console.log("LOADING_SPINNER_ACTIVE");
+    dispatch({ type: LOADING_SPINNER_ACTIVE });
+  };
+};
 
 export const loadingSpinnerInactive = () => {
   return dispatch => {
-    console.log('LOADING_SPINNER_INACTIVE')
-    dispatch({type: LOADING_SPINNER_INACTIVE })
-  }
-}
+    console.log("LOADING_SPINNER_INACTIVE");
+    dispatch({ type: LOADING_SPINNER_INACTIVE });
+  };
+};
 
 ////////// LOAD RECORD BY ID
 
