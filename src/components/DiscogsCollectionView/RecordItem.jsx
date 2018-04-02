@@ -35,12 +35,12 @@ export class RecordItem extends Component {
 
   render() {
     return (
-      <div
-        className="record-image-container col-sm-3"
-        onClick={this.handleRecordClick}
-        key={Math.random()}
-      >
-        <div className="record-details-container">
+      <div className="record-item-container card col-sm-3">
+        <div
+          className="record-image-container card-img-top"
+          onClick={this.handleRecordClick}
+          key={Math.random()}
+        >
           <img
             className="record-image"
             onMouseEnter={this.handleMouseover.bind(this)}
@@ -49,7 +49,9 @@ export class RecordItem extends Component {
             alt="Record"
             id={this.props.id}
           />
-          {this.state.hovering === true ? (
+        </div>
+        <div className="record-details-container card-body">
+          <div className="card-text">
             <RecordInfo
               artistName={this.props.artistName}
               recordTitle={this.props.recordTitle}
@@ -58,7 +60,7 @@ export class RecordItem extends Component {
               resource_url={this.props.resource_url}
               key={this.props.key}
             />
-          ) : null}
+          </div>
         </div>
       </div>
     );

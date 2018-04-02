@@ -10,7 +10,6 @@ export class RecordInfo extends Component {
   render() {
     return (
       <div className="record-info" onClick={this.getYoutubeVideos}>
-        <i className="fas fa-external-link-alt" />
         <p>
           <span className="record-text">Artist - </span>
           {this.props.artistName}
