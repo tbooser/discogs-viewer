@@ -1,24 +1,25 @@
-import { LOAD_RECORDS_BY_USERNAME_SUCCESS,
-  LOAD_RECORDS_BY_USERNAME_ERROR,
-} from '../constants'
+import { LOAD_RECORDS_BY_USERNAME_SUCCESS, LOAD_RECORDS_BY_USERNAME_ERROR } from "../constants";
 
 const recordList = {
-  records: [''],
-}
+  records: [""]
+};
 
-function loadRecordsByUsername (state = recordList, action) {
+function loadRecordsByUsername(state = recordList, action) {
   switch (action.type) {
     case LOAD_RECORDS_BY_USERNAME_SUCCESS:
       return Object.assign({}, state, {
-        records: [...state.records, {
-          response: action.response
-        }]
-      })
+        records: [
+          ...state.records,
+          {
+            response: action.response
+          }
+        ]
+      });
     case LOAD_RECORDS_BY_USERNAME_ERROR:
-     	return state 
+      return state;
     default:
-      return state  
+      return state;
   }
 }
 
-export default loadRecordsByUsername
+export default loadRecordsByUsername;

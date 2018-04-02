@@ -1,23 +1,21 @@
-import { LOADING_SPINNER_ACTIVE,
-  LOADING_SPINNER_INACTIVE,
-} from '../constants'
+import { LOADING_SPINNER_ACTIVE, LOADING_SPINNER_INACTIVE } from "../constants";
 
 const loadingSpinnerState = {
-  loading: true,
-}
+  loading: true
+};
 
-function loadingSpinner (state = loadingSpinnerState, action) {
+function loadingSpinner(state = loadingSpinnerState, action) {
   switch (action.type) {
     case LOADING_SPINNER_ACTIVE:
-      return state
+      return state;
     case HOVER_STATE_INACTIVE:
       return {
         ...state,
         loading: false
-      }
+      };
     default:
-      return state  
+      return state;
   }
 }
 
-export default loadingSpinner
+export default loadingSpinner;

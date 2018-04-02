@@ -10,13 +10,13 @@ body {
   height: 100vh;
 }
 
-
-
 ///// Homepage
 .homepage-container {
-  font-family: 'Rubik', sans-serif;
-  
-  a { color: inherit; } 
+  font-family: "Rubik", sans-serif;
+
+  a {
+    color: inherit;
+  }
 
   .homepage-header {
     background: paleturquoise;
@@ -40,16 +40,16 @@ body {
   }
 
   .github-logo {
-    max-height: 50px; 
+    max-height: 50px;
     max-width: 50px;
     margin: 15px;
   }
 
   .linkedin-logo {
-    max-height: 50px; 
+    max-height: 50px;
     max-width: 50px;
   }
-  
+
   .portfolio-item-image {
     img {
       height: 100%;
@@ -58,21 +58,18 @@ body {
   }
 }
 
-
-
-
 .App {
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   padding: 50px 30px;
   min-height: 100%;
 }
 
 .bg-color {
-  background: #BFD8D2;
+  background: #bfd8d2;
 }
 
 .header {
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
 
   .header-image {
     height: 120px;
@@ -96,10 +93,10 @@ body {
   font-size: 21px;
   font-weight: 700;
   text-align: center;
-}  
+}
 
 .record-list-container {
-  background: #F4F4F4;
+  background: #f4f4f4;
   padding: 30px 50px;
 
   .loading-spinner-container {
@@ -136,17 +133,17 @@ body {
 
 li {
   list-style-type: none;
-} 
+}
 
 .record-info {
   background: #111112;
   bottom: 0;
-  color: #E0E0E0;
+  color: #e0e0e0;
   font-size: 16px;
   font-weight: 700;
   height: 100%;
   left: 0;
-  opacity: .95;
+  opacity: 0.95;
   padding: 20px 0 0 20px;
   pointer-events: none;
   position: absolute;
@@ -157,7 +154,7 @@ li {
 }
 
 .fa-external-link-alt {
-  margin-right: 5px; 
+  margin-right: 5px;
   position: absolute;
   right: 0;
   top: 5px;
