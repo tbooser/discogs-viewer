@@ -1,18 +1,10 @@
 "use strict";
 
-const config = require("./config");
 const express = require("express");
 const app = express();
 const routes = express.Router();
 const Path = require("path");
 const bodyParser = require("body-parser");
-const _ = require("underscore");
-
-const Discogs = require("disconnect").Client;
-const dis = new Discogs(config);
-const db = dis.database();
-const col = dis.user().collection();
-const wantList = dis.user().wantlist();
 
 const assetFolder = Path.resolve(__dirname, "../public");
 routes.use(express.static(assetFolder));

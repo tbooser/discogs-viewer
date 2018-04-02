@@ -96,7 +96,7 @@ body {
 }
 
 .record-list-container {
-  background: #f4f4f4;
+  background: #dfdfdf;
   padding: 30px 50px;
 
   .loading-spinner-container {
@@ -105,21 +105,20 @@ body {
 }
 
 .record-image-container {
-  display: table;
+  // display: table;
   float: left;
-  height: 100%;
-  position: relative;
+  // height: 100%;
+  // position: relative;
   width: auto;
 }
 
 .record-details-container {
-  position: relative;
+  // position: relative;
 }
 
 .record-image {
   border: 1px solid grey;
   box-shadow: 8px 8px 6px -6px black;
-  display: block;
   height: 100%;
   max-height: 255px;
   margin-top: 15px;
@@ -131,33 +130,33 @@ body {
   }
 }
 
-li {
-  list-style-type: none;
-}
+// li {
+//   list-style-type: none;
+// }
 
-.record-info {
-  background: #111112;
-  bottom: 0;
-  color: #e0e0e0;
-  font-size: 16px;
-  font-weight: 700;
-  height: 100%;
-  left: 0;
-  opacity: 0.95;
-  padding: 20px 0 0 20px;
-  pointer-events: none;
-  position: absolute;
-  right: 0;
-  top: 0;
-  transition: bottom 0.5s ease;
-  width: 100% !important;
-}
+// .record-info {
+//   background: #111112;
+//   bottom: 0;
+//   color: #e0e0e0;
+//   font-size: 16px;
+//   font-weight: 700;
+//   height: 100%;
+//   left: 0;
+//   opacity: 0.95;
+//   padding: 20px 0 0 20px;
+//   pointer-events: none;
+//   position: absolute;
+//   right: 0;
+//   top: 0;
+//   transition: bottom 0.5s ease;
+//   width: 100% !important;
+// }
 
 .fa-external-link-alt {
   margin-right: 5px;
   position: absolute;
   right: 0;
-  top: 5px;
+  bottom: 5px;
 }
 
 .record-text {
