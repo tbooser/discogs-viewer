@@ -56,20 +56,6 @@ export const fetchYoutubeVideos = resource_url => {
   };
 };
 
-export const hoverStateActive = () => {
-  return dispatch => {
-    console.log("HOVER_STATE_ACTIVE");
-    dispatch({ type: HOVER_STATE_ACTIVE });
-  };
-};
-
-export const hoverStateInactive = () => {
-  return dispatch => {
-    console.log("HOVER_STATE_INACTIVE");
-    dispatch({ type: HOVER_STATE_INACTIVE });
-  };
-};
-
 export const loadingSpinnerActive = () => {
   return dispatch => {
     console.log("LOADING_SPINNER_ACTIVE");

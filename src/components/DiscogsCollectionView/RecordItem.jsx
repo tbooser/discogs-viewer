@@ -8,7 +8,6 @@ export class RecordItem extends Component {
     super(props);
     this.state = {
       clicked: false,
-      hovering: false,
       current_youtube_video_artist: null
     };
 
@@ -25,14 +24,6 @@ export class RecordItem extends Component {
     this.setState({ current_youtube_video_artist: this.props.artistName });
   }
 
-  handleMouseover() {
-    this.setState({ hovering: true });
-  }
-
-  handleMouseOut() {
-    this.setState({ hovering: false });
-  }
-
   render() {
     return (
       <div className="record-item-container card col-sm-3">
@@ -41,14 +32,7 @@ export class RecordItem extends Component {
           onClick={this.handleRecordClick}
           key={Math.random()}
         >
-          <img
-            className="record-image"
-            onMouseEnter={this.handleMouseover.bind(this)}
-            onMouseOut={this.handleMouseOut.bind(this)}
-            src={this.props.imgSrc}
-            alt="Record"
-            id={this.props.id}
-          />
+          <img className="record-image" src={this.props.imgSrc} alt="Record" id={this.props.id} />
         </div>
         <div className="record-details-container card-body">
           <div className="card-text">
