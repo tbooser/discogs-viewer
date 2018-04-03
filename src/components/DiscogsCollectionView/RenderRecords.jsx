@@ -16,7 +16,6 @@ export class RenderRecords extends Component {
 
     this.loadingSpinner = this.loadingSpinner.bind(this);
     this.openYoutubeVideo = this.openYoutubeVideo.bind(this);
-    this.shuffle = this.shuffle.bind(this);
   }
 
   componentWillMount() {
@@ -25,7 +24,7 @@ export class RenderRecords extends Component {
 
   componentDidMount() {
     this.props.actions.recordActions.getRecordsByUsername();
-    this.state.isFetching = false;
+    this.setState({ isFetching: false });
   }
 
   componentDidUpdate() {
@@ -56,61 +55,30 @@ export class RenderRecords extends Component {
   loadingSpinner() {
     if (this.state.isFetching) {
       return <LoadingSpinner />;
-    } else {
-      return;
     }
-  }
-
-  shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
   }
 
   renderRecords() {
     let records = this.props.app.loadRecordsByUsername.records;
     var counter = 1;
-    console.log("records ", records);
     for (var i = 0; i < records.length; i++) {
       if (records.length > 1 && records[i].response !== undefined) {
         return records[i].response.map(item => {
-          console.log("counter", counter);
-          if (counter % 4 === 0) {
-            console.log("Multiple of 4, ", counter);
-            counter++;
-            return (
-              <RecordItem
-                id={item.id}
-                key={Math.random()}
-                year={item.basic_information.year}
-                recordTitle={item.basic_information.title}
-                imgSrc={item.basic_information.cover_image}
-                label={item.basic_information.labels[0].name}
-                resource_url={item.basic_information.resource_url}
-                artistName={item.basic_information.artists[0].name}
-                handleChange={this.props.actions.recordActions.getRecordById}
-                getYoutubeVideo={this.props.actions.recordActions.fetchYoutubeVideos}
-              />
-            );
-          } else {
-            counter++;
-            return (
-              <RecordItem
-                id={item.id}
-                key={Math.random()}
-                year={item.basic_information.year}
-                recordTitle={item.basic_information.title}
-                imgSrc={item.basic_information.cover_image}
-                label={item.basic_information.labels[0].name}
-                resource_url={item.basic_information.resource_url}
-                artistName={item.basic_information.artists[0].name}
-                handleChange={this.props.actions.recordActions.getRecordById}
-                getYoutubeVideo={this.props.actions.recordActions.fetchYoutubeVideos}
-              />
-            );
-          }
+          counter++;
+          return (
+            <RecordItem
+              id={item.id}
+              key={Math.random()}
+              year={item.basic_information.year}
+              recordTitle={item.basic_information.title}
+              imgSrc={item.basic_information.cover_image}
+              label={item.basic_information.labels[0].name}
+              resource_url={item.basic_information.resource_url}
+              artistName={item.basic_information.artists[0].name}
+              handleChange={this.props.actions.recordActions.getRecordById}
+              getYoutubeVideo={this.props.actions.recordActions.fetchYoutubeVideos}
+            />
+          );
         });
       }
     }
