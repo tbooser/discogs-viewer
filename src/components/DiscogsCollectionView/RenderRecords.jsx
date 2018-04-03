@@ -16,18 +16,21 @@ export class RenderRecords extends Component {
 
     this.loadingSpinner = this.loadingSpinner.bind(this);
     this.openYoutubeVideo = this.openYoutubeVideo.bind(this);
-  }
-
-  componentWillMount() {
-    this.loadingSpinner();
+    this.handleVideoLoad = this.handleVideoLoad.bind(this);
   }
 
   componentDidMount() {
     this.props.actions.recordActions.getRecordsByUsername();
-    this.setState({ isFetching: false });
   }
 
   componentDidUpdate() {
+    if (this.state.isFetching === true) {
+      this.setState({ isFetching: false });
+    }
+    this.handleVideoLoad();
+  }
+
+  handleVideoLoad() {
     let currentVideoIndex = this.props.app.loadYoutubeVideos.videos.length - 1;
     let currentVideo = this.props.app.loadYoutubeVideos.videos[currentVideoIndex].response;
     if (currentVideo) {
@@ -75,7 +78,6 @@ export class RenderRecords extends Component {
               label={item.basic_information.labels[0].name}
               resource_url={item.basic_information.resource_url}
               artistName={item.basic_information.artists[0].name}
-              handleChange={this.props.actions.recordActions.getRecordById}
               getYoutubeVideo={this.props.actions.recordActions.fetchYoutubeVideos}
             />
           );
