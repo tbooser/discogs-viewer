@@ -5,6 +5,7 @@ import {
   LOADING_SPINNER_ACTIVE,
   LOADING_SPINNER_INACTIVE
 } from "../constants.js";
+const _ = require("underscore");
 
 ////////// LOAD RECORD COLLECTION BY USERNAME
 

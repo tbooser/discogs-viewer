@@ -24,6 +24,7 @@ export class DiscogsTableContainer extends Component {
     if (this.state.isFetching === true) {
       this.setState({ isFetching: false });
     }
+    console.log(this.props);
   }
 
   loadingSpinner() {
