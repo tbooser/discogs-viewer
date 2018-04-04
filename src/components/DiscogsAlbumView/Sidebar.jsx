@@ -6,7 +6,7 @@ export default function Sidebar() {
 			<div className="sidebar">
 				<div className="card">
 					<div className="card-body">
-						<a href="/discogs-album-view">Go to album view</a>
+						<a href="/discogs-table-view">Go to table view</a>
 					</div>
 				</div>
 			</div>

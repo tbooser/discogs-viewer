@@ -101,9 +101,6 @@ body {
 }
 
 .record-list-container {
-  background: #dfdfdf;
-  padding: 30px 50px;
-  min-height: 500px;
 }
 
 .record-image-container {
@@ -153,4 +150,8 @@ body {
   &:hover {
     cursor: pointer;
   }
+}
+
+.sidebar {
+  position: fixed;
 }

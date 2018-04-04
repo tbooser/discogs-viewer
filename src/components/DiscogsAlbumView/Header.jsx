@@ -12,14 +12,6 @@ export default function Header() {
             <img alt="header-discogs" src={discogsImage} />
           </div>
         </div>
-        <div className="discogs-header-gh-link align-self-end ml-auto mb-5">
-          <a
-            target="_blank"
-            href="https://github.com/tbooser/portfolio/tree/master/src/components/DiscogsCollectionView"
-          >
-            <img alt="header-github" src={githubLogo} />
-          </a>
-        </div>
       </div>
     </div>
   );
