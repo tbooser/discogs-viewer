@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import RecordItem from "./RecordItem";
-import LoadingSpinner from "./LoadingSpinner";
+import Sidebar from "./Sidebar.jsx";
 import * as recordActions from "../../actions/loadRecordsActions";
 const _ = require("underscore");
 
@@ -11,23 +11,14 @@ export class RenderRecords extends Component {
     super(props);
     this.state = {
       recordList: [""],
-      hovering: false,
-      isFetching: true
+      hovering: false
     };
 
-    this.loadingSpinner = this.loadingSpinner.bind(this);
     this.openYoutubeVideo = this.openYoutubeVideo.bind(this);
     this.handleVideoLoad = this.handleVideoLoad.bind(this);
   }
 
-  componentDidMount() {
-    this.props.actions.recordActions.getRecordsByUsername();
-  }
-
   componentDidUpdate() {
-    if (this.state.isFetching === true) {
-      this.setState({ isFetching: false });
-    }
     this.handleVideoLoad();
   }
 
@@ -56,12 +47,6 @@ export class RenderRecords extends Component {
     newTab.focus();
   }
 
-  loadingSpinner() {
-    if (this.state.isFetching) {
-      return <LoadingSpinner />;
-    }
-  }
-
   renderRecords() {
     let records = this.props.app.loadRecordsByUsername.records;
     for (var i = 0; i < records.length; i++) {
@@ -88,13 +73,11 @@ export class RenderRecords extends Component {
 
   render() {
     return (
-      <div className="container record-list-container">
-        <div className="record-container-intro-copy">
-          Click on a record to load a random track from it!
-        </div>
-        <div className="mt-4 row">
-          {this.loadingSpinner()}
-          {this.renderRecords()}
+      <div className="row">
+        <Sidebar />
+        <div className="container record-list-container col-sm-12 col-md-10">
+          <div className="record-container-intro-copy " />
+          <div className="mt-4 row">{this.renderRecords()}</div>
         </div>
       </div>
     );
