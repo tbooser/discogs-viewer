@@ -28,6 +28,7 @@ export class RenderRecords extends Component {
     if (currentVideo) {
       if (currentVideo.videos === undefined) {
         // If no videos have been uploaded to Discogs for this record
+        alert("No videos have been uploaded for this record!");
         return;
       }
       if (currentVideo.videos.length > 1) {
@@ -75,9 +76,9 @@ export class RenderRecords extends Component {
     return (
       <div className="row">
         <Sidebar />
-        <div className="container record-list-container col-sm-12 col-md-10">
+        <div className="container record-list-container col-sm-12 col-lg-9">
           <div className="record-container-intro-copy " />
-          <div className="mt-4 row">{this.renderRecords()}</div>
+          <div className="row">{this.renderRecords()}</div>
         </div>
       </div>
     );

@@ -6,7 +6,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ReduxThunk from "redux-thunk";
 import App from "./components/DiscogsAlbumView/DiscogsAlbumViewContainer.jsx";
 import DiscogsTableContainer from "./components/DiscogsTableView/DiscogsTableContainer.jsx";
-import HomepageContainer from "./components/Homepage/HomepageContainer.jsx";
 import combineReducers from "./reducers";
 import "./styles/main.css";
 

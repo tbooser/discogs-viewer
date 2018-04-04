@@ -146,6 +146,12 @@ body {
   // background: #3cc4c7;
 }
 
+.table-head-column-name {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .fa-headphones {
   &:hover {
     cursor: pointer;
