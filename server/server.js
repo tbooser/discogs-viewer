@@ -5,7 +5,7 @@ const app = express();
 const musicController = require("./api/musicController");
 
 if (process.env.NODE_ENV === "production") {
-	app.use(express.static("client/build"));
+	app.use(express.static("build"));
 }
 
 app.get("/music", musicController.getMusicByCollection);
