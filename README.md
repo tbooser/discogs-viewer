@@ -1,1 +1,1 @@
-This app uses the Discogs API to display information about my vinyl record collection
+This app uses the Discogs API to display my vinyl record collection

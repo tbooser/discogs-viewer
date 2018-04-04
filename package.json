@@ -1,5 +1,5 @@
 {
-  "name": "breakable-toy",
+  "name": "discogs-viewer",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,7 +19,8 @@
   "scripts": {
     "build-css": "node-sass src/ -o src/",
     "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
-    "start": "react-scripts start | yarn run watch-css",
+    "dev": "react-scripts start | yarn run watch-css",
+    "start": "react-scripts start",
     "server": "nodemon server/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
