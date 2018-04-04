@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import DiscogsTable from "./DiscogsTable.jsx";
-import Sidebar from "./Sidebar.jsx";
+import RenderRecords from "./RenderRecords.jsx";
+import Header from "./Header.jsx";
 import LoadingSpinner from "./LoadingSpinner";
+import { bindActionCreators } from "redux";
 import * as recordActions from "../../actions/loadRecordsActions";
 
-export class DiscogsTableContainer extends Component {
+export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,23 +28,18 @@ export class DiscogsTableContainer extends Component {
 
   loadingSpinner() {
     if (this.state.isFetching) {
-      return (
-        <div className="row">
-          <LoadingSpinner />
-        </div>
-      );
+      return <LoadingSpinner />;
     } else {
       return (
-        <div className="row">
-          <Sidebar />
-          <DiscogsTable />
+        <div className="container">
+          <RenderRecords />
         </div>
       );
     }
   }
 
   render() {
-    return <div className="table-container pt-4 container">{this.loadingSpinner()}</div>;
+    return <div className="App">{this.loadingSpinner()}</div>;
   }
 }
 
@@ -53,7 +48,6 @@ function mapStateToProps(state) {
     app: state
   };
 }
-
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
@@ -62,4 +56,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DiscogsTableContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

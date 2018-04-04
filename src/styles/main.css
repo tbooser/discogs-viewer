@@ -75,11 +75,6 @@ body {
   font-weight: 700;
   text-align: center; }
 
-.record-list-container {
-  background: #dfdfdf;
-  padding: 30px 50px;
-  min-height: 500px; }
-
 .record-image-container {
   float: left;
   width: auto; }
@@ -112,3 +107,6 @@ body {
 
 .fa-headphones:hover {
   cursor: pointer; }
+
+.sidebar {
+  position: fixed; }

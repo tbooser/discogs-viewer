@@ -6,27 +6,7 @@ import LoadingSpinner from "./LoadingSpinner";
 export class DiscogsTable extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isFetching: true
-    };
-
-    this.loadingSpinner = this.loadingSpinner.bind(this);
-  }
-
-  componentDidMount() {
-    console.log(this.props);
-  }
-
-  componentDidUpdate() {
-    if (this.state.isFetching === true) {
-      this.setState({ isFetching: false });
-    }
-  }
-
-  loadingSpinner() {
-    if (this.state.isFetching) {
-      return <LoadingSpinner />;
-    }
+    this.state = {};
   }
 
   renderCollection() {
@@ -71,7 +51,6 @@ export class DiscogsTable extends Component {
             </thead>
             <tbody>{this.renderCollection()}</tbody>
           </table>
-          {this.loadingSpinner()}
         </div>
       </div>
     );
