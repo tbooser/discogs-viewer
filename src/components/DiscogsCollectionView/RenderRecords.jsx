@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import RecordItem from "./RecordItem";
 import LoadingSpinner from "./LoadingSpinner";
 import * as recordActions from "../../actions/loadRecordsActions";
+const _ = require("underscore");
 
 export class RenderRecords extends Component {
   constructor(props) {
@@ -63,11 +64,10 @@ export class RenderRecords extends Component {
 
   renderRecords() {
     let records = this.props.app.loadRecordsByUsername.records;
-    var counter = 1;
     for (var i = 0; i < records.length; i++) {
       if (records.length > 1 && records[i].response !== undefined) {
-        return records[i].response.map(item => {
-          counter++;
+        let shuffledRecords = _.shuffle(records[i].response);
+        return shuffledRecords.map(item => {
           return (
             <RecordItem
               id={item.id}

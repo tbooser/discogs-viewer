@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import HomepageHeroSectionLeft from "./HomepageHeroSectionLeft";
 import HomepageHeroSectionRight from "./HomepageHeroSectionRight";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 export class HomepageHeroSectionContainer extends Component {
 	constructor(props) {
