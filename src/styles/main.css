@@ -105,6 +105,9 @@ body {
 .record-table-item th {
   vertical-align: baseline !important; }
 
+.table-head-column-name:hover {
+  cursor: pointer; }
+
 .fa-headphones:hover {
   cursor: pointer; }
 

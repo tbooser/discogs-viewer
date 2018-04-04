@@ -11,6 +11,11 @@ export class RecordCollectionItem extends Component {
     };
   }
 
+  getYoutubeVideos() {
+    this.props.getYoutubeVideo(this.props.resource_url);
+    this.setState({ current_youtube_video_artist: this.props.artistName });
+  }
+
   render() {
     return (
       <tr className="record-table-item">
@@ -22,7 +27,7 @@ export class RecordCollectionItem extends Component {
         <th className="record-table-item-info">{this.props.label}</th>
         <th className="record-table-item-info">{this.props.catNo}</th>
         <th className="record-table-item-info">{this.props.year}</th>
-        <th>
+        <th onClick={this.getYoutubeVideos.bind(this)}>
           <i className="fas fa-headphones" />
         </th>
       </tr>
