@@ -64,6 +64,11 @@ body {
   min-height: 100%;
 }
 
+.loading-spinner-container {
+  margin: 0 auto;
+  padding-top: 150px;
+}
+
 .bg-color {
   background: #bfd8d2;
 }
@@ -98,22 +103,16 @@ body {
 .record-list-container {
   background: #dfdfdf;
   padding: 30px 50px;
-
-  .loading-spinner-container {
-    margin: 0 auto;
-  }
+  min-height: 500px;
 }
 
 .record-image-container {
-  // display: table;
   float: left;
-  // height: 100%;
-  // position: relative;
   width: auto;
 }
 
 .record-details-container {
-  // position: relative;
+  align-items: flex-start;
 }
 
 .record-image {
@@ -130,36 +129,28 @@ body {
   }
 }
 
-// li {
-//   list-style-type: none;
-// }
-
-// .record-info {
-//   background: #111112;
-//   bottom: 0;
-//   color: #e0e0e0;
-//   font-size: 16px;
-//   font-weight: 700;
-//   height: 100%;
-//   left: 0;
-//   opacity: 0.95;
-//   padding: 20px 0 0 20px;
-//   pointer-events: none;
-//   position: absolute;
-//   right: 0;
-//   top: 0;
-//   transition: bottom 0.5s ease;
-//   width: 100% !important;
-// }
-
-.fa-external-link-alt {
-  margin-right: 5px;
-  position: absolute;
-  right: 0;
-  bottom: 5px;
-}
-
 .record-text {
   color: #9e5a75;
   opacity: 1;
+}
+
+.record-table-item-image {
+  max-height: 50px;
+  max-width: 50px;
+}
+
+.record-table-item {
+  th {
+    vertical-align: baseline !important; // This overrides the vertical-align: top that comes with the th element
+  }
+}
+
+.table-container {
+  // background: #3cc4c7;
+}
+
+.fa-headphones {
+  &:hover {
+    cursor: pointer;
+  }
 }

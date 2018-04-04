@@ -1,7 +1,6 @@
 "use strict";
 
 const config = require("./config");
-const _ = require("underscore");
 const Discogs = require("disconnect").Client;
 const dis = new Discogs(config);
 const db = dis.database();
@@ -10,8 +9,7 @@ const wantList = dis.user().wantlist();
 
 exports.getMusicByCollection = (req, res) => {
 	col.getReleases("tboos", 0, { page: 1, per_page: 400 }, function(err, data) {
-		let shuffledArray = _.shuffle(data.releases);
-		res.send(shuffledArray);
+		res.send(data.releases);
 	});
 };
 

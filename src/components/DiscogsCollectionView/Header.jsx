@@ -17,7 +17,7 @@ export default function Header() {
             target="_blank"
             href="https://github.com/tbooser/portfolio/tree/master/src/components/DiscogsCollectionView"
           >
-            <img src={githubLogo} />
+            <img alt="header-github" src={githubLogo} />
           </a>
         </div>
       </div>
