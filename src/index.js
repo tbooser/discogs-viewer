@@ -2,11 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Switch } from "react-router-dom";
 import ReduxThunk from "redux-thunk";
-import App from "./components/DiscogsAlbumView/DiscogsAlbumViewContainer.jsx";
-import DiscogsTableContainer from "./components/DiscogsTableView/DiscogsTableContainer.jsx";
 import combineReducers from "./reducers";
+import Routes from "./routes";
 import "./styles/main.css";
 
 const store = createStore(combineReducers, applyMiddleware(ReduxThunk));
@@ -16,9 +15,7 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={DiscogsTableContainer} />
-        <Route exact path="/discogs-album-view" component={App} />
-        <Route exact path="/discogs-table-view" component={DiscogsTableContainer} />
+        <Routes />
       </Switch>
     </BrowserRouter>
   </Provider>,

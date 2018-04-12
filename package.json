@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "d3": "^5.0.0",
     "disconnect": "^1.2.1",
-    "eslint": "^4.19.1",
     "global": "^4.3.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
@@ -20,7 +18,7 @@
     "build-css": "node-sass src/ -o src/",
     "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
     "dev": "react-scripts start | yarn run watch-css",
-    "start": "react-scripts start",
+    "start": "node server/server.js",
     "server": "nodemon server/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
@@ -28,6 +26,7 @@
   },
   "proxy": "http://localhost:3001/",
   "devDependencies": {
+    "babel-preset-env": "^1.6.1",
     "node-sass": "^4.7.2"
   },
   "engines": {
