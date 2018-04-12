@@ -6,7 +6,7 @@ export default function Sidebar() {
 			<div className="sidebar">
 				<div className="card">
 					<div className="card-body">
-						<a href="/discogs-table-view">
+						<a href="/">
 							{" "}
 							<button type="button" className="text-center btn btn-link">
 								Go to table view
