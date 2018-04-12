@@ -1,5 +1,1 @@
-module.exports = {
-	consumerKey: "vdjYITGlwsFQzUxtNGkf",
-	consumerSecret: "TNxkiCfCGkPXDYNsFdRqlSrcYIZWTGcs"
-};
-
+module.exports = {};
