@@ -15,7 +15,7 @@ export class Sidebar extends Component {
 				<div className="sidebar">
 					<div className="card">
 						<div className="text-center card-body">
-							<a href="/">
+							<a href="/discogs-album-view">
 								<button type="button" className="text-center btn btn-link">
 									Go to album view
 								</button>
