@@ -31,5 +31,5 @@ app.get("*", (req, res) => {
 
 // console.log(__dirname, "__dirname");
 app.listen(port, function() {
-	console.log("Server started.......");
+	console.log("Server started.........");
 });
