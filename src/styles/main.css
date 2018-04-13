@@ -111,5 +111,9 @@ body {
 .fa-headphones:hover {
   cursor: pointer; }
 
-.sidebar {
-  position: fixed; }
+.music-player-bar {
+  background: black;
+  bottom: 0;
+  max-height: 150px;
+  position: fixed;
+  max-width: 150px; }
