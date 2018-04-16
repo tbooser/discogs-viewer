@@ -6,6 +6,7 @@ import Sidebar from "./Sidebar.jsx";
 import LoadingSpinner from "./LoadingSpinner";
 import * as recordActions from "../../actions/loadRecordsActions";
 import MusicPlayerBar from "./MusicPlayerBar.jsx";
+import Header from "./Header.jsx";
 
 export class DiscogsTableContainer extends Component {
   constructor(props) {
@@ -25,7 +26,6 @@ export class DiscogsTableContainer extends Component {
     if (this.state.isFetching === true) {
       this.setState({ isFetching: false });
     }
-    this.handleVideoLoad();
   }
 
   handleVideoLoad() {
@@ -42,27 +42,47 @@ export class DiscogsTableContainer extends Component {
         var randomVideo =
           currentVideo.videos[Math.floor(Math.random() * currentVideo.videos.length)].uri;
         // Replace parts of the url so that it can be embedded and autoplayed
-        var embedURL = randomVideo
-          .replace("watch?v=", "embed/")
-          .concat("?autoplay=1")
-          .concat("&controls=1");
+        var embedURL = randomVideo.replace("watch?v=", "embed/").concat("?autoplay=1");
+
         return embedURL;
       } else {
         // If there is only one video uploaded for this record, open it
         var embedURL = currentVideo.videos[0].uri
           .replace("watch?v=", "embed/")
-          .concat("?autoplay=1");
+          .concat("?autoplay=1")
+          .concat("?enablejsapi=1");
 
         return embedURL;
       }
     }
   }
 
-  openYoutubeVideo(video) {
-    // var newTab = window.open(video, "_blank");
-    // newTab.focus();
-    console.log(video);
-    return <MusicPlayerBar video={video} />;
+  getVideoId() {
+    let currentVideoIndex = this.props.app.loadYoutubeVideos.videos.length - 1;
+    let currentVideo = this.props.app.loadYoutubeVideos.videos[currentVideoIndex].response;
+    if (currentVideo) {
+      if (currentVideo.videos === undefined) {
+        // If no videos have been uploaded to Discogs for this record
+        alert("No videos have been uploaded for this record!");
+        return;
+      }
+      if (currentVideo.videos.length > 1) {
+        // If there is more than one video uploaded for this record, i.e. for multiple tracks, select one randomly to open
+        var randomVideo =
+          currentVideo.videos[Math.floor(Math.random() * currentVideo.videos.length)].uri;
+
+        var slicedRandomVideo = randomVideo.slice(randomVideo.indexOf("=") + 1, randomVideo.length);
+
+        return slicedRandomVideo;
+      } else {
+        // If there is only one video uploaded for this record, open it
+        var singleVideo = currentVideo.videos[0].uri;
+        console.log(singleVideo);
+        var slicedSingleVideo = singleVideo.slice(randomVideo.indexOf("=") + 1, randomVideo.length);
+
+        return singleVideo;
+      }
+    }
   }
 
   loadingSpinner() {
@@ -76,13 +96,17 @@ export class DiscogsTableContainer extends Component {
       );
     } else {
       return [
+        <Header key={Math.random()} />,
         <div className="table-container pt-4 container" key={Math.random()}>
           <div className="row">
-            <Sidebar />
             <DiscogsTable />
           </div>
         </div>,
-        <MusicPlayerBar video={this.handleVideoLoad()} key={Math.random()} />
+        <MusicPlayerBar
+          video={this.handleVideoLoad()}
+          videoId={this.getVideoId()}
+          key={Math.random()}
+        />
       ];
     }
   }

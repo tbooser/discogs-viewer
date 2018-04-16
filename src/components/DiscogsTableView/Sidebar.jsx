@@ -12,16 +12,12 @@ export class Sidebar extends Component {
 	render() {
 		return (
 			<div className="col-sm-12 col-lg-3">
-				<div className="sidebar">
-					<div className="card">
-						<div className="text-center card-body">
-							<a href="/discogs-album-view">
-								<button type="button" className="text-center btn btn-link">
-									Go to album view
-								</button>
-							</a>
-						</div>
-					</div>
+				<div className="text-center card-body">
+					<a href="/discogs-album-view">
+						<button type="button" className="text-center btn btn-link">
+							Go to album view
+						</button>
+					</a>
 				</div>
 			</div>
 		);

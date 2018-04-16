@@ -112,8 +112,14 @@ body {
   cursor: pointer; }
 
 .music-player-bar {
-  background: black;
+  background: grey;
   bottom: 0;
-  max-height: 150px;
+  height: 200px;
+  opacity: 0.5;
   position: fixed;
-  max-width: 150px; }
+  width: 100%; }
+
+.yt-button {
+  background: black;
+  position: absolute;
+  z-index: 1; }
