@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Youtube from "./Youtube.jsx";
 import { connect } from "react-redux";
 
 export class MusicPlayerBar extends Component {
@@ -7,19 +8,22 @@ export class MusicPlayerBar extends Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    console.log(this.props);
+  }
+
   render() {
-    return (
-      <div className="music-player-bar">
-        <div>
-          <iframe width="150" height="150" src={this.props.video} frameBorder="0" allowFullScreen />
+    if (this.props.video) {
+      return (
+        <div className="music-player-bar">
+          <div className="yt-video">
+            <Youtube videoId={this.props.videoId} />
+          </div>
         </div>
-        <button
-          type="button"
-          className="text-center btn btn-link ytp-play-button ytp-button"
-          aria-label="Pause"
-        />
-      </div>
-    );
+      );
+    } else {
+      return <div />;
+    }
   }
 }
 

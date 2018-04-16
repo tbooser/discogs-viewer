@@ -68,7 +68,7 @@ export class DiscogsTable extends Component {
 
   render() {
     return (
-      <div className="col-sm-12 col-lg-9">
+      <div className="col-sm-12">
         <div className="container">
           <table className="table table-hover">
             <thead className="thead-light">

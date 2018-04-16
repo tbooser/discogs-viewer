@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import RecordCollectionItemInfo from "./RecordCollectionItemInfo";
 
 export class RecordCollectionItem extends Component {
   constructor(props) {
@@ -11,9 +10,11 @@ export class RecordCollectionItem extends Component {
     };
   }
 
-  getYoutubeVideos() {
+  getYoutubeVideos(event) {
+    event.preventDefault();
     this.props.getYoutubeVideo(this.props.resource_url);
     this.setState({ current_youtube_video_artist: this.props.artistName });
+    return false;
   }
 
   render() {
