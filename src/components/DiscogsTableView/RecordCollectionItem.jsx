@@ -14,6 +14,7 @@ export class RecordCollectionItem extends Component {
     event.preventDefault();
     this.props.getYoutubeVideo(this.props.resource_url);
     this.setState({ current_track: this });
+    window.scrollTo(this);
     console.log("this.state", this.state);
   }
 

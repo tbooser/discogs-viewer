@@ -13,7 +13,7 @@ export class MusicPlayerBar extends Component {
   }
 
   render() {
-    if (this.props.video) {
+    if (this.props.videoId) {
       return (
         <div className="music-player-bar">
           <Youtube videoId={this.props.videoId} />
