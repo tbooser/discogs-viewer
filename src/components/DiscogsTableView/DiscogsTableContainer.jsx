@@ -28,35 +28,6 @@ export class DiscogsTableContainer extends Component {
     console.log("updated");
   }
 
-  handleVideoLoad() {
-    let currentVideoIndex = this.props.app.loadYoutubeVideos.videos.length - 1;
-    let currentVideo = this.props.app.loadYoutubeVideos.videos[currentVideoIndex].response;
-    if (currentVideo) {
-      if (currentVideo.videos === undefined) {
-        // If no videos have been uploaded to Discogs for this record
-        alert("No videos have been uploaded for this record!");
-        return;
-      }
-      if (currentVideo.videos.length > 1) {
-        // If there is more than one video uploaded for this record, i.e. for multiple tracks, select one randomly to open
-        var randomVideo =
-          currentVideo.videos[Math.floor(Math.random() * currentVideo.videos.length)].uri;
-        // Replace parts of the url so that it can be embedded and autoplayed
-        var embedURL = randomVideo.replace("watch?v=", "embed/").concat("?autoplay=1");
-
-        return embedURL;
-      } else {
-        // If there is only one video uploaded for this record, open it
-        var singleEmbedURL = currentVideo.videos[0].uri
-          .replace("watch?v=", "embed/")
-          .concat("?autoplay=1")
-          .concat("?enablejsapi=1");
-
-        return singleEmbedURL;
-      }
-    }
-  }
-
   getVideoId() {
     let currentVideoIndex = this.props.app.loadYoutubeVideos.videos.length - 1;
     let currentVideo = this.props.app.loadYoutubeVideos.videos[currentVideoIndex].response;
@@ -101,11 +72,7 @@ export class DiscogsTableContainer extends Component {
             <DiscogsTable />
           </div>
         </div>,
-        <MusicPlayerBar
-          video={this.handleVideoLoad()}
-          videoId={this.getVideoId()}
-          key={Math.random()}
-        />
+        <MusicPlayerBar videoId={this.getVideoId()} key={Math.random()} />
       ];
     }
   }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import audioSVG from "../../images/loading-spinner/audio.svg";
 
 let player;
 
@@ -9,7 +10,7 @@ export class Youtube extends Component {
 		this.state = {
 			player: null,
 			paused: false,
-			volume: null
+			volume: 100
 		};
 
 		this.loadInfo = this.loadInfo.bind(this);
@@ -18,17 +19,17 @@ export class Youtube extends Component {
 		this.toggleVideoPlay = this.toggleVideoPlay.bind(this);
 		this.setVolume = this.setVolume.bind(this);
 		this.getDuration = this.getDuration.bind(this);
+		this.getCurrentTime = this.getCurrentTime.bind(this);
 		this.getArtistAndTrackTitle = this.getArtistAndTrackTitle.bind(this);
+		this.handleVolumeChange = this.handleVolumeChange.bind(this);
 	}
 
 	componentDidUpdate() {
 		console.log("did update", this.state);
-		console.log("video info", this.state.player.getVolume());
-		console.log("video info", this.state.player.setVolume());
+		console.log("Volume -> ", this.state.player.getVolume());
 	}
 
 	componentDidMount() {
-		console.log("did mount", this.state);
 		if (!player) {
 			player = new Promise(resolve => {
 				const tag = document.createElement("script");
@@ -78,17 +79,27 @@ export class Youtube extends Component {
 		this.setState({ paused: true });
 	}
 
-	setVolume() {
-		this.state.player.setVolume();
-		this.setState({ volume: this.state.player.getVolume });
+	setVolume(volume) {
+		this.state.player.setVolume(volume);
+		// this.setState({ volume: event.target.value });
 	}
 
 	getDuration() {
 		this.state.player.getDuration();
 	}
 
+	getCurrentTime() {
+		this.state.player.getCurrentTime();
+	}
+
 	getArtistAndTrackTitle() {
 		return this.state.player.j.videoData.title;
+	}
+
+	handleVolumeChange(event) {
+		console.log(event.target.value);
+		this.setState({ volume: event.target.value });
+		this.setVolume(event.target.value);
 	}
 
 	toggleVideoPlay() {
@@ -110,13 +121,21 @@ export class Youtube extends Component {
 	loadInfo() {
 		if (this.state.player) {
 			return [
-				<div className="col md-3 my-auto" key={Math.random()}>
+				<div className="col-md-1 my-auto" key={Math.random()}>
+					<img alt="audio-svg" className="audio-svg" src={audioSVG} />
+				</div>,
+				<div className="col-md-3 my-auto" key={Math.random()}>
 					{this.getArtistAndTrackTitle()}
 				</div>,
-				<div className="col md-3 my-auto d-flex align-items-center" key={Math.random()}>
+				<div className="col-md-2 my-auto d-flex align-items-center" key={Math.random()}>
 					{this.toggleVideoPlay()}
 				</div>,
-				<div className="col md-6" key={Math.random()} />
+				<div className="col-md-4 my-auto d-flex align-items-cente" key={Math.random()}>
+					Future location of progress bar
+				</div>,
+				<div className="col-md-2 my-auto d-flex align-items-cente" key={Math.random()}>
+					<input type="range" value={this.state.volume} onChange={this.handleVolumeChange} />
+				</div>
 			];
 		}
 	}

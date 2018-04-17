@@ -10,54 +10,6 @@ body {
   height: 100vh;
 }
 
-///// Homepage
-.homepage-container {
-  font-family: "Rubik", sans-serif;
-
-  a {
-    color: inherit;
-  }
-
-  .homepage-header {
-    background: paleturquoise;
-    font-weight: 700;
-    left: 10px;
-    top: 10px;
-  }
-
-  .hero-section-left {
-    font-size: 29px;
-    padding: 10% 0;
-  }
-
-  .hero-section-right {
-    padding: 10% 0;
-  }
-
-  .nav-link {
-    text-decoration: none;
-    padding: 10px 0;
-  }
-
-  .github-logo {
-    max-height: 50px;
-    max-width: 50px;
-    margin: 15px;
-  }
-
-  .linkedin-logo {
-    max-height: 50px;
-    max-width: 50px;
-  }
-
-  .portfolio-item-image {
-    img {
-      height: 100%;
-      width: 100%;
-    }
-  }
-}
-
 .App {
   font-family: "Rubik", sans-serif;
   padding: 50px 30px;
@@ -161,8 +113,10 @@ body {
 .music-player-bar {
   background: grey;
   bottom: 0;
+  color: #fff;
   height: 80px;
-  background: rgba(0, 0, 0, 0.8);
+  // background: rgba(0, 0, 0, 0.9);
+  background: #333333;
   position: fixed;
   width: 100%;
 }
@@ -188,8 +142,8 @@ body {
 }
 
 .yt-player-video-info {
-  color: #64e0dc;
-  font-size: 18px;
+  color: #02d46a;
+  font-size: 14px;
   margin-left: 50px;
   opacity: 1;
 }
