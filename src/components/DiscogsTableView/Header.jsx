@@ -1,6 +1,4 @@
 import React from "react";
-import discogsImage from "../../images/discogs-logo.png";
-import githubLogo from "../../images/GitHub-Mark-120px.png";
 
 export default function Header() {
   return (

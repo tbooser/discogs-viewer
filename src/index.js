@@ -11,13 +11,18 @@ import "./styles/main.css";
 const store = createStore(combineReducers, applyMiddleware(ReduxThunk));
 // console.log('Store --->>> ', store.getState())
 
+if (process.env.NODE_ENV !== "production") {
+	const { whyDidYouUpdate } = require("why-did-you-update");
+	whyDidYouUpdate(React);
+}
+
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <Switch>
-        <Routes />
-      </Switch>
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById("root")
+	<Provider store={store}>
+		<BrowserRouter>
+			<Switch>
+				<Routes />
+			</Switch>
+		</BrowserRouter>
+	</Provider>,
+	document.getElementById("root")
 );

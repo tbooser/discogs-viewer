@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import RenderRecords from "./RenderRecords.jsx";
-import Header from "./Header.jsx";
 import LoadingSpinner from "./LoadingSpinner";
 import { bindActionCreators } from "redux";
 import * as recordActions from "../../actions/loadRecordsActions";

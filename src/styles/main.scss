@@ -132,8 +132,8 @@ body {
 }
 
 .record-table-item-image {
-  max-height: 50px;
-  max-width: 50px;
+  max-height: 75px;
+  max-width: 75px;
 }
 
 .record-table-item {
@@ -161,14 +161,35 @@ body {
 .music-player-bar {
   background: grey;
   bottom: 0;
-  height: 200px;
-  opacity: 0.5;
+  height: 80px;
+  background: rgba(0, 0, 0, 0.8);
   position: fixed;
   width: 100%;
+}
+
+.music-player-button {
+  color: #fff;
+  cursor: pointer;
+  font-size: 30px;
 }
 
 .yt-button {
   background: black;
   position: absolute;
   z-index: 1;
+}
+
+.yt-video {
+  height: 100%;
+}
+
+.youtubeComponent-wrapper {
+  max-width: 50%;
+}
+
+.yt-player-video-info {
+  color: #64e0dc;
+  font-size: 18px;
+  margin-left: 50px;
+  opacity: 1;
 }

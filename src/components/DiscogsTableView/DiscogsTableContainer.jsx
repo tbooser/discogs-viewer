@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import DiscogsTable from "./DiscogsTable.jsx";
-import Sidebar from "./Sidebar.jsx";
 import LoadingSpinner from "./LoadingSpinner";
 import * as recordActions from "../../actions/loadRecordsActions";
 import MusicPlayerBar from "./MusicPlayerBar.jsx";
@@ -26,6 +25,7 @@ export class DiscogsTableContainer extends Component {
     if (this.state.isFetching === true) {
       this.setState({ isFetching: false });
     }
+    console.log("updated");
   }
 
   handleVideoLoad() {
@@ -47,12 +47,12 @@ export class DiscogsTableContainer extends Component {
         return embedURL;
       } else {
         // If there is only one video uploaded for this record, open it
-        var embedURL = currentVideo.videos[0].uri
+        var singleEmbedURL = currentVideo.videos[0].uri
           .replace("watch?v=", "embed/")
           .concat("?autoplay=1")
           .concat("?enablejsapi=1");
 
-        return embedURL;
+        return singleEmbedURL;
       }
     }
   }
@@ -78,9 +78,8 @@ export class DiscogsTableContainer extends Component {
         // If there is only one video uploaded for this record, open it
         var singleVideo = currentVideo.videos[0].uri;
         console.log(singleVideo);
-        var slicedSingleVideo = singleVideo.slice(randomVideo.indexOf("=") + 1, randomVideo.length);
-
-        return singleVideo;
+        var slicedSingleVideo = singleVideo.slice(singleVideo.indexOf("=") + 1, singleVideo.length);
+        return slicedSingleVideo;
       }
     }
   }
