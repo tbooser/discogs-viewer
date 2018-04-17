@@ -25,8 +25,7 @@ export class Youtube extends Component {
 	}
 
 	componentDidUpdate() {
-		console.log("did update", this.state);
-		console.log("Volume -> ", this.state.player.getVolume());
+		console.log("State -> ", this.state);
 	}
 
 	componentDidMount() {

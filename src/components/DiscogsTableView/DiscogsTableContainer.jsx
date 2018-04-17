@@ -25,7 +25,6 @@ export class DiscogsTableContainer extends Component {
     if (this.state.isFetching === true) {
       this.setState({ isFetching: false });
     }
-    console.log("updated");
   }
 
   getVideoId() {
@@ -48,7 +47,6 @@ export class DiscogsTableContainer extends Component {
       } else {
         // If there is only one video uploaded for this record, open it
         var singleVideo = currentVideo.videos[0].uri;
-        console.log(singleVideo);
         var slicedSingleVideo = singleVideo.slice(singleVideo.indexOf("=") + 1, singleVideo.length);
         return slicedSingleVideo;
       }

@@ -8,9 +8,7 @@ export class MusicPlayerBar extends Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    console.log(this.props);
-  }
+  componentDidMount() {}
 
   render() {
     if (this.props.videoId) {
