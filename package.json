@@ -12,7 +12,8 @@
     "react-scripts": "0.9.x",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "why-did-you-update": "^0.1.1"
   },
   "scripts": {
     "build-css": "node-sass src/ -o src/",

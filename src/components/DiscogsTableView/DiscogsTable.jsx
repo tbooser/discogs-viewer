@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import RecordCollectionItem from "./RecordCollectionItem.jsx";
 import { bindActionCreators } from "redux";
 import * as recordActions from "../../actions/loadRecordsActions";
-import MusicPlayerBar from "./MusicPlayerBar.jsx";
 
 export class DiscogsTable extends Component {
   constructor(props) {

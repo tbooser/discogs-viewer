@@ -16,9 +16,7 @@ export class MusicPlayerBar extends Component {
     if (this.props.video) {
       return (
         <div className="music-player-bar">
-          <div className="yt-video">
-            <Youtube videoId={this.props.videoId} />
-          </div>
+          <Youtube videoId={this.props.videoId} />
         </div>
       );
     } else {
