@@ -6,16 +6,19 @@ export class RecordCollectionItem extends Component {
     super(props);
     this.state = {
       clicked: false,
-      current_track: null
+      current_record: null
     };
   }
 
   getYoutubeVideos(event) {
-    event.preventDefault();
     this.props.getYoutubeVideo(this.props.resource_url);
-    this.setState({ current_track: this });
+    this.setState({ current_record: this.props.recordTitle });
+    console.log("event", event);
+    // console.log(this.props.artistName);
+  }
 
-    console.log("this.state", this.state);
+  componentDidUpdate() {
+    console.log(this.state, "this.state");
   }
 
   render() {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import audioSVG from "../../images/loading-spinner/audio.svg";
+import YoutubeProgressBar from "./YoutubeProgressBar.jsx";
 
 let player;
 
@@ -13,7 +13,6 @@ export class Youtube extends Component {
 			volume: 100
 		};
 
-		this.loadInfo = this.loadInfo.bind(this);
 		this.pauseVideo = this.pauseVideo.bind(this);
 		this.playVideo = this.playVideo.bind(this);
 		this.toggleVideoPlay = this.toggleVideoPlay.bind(this);
@@ -22,10 +21,12 @@ export class Youtube extends Component {
 		this.getCurrentTime = this.getCurrentTime.bind(this);
 		this.getArtistAndTrackTitle = this.getArtistAndTrackTitle.bind(this);
 		this.handleVolumeChange = this.handleVolumeChange.bind(this);
+		this.progressBar = this.progressBar.bind(this);
 	}
 
 	componentDidUpdate() {
 		console.log("State -> ", this.state);
+		console.log("Duration -> ", this.state.player.getDuration());
 	}
 
 	componentDidMount() {
@@ -80,7 +81,6 @@ export class Youtube extends Component {
 
 	setVolume(volume) {
 		this.state.player.setVolume(volume);
-		// this.setState({ volume: event.target.value });
 	}
 
 	getDuration() {
@@ -88,6 +88,7 @@ export class Youtube extends Component {
 	}
 
 	getCurrentTime() {
+		console.log("Get current time", this.state.player.getCurrentTime());
 		this.state.player.getCurrentTime();
 	}
 
@@ -96,9 +97,17 @@ export class Youtube extends Component {
 	}
 
 	handleVolumeChange(event) {
-		console.log(event.target.value);
 		this.setState({ volume: event.target.value });
 		this.setVolume(event.target.value);
+	}
+
+	progressBar() {
+		var playerCurrentTime = this.state.player.getCurrentTime();
+		var playerTotalTime = this.state.player.getDuration();
+		var playerTimeDifference = playerCurrentTime / playerTotalTime * 100;
+		console.log("playerTimeDifference", playerTimeDifference);
+		console.log("this.state.progressBarWidth", this.state.progressBarWidth);
+		return playerTimeDifference;
 	}
 
 	toggleVideoPlay() {
@@ -117,35 +126,36 @@ export class Youtube extends Component {
 		}
 	}
 
-	loadInfo() {
-		if (this.state.player) {
-			return [
-				<div className="col-md-1 my-auto" key={Math.random()}>
-					<img alt="audio-svg" className="audio-svg" src={audioSVG} />
-				</div>,
-				<div className="col-md-3 my-auto" key={Math.random()}>
-					{this.getArtistAndTrackTitle()}
-				</div>,
-				<div className="col-md-2 my-auto d-flex align-items-center" key={Math.random()}>
-					{this.toggleVideoPlay()}
-				</div>,
-				<div className="col-md-4 my-auto d-flex align-items-cente" key={Math.random()}>
-					Future location of progress bar
-				</div>,
-				<div className="col-md-2 my-auto d-flex align-items-cente" key={Math.random()}>
-					<input type="range" value={this.state.volume} onChange={this.handleVolumeChange} />
-				</div>
-			];
-		}
-	}
-
 	render() {
-		return (
-			<div className="container h-100">
-				<div className="yt-player-video-info row h-100">{this.loadInfo()}</div>
-				<div id="yt-player" />
-			</div>
-		);
+		if (this.state.player) {
+			return (
+				<div className="container h-100">
+					<div className="yt-player-video-info row h-100">
+						<div className="col-md-4 my-auto" key={Math.random()}>
+							{this.getArtistAndTrackTitle()}
+						</div>
+						<div className="col-md-2 my-auto d-flex align-items-center" key={Math.random()}>
+							{this.toggleVideoPlay()}
+						</div>
+						<div className="col-md-4 my-auto d-flex align-items-center" key={Math.random()}>
+							<YoutubeProgressBar currentPlayerWidth={this.progressBar()} />
+						</div>
+						<div className="col-md-2 my-auto d-flex align-items-cente" key={Math.random()}>
+							<input type="range" value={this.state.volume} onChange={this.handleVolumeChange} />
+						</div>
+					</div>
+
+					<div id="yt-player" />
+				</div>
+			);
+		} else {
+			return (
+				<div className="container h-100">
+					<div className="yt-player-video-info row h-100" />
+					<div id="yt-player" />
+				</div>
+			);
+		}
 	}
 }
 

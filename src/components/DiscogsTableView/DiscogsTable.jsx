@@ -10,37 +10,6 @@ export class DiscogsTable extends Component {
     this.state = {};
   }
 
-  componentDidUpdate() {
-    // this.handleVideoLoad();
-  }
-
-  // handleVideoLoad() {
-  //   let currentVideoIndex = this.props.app.loadYoutubeVideos.videos.length - 1;
-  //   let currentVideo = this.props.app.loadYoutubeVideos.videos[currentVideoIndex].response;
-  //   if (currentVideo) {
-  //     if (currentVideo.videos === undefined) {
-  //       // If no videos have been uploaded to Discogs for this record
-  //       alert("No videos have been uploaded for this record!");
-  //       return;
-  //     }
-  //     if (currentVideo.videos.length > 1) {
-  //       // If there is more than one video uploaded for this record, i.e. for multiple tracks, select one randomly to open
-  //       var randomVideo =
-  //         currentVideo.videos[Math.floor(Math.random() * currentVideo.videos.length)].uri;
-  //       this.openYoutubeVideo(randomVideo);
-  //     } else {
-  //       // If there is only one video uploaded for this record, open it
-  //       this.openYoutubeVideo(currentVideo.videos[0].uri);
-  //     }
-  //   }
-  // }
-
-  // openYoutubeVideo(video) {
-  //   // var newTab = window.open(video, "_blank");
-  //   // newTab.focus();
-  //   return <MusicPlayerBar video={video} />;
-  // }
-
   renderCollection() {
     let records = this.props.app.loadRecordsByUsername.records;
     for (var i = 0; i < records.length; i++) {
