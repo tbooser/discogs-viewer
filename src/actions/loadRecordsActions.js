@@ -3,7 +3,8 @@ import {
   LOAD_RECORDS_BY_USERNAME_ERROR,
   RECEIVE_YOUTUBE_VIDEOS_SUCCESS,
   LOADING_SPINNER_ACTIVE,
-  LOADING_SPINNER_INACTIVE
+  LOADING_SPINNER_INACTIVE,
+  TICK_YOUTUBE_PROGRESS_BAR
 } from "../constants.js";
 const _ = require("underscore");
 
@@ -69,30 +70,10 @@ export const loadingSpinnerInactive = () => {
   };
 };
 
-////////// LOAD RECORD BY ID
+export const tickYoutubeProgressBar = response => {
+  return dispatch => {
+    console.log("TICK_YOUTUBE_PROGRESS_BAR");
+    dispatch({ response, type: TICK_YOUTUBE_PROGRESS_BAR });
+  };
+};
 
-// export const loadRecordByIdSuccess = (response) => {
-//  console.log('Action in loadRecordByIdSuccess')
-//  return dispatch => {
-//    dispatch({ response, type: LOAD_RECORD_BY_ID_SUCCESS })
-//  }
-// }
-
-// export const loadRecordByIdError = (error) => {
-//  return { error, type: LOAD_RECORD_BY_ID_ERROR }
-// }
-
-// export const getRecordById = (id) => {
-//  console.log('id', id)
-//  return dispatch => {
-//    fetch('/id', {
-//      accept: 'application/json',
-//      method: 'POST',
-//      body: JSON.stringify(id)
-//    }).then(response => {
-//      return response.json()
-//    }).then(response => {
-//      dispatch(loadRecordByIdSuccess(response))
-//    })
-//  }
-// }

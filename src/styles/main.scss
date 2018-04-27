@@ -142,9 +142,13 @@ body {
 }
 
 .yt-player-video-info {
-  color: #02d46a;
-  font-size: 18px;
+  color: #999;
+  font-size: 15px;
   margin-left: 50px;
   opacity: 1;
 }
 
+.progress-bar {
+  background-color: #42e8f4;
+  height: 3px;
+}

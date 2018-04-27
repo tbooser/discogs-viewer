@@ -74,6 +74,7 @@ function mapStateToProps(state) {
     app: state
   };
 }
+
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
