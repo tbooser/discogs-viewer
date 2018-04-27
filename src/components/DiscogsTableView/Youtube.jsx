@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import YoutubeProgressBar from "./YoutubeProgressBar.jsx";
+import * as recordActions from "../../actions/loadRecordsActions";
+import { bindActionCreators } from "redux";
 
 let player;
 
@@ -10,7 +12,10 @@ export class Youtube extends Component {
 		this.state = {
 			player: null,
 			paused: false,
-			volume: 100
+			volume: 100,
+			currentTimeRounded: 0,
+			currentTime: 0,
+			duration: 0
 		};
 
 		this.pauseVideo = this.pauseVideo.bind(this);
@@ -18,16 +23,15 @@ export class Youtube extends Component {
 		this.toggleVideoPlay = this.toggleVideoPlay.bind(this);
 		this.setVolume = this.setVolume.bind(this);
 		this.getDuration = this.getDuration.bind(this);
-		this.getCurrentTime = this.getCurrentTime.bind(this);
+		this.getCurrentTimeRounded = this.getCurrentTimeRounded.bind(this);
 		this.getArtistAndTrackTitle = this.getArtistAndTrackTitle.bind(this);
 		this.handleVolumeChange = this.handleVolumeChange.bind(this);
-		this.progressBar = this.progressBar.bind(this);
+		this.tick = this.tick.bind(this);
+		this.getCurrentTime = this.getCurrentTime.bind(this);
+		this.getDuration = this.getDuration.bind(this);
 	}
 
-	componentDidUpdate() {
-		console.log("State -> ", this.state);
-		console.log("Duration -> ", this.state.player.getDuration());
-	}
+	componentDidUpdate() {}
 
 	componentDidMount() {
 		if (!player) {
@@ -55,6 +59,7 @@ export class Youtube extends Component {
 				}
 			});
 		});
+		this.tick();
 	}
 
 	onReady = e => {
@@ -68,6 +73,14 @@ export class Youtube extends Component {
 			this.props.onStateChange(e);
 		}
 	};
+
+	tick() {
+		setInterval(() => {
+			this.getCurrentTimeRounded();
+			this.getCurrentTime();
+			this.getDuration();
+		}, 1000);
+	}
 
 	playVideo() {
 		this.state.player.playVideo();
@@ -83,13 +96,16 @@ export class Youtube extends Component {
 		this.state.player.setVolume(volume);
 	}
 
-	getDuration() {
-		this.state.player.getDuration();
+	getCurrentTime() {
+		this.setState({ currentTime: this.state.player.getCurrentTime() });
 	}
 
-	getCurrentTime() {
-		console.log("Get current time", this.state.player.getCurrentTime());
-		this.state.player.getCurrentTime();
+	getDuration() {
+		this.setState({ duration: this.state.player.getDuration() });
+	}
+
+	getCurrentTimeRounded() {
+		this.setState({ currentTimeRounded: Math.floor(this.state.player.getCurrentTime()) });
 	}
 
 	getArtistAndTrackTitle() {
@@ -99,15 +115,6 @@ export class Youtube extends Component {
 	handleVolumeChange(event) {
 		this.setState({ volume: event.target.value });
 		this.setVolume(event.target.value);
-	}
-
-	progressBar() {
-		var playerCurrentTime = this.state.player.getCurrentTime();
-		var playerTotalTime = this.state.player.getDuration();
-		var playerTimeDifference = playerCurrentTime / playerTotalTime * 100;
-		console.log("playerTimeDifference", playerTimeDifference);
-		console.log("this.state.progressBarWidth", this.state.progressBarWidth);
-		return playerTimeDifference;
 	}
 
 	toggleVideoPlay() {
@@ -131,14 +138,19 @@ export class Youtube extends Component {
 			return (
 				<div className="container h-100">
 					<div className="yt-player-video-info row h-100">
-						<div className="col-md-4 my-auto" key={Math.random()}>
-							{this.getArtistAndTrackTitle()}
-						</div>
-						<div className="col-md-2 my-auto d-flex align-items-center" key={Math.random()}>
+						<div className="col-md-1 my-auto d-flex align-items-center" key={Math.random()}>
 							{this.toggleVideoPlay()}
 						</div>
-						<div className="col-md-4 my-auto d-flex align-items-center" key={Math.random()}>
-							<YoutubeProgressBar currentPlayerWidth={this.progressBar()} />
+						<div className="col-md-5 my-auto d-flex align-items-center" key={Math.random()}>
+							{this.state.currentTimeRounded}
+
+							<YoutubeProgressBar
+								getCurrentTime={this.state.currentTime}
+								getDuration={this.state.duration}
+							/>
+						</div>
+						<div className="col-md-4 my-auto" key={Math.random()}>
+							{this.getArtistAndTrackTitle()}
 						</div>
 						<div className="col-md-2 my-auto d-flex align-items-cente" key={Math.random()}>
 							<input type="range" value={this.state.volume} onChange={this.handleVolumeChange} />
@@ -165,4 +177,12 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps)(Youtube);
+function mapDispatchToProps(dispatch) {
+	return {
+		actions: {
+			recordActions: bindActionCreators(recordActions, dispatch)
+		}
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Youtube);
