@@ -4,7 +4,8 @@ import {
   RECEIVE_YOUTUBE_VIDEOS_SUCCESS,
   LOADING_SPINNER_ACTIVE,
   LOADING_SPINNER_INACTIVE,
-  TICK_YOUTUBE_PROGRESS_BAR
+  TICK_YOUTUBE_PROGRESS_BAR,
+  SET_ALBUM_IMAGE
 } from "../constants.js";
 const _ = require("underscore");
 
@@ -72,8 +73,15 @@ export const loadingSpinnerInactive = () => {
 
 export const tickYoutubeProgressBar = response => {
   return dispatch => {
-    console.log("TICK_YOUTUBE_PROGRESS_BAR");
+    console.log("TICK_YOUTUBE_PROGRESS_BAR ACTION");
     dispatch({ response, type: TICK_YOUTUBE_PROGRESS_BAR });
+  };
+};
+
+export const setAlbumImage = response => {
+  return dispatch => {
+    console.log("SET_ALBUM_IMAGE");
+    dispatch({ response, type: SET_ALBUM_IMAGE });
   };
 };
 
