@@ -4,7 +4,7 @@ const tick = {
   tick: []
 };
 
-function tickYoutubeProgressBar(state = tick, action) {
+function tickYoutubeProgressBarReducer(state = tick, action) {
   switch (action.type) {
     case TICK_YOUTUBE_PROGRESS_BAR:
       console.log("TICK_YOUTUBE_PROGRESS_BAR REDUCER");
@@ -22,4 +22,4 @@ function tickYoutubeProgressBar(state = tick, action) {
   }
 }
 
-export default tickYoutubeProgressBar;
+export default tickYoutubeProgressBarReducer;

@@ -12,13 +12,8 @@ export class RecordCollectionItem extends Component {
 
   getYoutubeVideos(event) {
     this.props.getYoutubeVideo(this.props.resource_url);
+    this.props.setAlbumImage(this.props.imgSrc);
     this.setState({ current_record: this.props.recordTitle });
-    console.log("event", event);
-    // console.log(this.props.artistName);
-  }
-
-  componentDidUpdate() {
-    console.log(this.state, "this.state");
   }
 
   render() {

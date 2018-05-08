@@ -3,33 +3,67 @@ import { connect } from "react-redux";
 import RecordCollectionItem from "./RecordCollectionItem.jsx";
 import { bindActionCreators } from "redux";
 import * as recordActions from "../../actions/loadRecordsActions";
+const _ = require("underscore");
 
 export class DiscogsTable extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      initialRenderComplete: false
+    };
+  }
+
+  randomizeCollection() {
+    this.setState({ initialRenderComplete: true });
   }
 
   renderCollection() {
-    let records = this.props.app.loadRecordsByUsername.records;
-    for (var i = 0; i < records.length; i++) {
-      if (records.length > 1 && records[i].response !== undefined) {
-        return records[i].response.map(item => {
-          return (
-            <RecordCollectionItem
-              id={item.id}
-              key={Math.random()}
-              year={item.basic_information.year}
-              recordTitle={item.basic_information.title}
-              imgSrc={item.basic_information.cover_image}
-              label={item.basic_information.labels[0].name}
-              catNo={item.basic_information.labels[0].catno}
-              resource_url={item.basic_information.resource_url}
-              artistName={item.basic_information.artists[0].name}
-              getYoutubeVideo={this.props.actions.recordActions.fetchYoutubeVideos}
-            />
-          );
-        });
+    if (this.state.intialRenderComplete === false) {
+      let records = this.props.app.loadRecordsByUsername.records;
+      for (var i = 0; i < records.length; i++) {
+        if (records.length > 1 && records[i].response !== undefined) {
+          return records[i].response.map(item => {
+            return (
+              <RecordCollectionItem
+                id={item.id}
+                key={Math.random()}
+                year={item.basic_information.year}
+                recordTitle={item.basic_information.title}
+                imgSrc={item.basic_information.cover_image}
+                label={item.basic_information.labels[0].name}
+                catNo={item.basic_information.labels[0].catno}
+                resource_url={item.basic_information.resource_url}
+                artistName={item.basic_information.artists[0].name}
+                getYoutubeVideo={this.props.actions.recordActions.fetchYoutubeVideos}
+                setAlbumImage={this.props.actions.recordActions.setAlbumImage}
+              />
+            );
+          });
+        }
+      }
+    } else {
+      let records = this.props.app.loadRecordsByUsername.records;
+      for (var i = 0; i < records.length; i++) {
+        if (records.length > 1 && records[i].response !== undefined) {
+          let shuffledRecords = _.shuffle(records[i].response);
+          console.log(shuffledRecords);
+          return shuffledRecords.map(item => {
+            return (
+              <RecordCollectionItem
+                id={item.id}
+                key={Math.random()}
+                year={item.basic_information.year}
+                recordTitle={item.basic_information.title}
+                imgSrc={item.basic_information.cover_image}
+                label={item.basic_information.labels[0].name}
+                resource_url={item.basic_information.resource_url}
+                artistName={item.basic_information.artists[0].name}
+                getYoutubeVideo={this.props.actions.recordActions.fetchYoutubeVideos}
+                setAlbumImage={this.props.actions.recordActions.setAlbumImage}
+              />
+            );
+          });
+        }
       }
     }
   }
@@ -38,7 +72,10 @@ export class DiscogsTable extends Component {
     return (
       <div className="col-sm-12">
         <div className="container">
-          <table className="table table-hover">
+          <button onClick={() => this.randomizeCollection()} className="btn btn-xs btn-primary">
+            Randomize
+          </button>
+          <table className="table table-hover mt-4">
             <thead className="thead-light">
               <tr>
                 <th scope="col" />

@@ -22,16 +22,18 @@ export class Youtube extends Component {
 		this.playVideo = this.playVideo.bind(this);
 		this.toggleVideoPlay = this.toggleVideoPlay.bind(this);
 		this.setVolume = this.setVolume.bind(this);
-		this.getDuration = this.getDuration.bind(this);
 		this.getCurrentTimeRounded = this.getCurrentTimeRounded.bind(this);
 		this.getArtistAndTrackTitle = this.getArtistAndTrackTitle.bind(this);
 		this.handleVolumeChange = this.handleVolumeChange.bind(this);
-		this.tick = this.tick.bind(this);
 		this.getCurrentTime = this.getCurrentTime.bind(this);
 		this.getDuration = this.getDuration.bind(this);
+		this.formatTime = this.formatTime.bind(this);
 	}
 
-	componentDidUpdate() {}
+	componentDidUpdate() {
+		console.log(this.props, "this.props");
+		console.log(this.props.app.setAlbumImage.albumImage[0], "image");
+	}
 
 	componentDidMount() {
 		if (!player) {
@@ -59,7 +61,6 @@ export class Youtube extends Component {
 				}
 			});
 		});
-		this.tick();
 	}
 
 	onReady = e => {
@@ -73,14 +74,6 @@ export class Youtube extends Component {
 			this.props.onStateChange(e);
 		}
 	};
-
-	tick() {
-		setInterval(() => {
-			this.getCurrentTimeRounded();
-			this.getCurrentTime();
-			this.getDuration();
-		}, 1000);
-	}
 
 	playVideo() {
 		this.state.player.playVideo();
@@ -104,8 +97,17 @@ export class Youtube extends Component {
 		this.setState({ duration: this.state.player.getDuration() });
 	}
 
+	formatTime(time) {
+		if (time / 60 >= 1) {
+			return (time = time / 60 + ":" + time);
+		}
+	}
+
 	getCurrentTimeRounded() {
-		this.setState({ currentTimeRounded: Math.floor(this.state.player.getCurrentTime()) });
+		console.log("this.props this.props", this.props);
+		let time = Math.floor(this.state.player.getCurrentTime());
+		this.props.actions.recordActions.tickYoutubeProgressBar(time);
+		this.setState({ currentTimeRounded: time });
 	}
 
 	getArtistAndTrackTitle() {
@@ -138,21 +140,26 @@ export class Youtube extends Component {
 			return (
 				<div className="container h-100">
 					<div className="yt-player-video-info row h-100">
-						<div className="col-md-1 my-auto d-flex align-items-center" key={Math.random()}>
-							{this.toggleVideoPlay()}
-						</div>
-						<div className="col-md-5 my-auto d-flex align-items-center" key={Math.random()}>
-							{this.state.currentTimeRounded}
-
-							<YoutubeProgressBar
-								getCurrentTime={this.state.currentTime}
-								getDuration={this.state.duration}
+						<div className=" col-md-1 my-auto" key={Math.random()}>
+							<img
+								alt="music-bar-record-album-cover"
+								className="music-bar-item-image"
+								src={this.props.app.setAlbumImage.albumImage[0].response}
 							/>
 						</div>
-						<div className="col-md-4 my-auto" key={Math.random()}>
+						<div className="col-md-3 my-auto" key={Math.random()}>
 							{this.getArtistAndTrackTitle()}
 						</div>
-						<div className="col-md-2 my-auto d-flex align-items-cente" key={Math.random()}>
+						<div
+							className="offset-md-1 col-md-1 my-auto d-flex align-items-center"
+							key={Math.random()}
+						>
+							{this.toggleVideoPlay()}
+						</div>
+						<div
+							className="offset-md-2 col-md-3 my-auto d-flex align-items-cente"
+							key={Math.random()}
+						>
 							<input type="range" value={this.state.volume} onChange={this.handleVolumeChange} />
 						</div>
 					</div>
