@@ -1,1 +1,4 @@
-module.exports = {};
+module.exports = {
+	consumerKey: "vdjYITGlwsFQzUxtNGkf",
+	consumerSecret: "TNxkiCfCGkPXDYNsFdRqlSrcYIZWTGcs"
+};
