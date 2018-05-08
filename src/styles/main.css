@@ -21,14 +21,12 @@ body {
 
 .header {
   font-family: "Rubik", sans-serif; }
-
-.header .header-image {
-  height: 120px;
-  width: 200px; }
-
-.header .header-image img {
-  height: auto;
-  width: 100%; }
+  .header .header-image {
+    height: 120px;
+    width: 200px; }
+  .header .header-image img {
+    height: auto;
+    width: 100%; }
 
 .discogs-header-gh-link img {
   height: 50px;
@@ -54,9 +52,8 @@ body {
   margin-top: 15px;
   top: 0;
   width: 100%; }
-
-.record-image:hover {
-  cursor: pointer; }
+  .record-image:hover {
+    cursor: pointer; }
 
 .record-text {
   color: #9e5a75;
