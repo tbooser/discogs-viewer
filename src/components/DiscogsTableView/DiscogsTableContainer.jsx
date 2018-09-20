@@ -64,7 +64,6 @@ export class DiscogsTableContainer extends Component {
       );
     } else {
       return [
-        <Header key={Math.random()} />,
         <div className="table-container pt-4 container" key={Math.random()}>
           <div className="row">
             <DiscogsTable />

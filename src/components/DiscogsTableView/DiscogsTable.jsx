@@ -4,6 +4,7 @@ import RecordCollectionItem from "./RecordCollectionItem.jsx";
 import { bindActionCreators } from "redux";
 import * as recordActions from "../../actions/loadRecordsActions";
 const _ = require("underscore");
+import Header from "./Header.jsx";
 
 export class DiscogsTable extends Component {
   constructor(props) {
@@ -11,14 +12,13 @@ export class DiscogsTable extends Component {
     this.state = {
       initialRenderComplete: false
     };
-  }
 
-  randomizeCollection() {
-    this.setState({ initialRenderComplete: true });
+    this.renderCollection = this.renderCollection.bind(this);
   }
 
   renderCollection() {
     if (this.state.intialRenderComplete === false) {
+      this.setState({ initialRenderComplete: true });
       let records = this.props.app.loadRecordsByUsername.records;
       for (var i = 0; i < records.length; i++) {
         if (records.length > 1 && records[i].response !== undefined) {
@@ -46,7 +46,7 @@ export class DiscogsTable extends Component {
       for (var i = 0; i < records.length; i++) {
         if (records.length > 1 && records[i].response !== undefined) {
           let shuffledRecords = _.shuffle(records[i].response);
-          console.log(shuffledRecords);
+          console.log(shuffledRecords, "lkjl");
           return shuffledRecords.map(item => {
             return (
               <RecordCollectionItem
@@ -72,9 +72,7 @@ export class DiscogsTable extends Component {
     return (
       <div className="col-sm-12">
         <div className="container">
-          <button onClick={() => this.randomizeCollection()} className="btn btn-xs btn-primary">
-            Randomize
-          </button>
+          <Header randomize={this.renderCollection} />
           <table className="table table-hover mt-4">
             <thead className="thead-light">
               <tr>

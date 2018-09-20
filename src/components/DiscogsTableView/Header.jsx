@@ -1,15 +1,43 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-export default function Header() {
-  return (
-    <div className="container" key={Math.random()}>
-      <div className="row ml-auto">
-        <a href="/discogs-album-view">
-          <button type="button" className="btn btn-link">
-            Go to album view
+export class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+
+    this.randomize = this.randomize.bind(this);
+  }
+
+  randomize() {
+    console.log("dfsf");
+    this.props.randomize();
+  }
+
+  render() {
+    return (
+      <div className="container" key={Math.random()}>
+        <div className="row">
+          <button onClick={this.randomize} className="btn btn-xs btn-primary">
+            Randomize <i className="fas fa-random" />
           </button>
-        </a>
+          <div className="go-to-button-container ml-auto">
+            <a href="/discogs-album-view">
+              <button type="button" className="btn btn-dark">
+                Go to album view <i className="fas fa-arrow-right" />
+              </button>
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
+
+function mapStateToProps(state) {
+  return {
+    app: state
+  };
+}
+
+export default connect(mapStateToProps)(Header);
