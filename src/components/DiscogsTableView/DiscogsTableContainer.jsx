@@ -5,7 +5,6 @@ import DiscogsTable from "./DiscogsTable.jsx";
 import LoadingSpinner from "./LoadingSpinner";
 import * as recordActions from "../../actions/loadRecordsActions";
 import MusicPlayerBar from "./MusicPlayerBar.jsx";
-import Header from "./Header.jsx";
 
 export class DiscogsTableContainer extends Component {
   constructor(props) {
@@ -17,39 +16,13 @@ export class DiscogsTableContainer extends Component {
     this.loadingSpinner = this.loadingSpinner.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.actions.recordActions.getRecordsByUsername();
   }
 
   componentDidUpdate() {
     if (this.state.isFetching === true) {
       this.setState({ isFetching: false });
-    }
-  }
-
-  getVideoId() {
-    let currentVideoIndex = this.props.app.loadYoutubeVideos.videos.length - 1;
-    let currentVideo = this.props.app.loadYoutubeVideos.videos[currentVideoIndex].response;
-    if (currentVideo) {
-      if (currentVideo.videos === undefined) {
-        // If no videos have been uploaded to Discogs for this record
-        alert("No videos have been uploaded for this record!");
-        return;
-      }
-      if (currentVideo.videos.length > 1) {
-        // If there is more than one video uploaded for this record, i.e. for multiple tracks, select one randomly to open
-        var randomVideo =
-          currentVideo.videos[Math.floor(Math.random() * currentVideo.videos.length)].uri;
-
-        var slicedRandomVideo = randomVideo.slice(randomVideo.indexOf("=") + 1, randomVideo.length);
-
-        return slicedRandomVideo;
-      } else {
-        // If there is only one video uploaded for this record, open it
-        var singleVideo = currentVideo.videos[0].uri;
-        var slicedSingleVideo = singleVideo.slice(singleVideo.indexOf("=") + 1, singleVideo.length);
-        return slicedSingleVideo;
-      }
     }
   }
 
@@ -69,13 +42,15 @@ export class DiscogsTableContainer extends Component {
             <DiscogsTable />
           </div>
         </div>,
-        <MusicPlayerBar videoId={this.getVideoId()} key={Math.random()} />
+        <MusicPlayerBar key={Math.random()} />
       ];
     }
   }
 
   render() {
-    return <div className="">{this.loadingSpinner()}</div>;
+    const loadingSpinner = this.loadingSpinner();
+
+    return <div className="">{loadingSpinner}</div>;
   }
 }
 
@@ -93,4 +68,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DiscogsTableContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  DiscogsTableContainer
+);

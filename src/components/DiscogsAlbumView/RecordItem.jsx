@@ -32,7 +32,12 @@ export class RecordItem extends Component {
           onClick={this.handleRecordClick}
           key={Math.random()}
         >
-          <img className="record-image" src={this.props.imgSrc} alt="Record" id={this.props.id} />
+          <img
+            className="record-image"
+            src={this.props.imgSrc}
+            alt="Record"
+            id={this.props.id}
+          />
         </div>
         <div className="record-details-container card-body">
           <div className="card-text">

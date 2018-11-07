@@ -1,19 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import * as recordActions from "../../actions/loadRecordsActions";
+import { bindActionCreators } from "redux";
 
 export class RecordCollectionItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      clicked: false,
-      current_record: null
+      clicked: false
     };
+
+    this.getYoutubeVideos = this.getYoutubeVideos.bind(this);
   }
 
   getYoutubeVideos(event) {
-    this.props.getYoutubeVideo(this.props.resource_url);
-    this.props.setAlbumImage(this.props.imgSrc);
-    this.setState({ current_record: this.props.recordTitle });
+    this.props.actions.recordActions.fetchYoutubeVideos(
+      this.props.resource_url,
+      this.props.imgSrc
+    );
   }
 
   render() {
@@ -31,7 +35,7 @@ export class RecordCollectionItem extends Component {
         <th className="record-table-item-info">{this.props.label}</th>
         <th className="record-table-item-info">{this.props.catNo}</th>
         <th className="record-table-item-info">{this.props.year}</th>
-        <th onClick={this.getYoutubeVideos.bind(this)}>
+        <th onClick={this.getYoutubeVideos}>
           <i className="fas fa-headphones" />
         </th>
       </tr>
@@ -45,4 +49,14 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(RecordCollectionItem);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      recordActions: bindActionCreators(recordActions, dispatch)
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  RecordCollectionItem
+);
