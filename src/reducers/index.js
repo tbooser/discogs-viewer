@@ -2,11 +2,9 @@ import { combineReducers } from "redux";
 import loadRecordsByUsername from "./loadRecordsByUsername";
 import loadRecordById from "./loadRecordById";
 import loadYoutubeVideos from "./loadYoutubeVideos";
-import setAlbumImage from "./setAlbumImage";
 
 export default combineReducers({
 	loadRecordsByUsername,
 	loadRecordById,
-	loadYoutubeVideos,
-	setAlbumImage
+	loadYoutubeVideos
 });

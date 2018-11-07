@@ -10,7 +10,6 @@ export class Header extends Component {
   }
 
   randomize() {
-    console.log("dfsf");
     this.props.randomize();
   }
 

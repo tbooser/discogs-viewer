@@ -1,4 +1,8 @@
-import { LOAD_RECORDS_BY_USERNAME_SUCCESS, LOAD_RECORDS_BY_USERNAME_ERROR } from "../constants";
+const _ = require("underscore");
+import {
+  LOAD_RECORDS_BY_USERNAME_SUCCESS,
+  LOAD_RECORDS_BY_USERNAME_ERROR
+} from "../constants";
 
 const recordList = {
   records: [""]
@@ -11,7 +15,7 @@ function loadRecordsByUsername(state = recordList, action) {
         records: [
           ...state.records,
           {
-            response: action.response
+            response: _.shuffle(action.response)
           }
         ]
       });

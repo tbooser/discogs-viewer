@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import YoutubeProgressBar from "./YoutubeProgressBar.jsx";
+// import YoutubeProgressBar from "./YoutubeProgressBar.jsx";
 import * as recordActions from "../../actions/loadRecordsActions";
 import { bindActionCreators } from "redux";
 
@@ -28,11 +28,6 @@ export class Youtube extends Component {
 		this.getCurrentTime = this.getCurrentTime.bind(this);
 		this.getDuration = this.getDuration.bind(this);
 		this.formatTime = this.formatTime.bind(this);
-	}
-
-	componentDidUpdate() {
-		console.log(this.props, "this.props");
-		console.log(this.props.app.setAlbumImage.albumImage[0], "image");
 	}
 
 	componentDidMount() {
@@ -104,7 +99,6 @@ export class Youtube extends Component {
 	}
 
 	getCurrentTimeRounded() {
-		console.log("this.props this.props", this.props);
 		let time = Math.floor(this.state.player.getCurrentTime());
 		this.props.actions.recordActions.tickYoutubeProgressBar(time);
 		this.setState({ currentTimeRounded: time });
@@ -122,13 +116,19 @@ export class Youtube extends Component {
 	toggleVideoPlay() {
 		if (this.state.paused) {
 			return (
-				<i className="material-icons music-player-button" onClick={this.playVideo}>
+				<i
+					className="material-icons music-player-button"
+					onClick={this.playVideo}
+				>
 					play_arrow
 				</i>
 			);
 		} else {
 			return (
-				<i className="material-icons music-player-button" onClick={this.pauseVideo}>
+				<i
+					className="material-icons music-player-button"
+					onClick={this.pauseVideo}
+				>
 					pause
 				</i>
 			);
@@ -144,7 +144,7 @@ export class Youtube extends Component {
 							<img
 								alt="music-bar-record-album-cover"
 								className="music-bar-item-image"
-								src={this.props.app.setAlbumImage.albumImage[0].response}
+								src={this.props.app.loadYoutubeVideos.currentImage}
 							/>
 						</div>
 						<div className="col-md-3 my-auto" key={Math.random()}>
@@ -160,7 +160,11 @@ export class Youtube extends Component {
 							className="offset-md-2 col-md-3 my-auto d-flex align-items-cente"
 							key={Math.random()}
 						>
-							<input type="range" value={this.state.volume} onChange={this.handleVolumeChange} />
+							<input
+								type="range"
+								value={this.state.volume}
+								onChange={this.handleVolumeChange}
+							/>
 						</div>
 					</div>
 
