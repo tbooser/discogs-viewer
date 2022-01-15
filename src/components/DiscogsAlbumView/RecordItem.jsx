@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getRecordById } from "../../actions/loadRecordsActions";
+// import { getRecordById } from "../../actions/loadRecordsActions";
 import RecordInfo from "./RecordInfo";
 
 export class RecordItem extends Component {
@@ -62,4 +62,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getRecordById })(RecordItem);
+export default connect(mapStateToProps)(RecordItem);

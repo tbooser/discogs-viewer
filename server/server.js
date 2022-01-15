@@ -1,6 +1,6 @@
 "use strict";
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 const express = require("express");
 const app = express();
 const routes = express.Router();
@@ -17,5 +17,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(port, function() {
-	console.log("Server started.........");
+	console.log(`Server started at http://localhost:${port}`);
 });

@@ -68,6 +68,7 @@ export class Youtube extends Component {
 		if (typeof this.props.onStateChange === "function") {
 			this.props.onStateChange(e);
 		}
+		console.log('this.state.player', this.state.player);
 	};
 
 	playVideo() {
@@ -105,7 +106,9 @@ export class Youtube extends Component {
 	}
 
 	getArtistAndTrackTitle() {
-		return this.state.player.j.videoData.title;
+		const videoData = this.state.player.getVideoData();
+		const { title } = videoData;
+		return title;
 	}
 
 	handleVolumeChange(event) {

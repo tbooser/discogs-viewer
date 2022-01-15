@@ -19,36 +19,57 @@ export class DiscogsTableView extends Component {
   }
 
   render() {
-    return (
-      <div className="col-sm-12">
-        <div className="container">
-          <Header randomize={this.randomizeCollection} />
-          <table className="table table-hover mt-4">
-            <thead className="thead-light">
-              <tr>
-                <th scope="col" />
-                <th className="table-head-column-name" scope="col">
-                  Artist
-                </th>
-                <th className="table-head-column-name" scope="col">
-                  Title
-                </th>
-                <th className="table-head-column-name" scope="col">
-                  Label
-                </th>
-                <th className="table-head-column-name" scope="col">
-                  Catalog #
-                </th>
-                <th className="table-head-column-name" scope="col">
-                  Year
-                </th>
-                <th scope="col" />
-                <th scope="col" />
-              </tr>
-            </thead>
-            <tbody>{this.collection()}</tbody>
-          </table>
+    // return (
+    //   <div className="col-sm-12">
+    //     <div className="container">
+    //       <Header randomize={this.randomizeCollection} />
+    //       <table className="table table-hover mt-4">
+    //         <thead className="thead-light">
+    //           <tr>
+    //             <th scope="col" />
+    //             <th className="table-head-column-name" scope="col">
+    //               Artist
+    //             </th>
+    //             <th className="table-head-column-name" scope="col">
+    //               Title
+    //             </th>
+    //             <th className="table-head-column-name" scope="col">
+    //               Label
+    //             </th>
+    //             <th className="table-head-column-name" scope="col">
+    //               Catalog #
+    //             </th>
+    //             <th className="table-head-column-name" scope="col">
+    //               Year
+    //             </th>
+    //             <th scope="col" />
+    //             <th scope="col" />
+    //           </tr>
+    //         </thead>
+    //         <tbody>{this.collection()}</tbody>
+    //       </table>
+    //     </div>
+    //   </div>
+    // );
+    return (  
+      <div className="list-view__collection-container">
+        <div className="list-view__sort-bar">
+          <div>
+          </div>
+          <div>
+            Artist
+          </div>
+          <div>
+            Title
+          </div>
+          <div>
+            Label
+          </div>
+          <div>
+            Year
+          </div>
         </div>
+        {this.collection()}
       </div>
     );
   }
