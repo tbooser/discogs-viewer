@@ -19,7 +19,7 @@ export class DiscogsTable extends Component {
 
   renderCollection() {
     const records = this.props.app.loadRecordsByUsername.records;
-    for (var i = 0; i < records.length; i++) {
+    for (let i = 0; i < records.length; i++) {
       if (records.length > 1 && records[i].response !== undefined) {
         const shuffledRecords = records[i].response;
         return shuffledRecords.map(item => {
@@ -44,9 +44,7 @@ export class DiscogsTable extends Component {
     const renderCollection = this.renderCollection();
 
     return (
-      <div>
-        <DiscogsTableView collection={renderCollection} />
-      </div>
+      <DiscogsTableView collection={renderCollection} />
     );
   }
 }

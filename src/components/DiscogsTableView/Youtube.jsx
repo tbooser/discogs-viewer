@@ -68,7 +68,6 @@ export class Youtube extends Component {
 		if (typeof this.props.onStateChange === "function") {
 			this.props.onStateChange(e);
 		}
-		console.log('this.state.player', this.state.player);
 	};
 
 	playVideo() {

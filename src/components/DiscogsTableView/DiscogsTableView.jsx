@@ -54,20 +54,20 @@ export class DiscogsTableView extends Component {
     return (  
       <div className="list-view__collection-container">
         <div className="list-view__sort-bar">
-          <div>
-          </div>
-          <div>
+          <span>
+          </span>
+          <span>
             Artist
-          </div>
-          <div>
+          </span>
+          <span>
             Title
-          </div>
-          <div>
+          </span>
+          <span>
             Label
-          </div>
-          <div>
+          </span>
+          <span>
             Year
-          </div>
+          </span>
         </div>
         {this.collection()}
       </div>

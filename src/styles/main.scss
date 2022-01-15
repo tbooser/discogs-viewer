@@ -11,7 +11,7 @@ body {
 }
 
 .App {
-  font-family: "Rubik", sans-serif;
+  font-family: 'Teko', sans-serif;
   padding: 50px 30px;
   min-height: 100%;
 }
@@ -26,7 +26,7 @@ body {
 }
 
 .header {
-  font-family: "Rubik", sans-serif;
+  font-family: 'Teko', sans-serif;
 
   .header-image {
     height: 120px;
@@ -50,9 +50,6 @@ body {
   font-size: 21px;
   font-weight: 700;
   text-align: center;
-}
-
-.record-list-container {
 }
 
 .record-image-container {
@@ -92,16 +89,6 @@ body {
   padding: 0 10px 0 0;
 }
 
-.record-table-item {
-  th {
-    vertical-align: baseline !important; // This overrides the vertical-align: top that comes with the th element
-  }
-}
-
-.table-container {
-  // background: #3cc4c7;
-}
-
 .table-head-column-name {
   &:hover {
     cursor: pointer;
@@ -119,8 +106,7 @@ body {
   bottom: 0;
   color: #fff;
   height: 80px;
-  // background: rgba(0, 0, 0, 0.9);
-  background: #333333;
+  background: #000;
   position: fixed;
   width: 100%;
 }
@@ -164,24 +150,45 @@ body {
 
 // List view
 
-.list-view__collection-container {
-  font-weight: 700;
-  width: 60vw;
+$lv: '.list-view';
+
+#{$lv}__container-main {
+  background-color: #f7f6f1;
+  display: flex;
+  justify-content: center;
+
+  #{$lv}__collection-container {
+    font-weight: 700;
+    margin: 30px 0 100px;
+    width: 70vw;
+
+    #{$lv}__sort-bar {
+      align-items: center;
+      display: grid;
+      font-family: 'Teko', sans-serif;
+      font-size: 45px;
+      grid-template-columns: repeat(6, 1fr);
+      height: 3em;
+      margin: 0 0 30px;
+
+      span {
+        text-align: center;
+      }
+    }
+    
+    #{$lv}__record-item {
+      align-items: center;
+      display: grid;
+      grid-template-columns: repeat(6,1fr);
+      font-family: 'Teko', sans-serif;
+      font-size: 20px;
+      height: 7em;
+
+      span {
+        text-align: center;
+      }
+    }
+  }
 }
 
-.list-view__sort-bar {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  font-size: 24px;
-  height: 3em;
-  align-items: center;
-  color: #495057;
-  background-color: #e9ecef;
-}
 
-.list-view__record-item {
-  display: grid;
-  grid-template-columns: repeat(6,1fr);
-  height: 7em;
-  align-items: center;
-}
