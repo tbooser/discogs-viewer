@@ -134,6 +134,7 @@ body {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       font-family: 'Teko', sans-serif;
+      font-size: 20px;
       height: 7em; }
       .list-view__container-main .list-view__collection-container .list-view__record-item span {
         text-align: center; }
