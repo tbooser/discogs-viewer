@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import RecordItem from "./RecordItem";
-import Sidebar from "./Sidebar.jsx";
 import * as recordActions from "../../actions/loadRecordsActions";
 const _ = require("underscore");
 
@@ -81,7 +80,6 @@ export class RenderRecords extends Component {
   render() {
     return (
       <div className="row">
-        <Sidebar />
         <div className="container record-list-container col-sm-12 col-lg-9">
           <div className="record-container-intro-copy " />
           <div className="row">{this.renderRecords()}</div>

@@ -7,15 +7,15 @@
     "global": "4.4.0",
     "moment": "2.29.1",
     "nodemon": "2.0.15",
+    "postcss-normalize": "^10.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-redux": "7.2.6",
-    "react-router-dom": "6.2.1",
+    "react-router-dom": "6.2.2",
     "react-scripts": "5.0.0",
     "redux": "4.1.2",
     "redux-thunk": "2.4.1",
-    "underscore": "1.13.2",
-    "why-did-you-update": "1.0.8"
+    "underscore": "1.13.2"
   },
   "scripts": {
     "build-css": "node-sass src/ -o src/",
@@ -26,7 +26,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "restart": "yarn build-css && yarn build && yarn start"
+    "restart": "yarn build-css && yarn build && yarn start",
+    "clean": "rm -rf package-lock.json && rm -rf node_modules && rm -rf build/ && npm i && npm run build"
   },
   "proxy": "http://127.0.0.1:3001",
   "devDependencies": {
@@ -34,7 +35,7 @@
     "node-sass": "7.0.1"
   },
   "engines": {
-    "node": "17.0.1"
+    "node": "16.14.0"
   },
   "browserslist": {
     "production": [
