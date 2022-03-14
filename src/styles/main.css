@@ -21,12 +21,14 @@ body {
 
 .header {
   font-family: 'Teko', sans-serif; }
-  .header .header-image {
-    height: 120px;
-    width: 200px; }
-  .header .header-image img {
-    height: auto;
-    width: 100%; }
+
+.header .header-image {
+  height: 120px;
+  width: 200px; }
+
+.header .header-image img {
+  height: auto;
+  width: 100%; }
 
 .discogs-header-gh-link img {
   height: 50px;
@@ -52,8 +54,9 @@ body {
   margin-top: 15px;
   top: 0;
   width: 100%; }
-  .record-image:hover {
-    cursor: pointer; }
+
+.record-image:hover {
+  cursor: pointer; }
 
 .record-text {
   color: #9e5a75;
@@ -115,26 +118,31 @@ body {
   background-color: #f7f6f1;
   display: flex;
   justify-content: center; }
-  .list-view__container-main .list-view__collection-container {
-    font-weight: 700;
-    margin: 30px 0 100px;
-    width: 70vw; }
-    .list-view__container-main .list-view__collection-container .list-view__sort-bar {
-      align-items: center;
-      display: grid;
-      font-family: 'Teko', sans-serif;
-      font-size: 45px;
-      grid-template-columns: repeat(6, 1fr);
-      height: 3em;
-      margin: 0 0 30px; }
-      .list-view__container-main .list-view__collection-container .list-view__sort-bar span {
-        text-align: center; }
-    .list-view__container-main .list-view__collection-container .list-view__record-item {
-      align-items: center;
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      font-family: 'Teko', sans-serif;
-      font-size: 20px;
-      height: 7em; }
-      .list-view__container-main .list-view__collection-container .list-view__record-item span {
-        text-align: center; }
+
+.list-view__container-main .list-view__collection-container {
+  font-weight: 700;
+  margin: 30px 0 100px;
+  width: 70vw; }
+
+.list-view__container-main .list-view__collection-container .list-view__sort-bar {
+  align-items: center;
+  display: grid;
+  font-family: 'Teko', sans-serif;
+  font-size: 45px;
+  grid-template-columns: repeat(6, 1fr);
+  height: 3em;
+  margin: 0 0 30px; }
+
+.list-view__container-main .list-view__collection-container .list-view__sort-bar span {
+  text-align: center; }
+
+.list-view__container-main .list-view__collection-container .list-view__record-item {
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  font-family: 'Teko', sans-serif;
+  font-size: 20px;
+  height: 7em; }
+
+.list-view__container-main .list-view__collection-container .list-view__record-item span {
+  text-align: center; }

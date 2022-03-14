@@ -175,11 +175,11 @@ $lv: '.list-view';
         text-align: center;
       }
     }
-    
+
     #{$lv}__record-item {
       align-items: center;
       display: grid;
-      grid-template-columns: repeat(6,1fr);
+      grid-template-columns: repeat(6, 1fr);
       font-family: 'Teko', sans-serif;
       font-size: 20px;
       height: 7em;
@@ -190,5 +190,3 @@ $lv: '.list-view';
     }
   }
 }
-
-
