@@ -1,10 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as recordActions from '../../actions/loadRecordsActions';
 
 interface DiscogsTableViewProps {
-  collection: Array<any>;
+  collection: void;
 }
 
 const DiscogsTableView = (props: DiscogsTableViewProps) => {
@@ -24,18 +21,4 @@ const DiscogsTableView = (props: DiscogsTableViewProps) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    app: state,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: {
-      recordActions: bindActionCreators(recordActions, dispatch),
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(DiscogsTableView);
+export default DiscogsTableView;

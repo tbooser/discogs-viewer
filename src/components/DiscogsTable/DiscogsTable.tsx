@@ -1,39 +1,46 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../reducers';
 import RecordCollectionItem from '../RecordCollectionItem';
-import { bindActionCreators } from 'redux';
-import * as recordActions from '../../actions/loadRecordsActions';
 import DiscogsTableView from '../DiscogsTableView';
 
-interface DiscogsTableProps {
-  app: object;
-}
+type RecordType = {
+  response: Array<object>; // Don't use object
+};
 
-const DiscogsTable = (props: DiscogsTableProps) => {
-  const { app } = props;
-  const [records, setRecords] = useState(null);
-  const [isFetching, setIsFetching] = useState(true);
-
+const DiscogsTable = () => {
   const renderCollection = () => {
-    const records = app.loadRecordsByUsername.records;
-    for (let i = 0; i < records.length; i++) {
-      if (records.length > 1 && records[i].response !== undefined) {
-        const shuffledRecords = records[i].response;
-        return shuffledRecords.map((item) => {
-          return (
-            <RecordCollectionItem
-              id={item.id}
-              key={Math.random()}
-              year={item.basic_information.year}
-              recordTitle={item.basic_information.title}
-              imgSrc={item.basic_information.cover_image}
-              label={item.basic_information.labels[0].name}
-              resource_url={item.basic_information.resource_url}
-              artistName={item.basic_information.artists[0].name}
-            />
-          );
-        });
-      }
+    const data = useSelector((state: RootState) => state.loadRecordsByUsername);
+    if (data.records.length > 1) {
+      data.records.forEach((record: RecordType) => {
+        const shuffledRecords = record.response;
+        return shuffledRecords.map(
+          (item: {
+            id: number;
+            basic_information: {
+              year: number;
+              title: string;
+              cover_image: string;
+              labels: { name: string }[];
+              resource_url: string;
+              artists: { name: string }[];
+            };
+          }) => {
+            return (
+              <RecordCollectionItem
+                id={item.id}
+                key={Math.random()}
+                year={item.basic_information.year}
+                recordTitle={item.basic_information.title}
+                imgSrc={item.basic_information.cover_image}
+                label={item.basic_information.labels[0].name}
+                resource_url={item.basic_information.resource_url}
+                artistName={item.basic_information.artists[0].name}
+              />
+            );
+          }
+        );
+      });
     }
   };
 
@@ -44,18 +51,4 @@ const DiscogsTable = (props: DiscogsTableProps) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    app: state,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: {
-      recordActions: bindActionCreators(recordActions, dispatch),
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(DiscogsTable);
+export default DiscogsTable;

@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Youtube from '../Youtube';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as recordActions from '../../actions/loadRecordsActions';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../reducers';
 
-interface MusicPlayerBarProps {
-  app: object;
-}
-
-const MusicPlayerBar = (props: MusicPlayerBarProps) => {
-  const { app } = props;
+const MusicPlayerBar = () => {
   const [videoId, setVideoId] = useState<null | number>(null);
 
   useEffect(() => {
@@ -17,8 +11,9 @@ const MusicPlayerBar = (props: MusicPlayerBarProps) => {
   });
 
   const getVideoId = () => {
-    let currentVideoIndex = app.loadYoutubeVideos.videos.length - 1;
-    let currentVideo = app.loadYoutubeVideos.videos[currentVideoIndex].response;
+    let currentVideoIndex = useSelector((state: RootState) => state.loadYoutubeVideos.videos.length - 1);
+    let currentVideo = useSelector((state: RootState) => state.loadYoutubeVideos.videos[currentVideoIndex].response);
+
     if (currentVideo) {
       if (currentVideo.videos === undefined) {
         // If no videos have been uploaded to Discogs for this record
@@ -53,18 +48,4 @@ const MusicPlayerBar = (props: MusicPlayerBarProps) => {
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: {
-      recordActions: bindActionCreators(recordActions, dispatch),
-    },
-  };
-};
-
-const mapStateToProps = (state) => {
-  return {
-    app: state,
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MusicPlayerBar);
+export default MusicPlayerBar;

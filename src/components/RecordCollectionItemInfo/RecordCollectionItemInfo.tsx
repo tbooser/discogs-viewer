@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 interface RecordCollectionItemInfoProps {
   getYoutubeVideos: () => void;
@@ -33,10 +32,4 @@ const RecordCollectionItemInfo = (props: RecordCollectionItemInfoProps) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    app: state,
-  };
-};
-
-export default connect(mapStateToProps)(RecordCollectionItemInfo);
+export default RecordCollectionItemInfo;

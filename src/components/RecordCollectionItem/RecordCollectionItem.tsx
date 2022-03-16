@@ -1,10 +1,10 @@
-import React, { Component, useState } from 'react';
-import { connect } from 'react-redux';
-import * as recordActions from '../../actions/loadRecordsActions';
-import { bindActionCreators } from 'redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 interface RecordCollectionItemProps {
-  actions: object;
+  id: number;
+  key: number;
+  actions: any;
   resource_url: string;
   imgSrc: string;
   artistName: string;
@@ -15,10 +15,13 @@ interface RecordCollectionItemProps {
 
 const RecordCollectionItem = (props: RecordCollectionItemProps) => {
   const { actions, resource_url, imgSrc, artistName, recordTitle, label, year } = props;
+  const { recordActions } = actions;
+  const { fetchYoutubeVideos } = recordActions;
   const [clicked, setClicked] = useState(false);
+  const dispatch = useDispatch();
 
   const getYoutubeVideos = (event) => {
-    actions.recordActions.fetchYoutubeVideos(resource_url, imgSrc);
+    dispatch(fetchYoutubeVideos(resource_url, imgSrc));
   };
 
   return (
@@ -37,18 +40,4 @@ const RecordCollectionItem = (props: RecordCollectionItemProps) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    app: state,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: {
-      recordActions: bindActionCreators(recordActions, dispatch),
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(RecordCollectionItem);
+export default RecordCollectionItem;

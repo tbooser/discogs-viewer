@@ -1,7 +1,7 @@
-import { LOAD_RECORD_BY_ID_SUCCESS, LOAD_RECORD_BY_ID_ERROR } from "../constants";
+import { LOAD_RECORD_BY_ID_SUCCESS, LOAD_RECORD_BY_ID_ERROR } from '../constants';
 
 const clickedRecord = {
-  record: [""]
+  record: [''],
 };
 
 function loadRecordById(state = clickedRecord, action) {
@@ -13,9 +13,9 @@ function loadRecordById(state = clickedRecord, action) {
           record: [
             ...state.clickedRecord,
             {
-              response: action.response
-            }
-          ]
+              response: action.response,
+            },
+          ],
         }
       );
     case LOAD_RECORD_BY_ID_ERROR:

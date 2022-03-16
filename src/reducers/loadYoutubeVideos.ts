@@ -4,7 +4,7 @@ import {
 } from "../constants";
 
 const videoList = {
-  videos: [""],
+  videos: [{}],
   currentImage: null
 };
 

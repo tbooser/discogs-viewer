@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import * as recordActions from '../../actions/loadRecordsActions';
-import { bindActionCreators } from 'redux';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../reducers';
 
 interface YoutubeProps {
   videoId: number;
@@ -17,6 +16,8 @@ const Youtube = (props: YoutubeProps) => {
   const [currentTimeRounded, setCurrentTimeRounded] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
+  const appData = useSelector((state: RootState) => state.loadYoutubeVideos);
+  const { currentImage } = appData;
 
   useEffect(() => {
     if (!player) {
@@ -67,7 +68,7 @@ const Youtube = (props: YoutubeProps) => {
     setPaused(true);
   };
 
-  const changeVolume = (volume) => {
+  const setVolumeLevel = (volume) => {
     player.setVolume(volume);
   };
 
@@ -95,20 +96,53 @@ const Youtube = (props: YoutubeProps) => {
     const { title } = videoData;
     return title;
   };
-};
 
-const mapStateToProps = (state) => {
-  return {
-    app: state,
+  const handleVolumeChange = (event) => {
+    setVolume(event.target.value);
+    setVolumeLevel(event.target.value);
   };
-};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: {
-      recordActions: bindActionCreators(recordActions, dispatch),
-    },
+  const toggleVideoPlay = () => {
+    if (paused) {
+      return (
+        <i className="material-icons music-player-button" onClick={playVideo}>
+          play_arrow
+        </i>
+      );
+    } else {
+      return (
+        <i className="material-icons music-player-button" onClick={pauseVideo}>
+          pause
+        </i>
+      );
+    }
   };
+
+  return player ? (
+    <div className="container h-100">
+      <div className="yt-player-video-info row h-100">
+        <div className=" col-md-1 my-auto" key={Math.random()}>
+          <img alt="music-bar-record-album-cover" className="music-bar-item-image" src={currentImage} />
+        </div>
+        <div className="col-md-3 my-auto" key={Math.random()}>
+          {getArtistAndTrackTitle()}
+        </div>
+        <div className="offset-md-1 col-md-1 my-auto d-flex align-items-center" key={Math.random()}>
+          {toggleVideoPlay()}
+        </div>
+        <div className="offset-md-2 col-md-3 my-auto d-flex align-items-cente" key={Math.random()}>
+          <input type="range" value={volume} onChange={handleVolumeChange} />
+        </div>
+      </div>
+
+      <div id="yt-player" />
+    </div>
+  ) : (
+    <div className="container h-100">
+      <div className="yt-player-video-info row h-100" />
+      <div id="yt-player" />
+    </div>
+  );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Youtube);
+export default Youtube;
