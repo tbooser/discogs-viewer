@@ -9,13 +9,13 @@ import DiscogsTableContainer from './components/DiscogsTableContainer';
 import './styles/main.css';
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
-console.log('Store --->>> ', store.getState());
+// console.log('Store --->>> ', store.getState());
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<DiscogsTableContainer />} />
+        <Route path="/" element={<DiscogsTableContainer />} />
       </Routes>
     </BrowserRouter>
   </Provider>,

@@ -4,7 +4,7 @@ import DiscogsTableContainer from './components/DiscogsTableContainer';
 
 const DiscogsRoutes = () => (
   <div>
-    <Route exact path="/" element={<DiscogsTableContainer />} />
+    <Route path="/" element={<DiscogsTableContainer />} />
   </div>
 );
 

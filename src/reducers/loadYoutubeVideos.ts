@@ -1,26 +1,25 @@
-import {
-  FETCH_YOUTUBE_VIDEOS,
-  RECEIVE_YOUTUBE_VIDEOS_SUCCESS
-} from "../constants";
+import { RECEIVE_YOUTUBE_VIDEOS_SUCCESS, RECEIVE_YOUTUBE_VIDEOS_ERROR } from '../constants';
 
 const videoList = {
   videos: [{}],
-  currentImage: null
+  currentImage: null,
 };
 
-function loadYoutubeVideos(state = videoList, action) {
+function loadYoutubeVideos(state = videoList, action: { type: string; response: any; img_url: any; error: any }) {
   switch (action.type) {
     case RECEIVE_YOUTUBE_VIDEOS_SUCCESS:
+      console.log('Success', action);
       return Object.assign({}, state, {
         videos: [
           ...state.videos,
           {
-            response: action.response
-          }
+            response: action.response,
+          },
         ],
-        currentImage: action.img_url
+        currentImage: action.img_url,
       });
-    case FETCH_YOUTUBE_VIDEOS:
+    case RECEIVE_YOUTUBE_VIDEOS_ERROR:
+      console.log('Error', action.error);
       return;
     default:
       return state;
@@ -28,4 +27,3 @@ function loadYoutubeVideos(state = videoList, action) {
 }
 
 export default loadYoutubeVideos;
-

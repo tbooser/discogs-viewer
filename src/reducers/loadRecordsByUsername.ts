@@ -1,35 +1,30 @@
 const _ = require('underscore');
 import { LOAD_RECORDS_BY_USERNAME_SUCCESS, LOAD_RECORDS_BY_USERNAME_ERROR } from '../constants';
 
-interface Records {
-  records: Array<object>;
-}
-
 interface ResponseObject {
   response: Object;
 }
 
-const initialRecordsState: Records = {
-  records: [{}],
+interface InitialStateInterface {
+  records: Array<any>;
+}
+
+const initialRecordsState: InitialStateInterface = {
+  records: [],
 };
 
 type LoadRecordsReducerType = typeof initialRecordsState;
 
 export default function loadRecordsByUsername(
   state = initialRecordsState,
-  action: { type: any; response: any }
+  action: { type: string; response_json: any }
 ): LoadRecordsReducerType {
   switch (action.type) {
     case LOAD_RECORDS_BY_USERNAME_SUCCESS:
-      return Object.assign({}, state, {
-        records: [
-          ...state.records,
-          {
-            response: _.shuffle(action.response),
-          },
-        ],
-      });
+      return Object.assign({ records: _.shuffle(action.response_json) });
+    // records: Object.assign({}, ...state.records, _.shuffle(action.response_json));
     case LOAD_RECORDS_BY_USERNAME_ERROR:
+      // console.log(action);
       return state;
     default:
       return state;

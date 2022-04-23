@@ -1,17 +1,17 @@
 import { LOAD_RECORD_BY_ID_SUCCESS, LOAD_RECORD_BY_ID_ERROR } from '../constants';
 
-const clickedRecord = {
+const clickedRecordState = {
   record: [''],
 };
 
-function loadRecordById(state = clickedRecord, action) {
+function loadRecordById(state = clickedRecordState, action) {
   switch (action.type) {
     case LOAD_RECORD_BY_ID_SUCCESS:
       return Object.assign(
         {},
         {
           record: [
-            ...state.clickedRecord,
+            ...state.record,
             {
               response: action.response,
             },
