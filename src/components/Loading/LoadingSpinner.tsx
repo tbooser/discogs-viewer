@@ -1,5 +1,6 @@
 import React from 'react';
 const loadingSpinner = require('../../images/loading-spinner/puff.svg');
+// const loadingSpinner = require('../../images/loading-spinner/puff.svg') as string;
 
 export default function LoadingSpinner() {
   return (

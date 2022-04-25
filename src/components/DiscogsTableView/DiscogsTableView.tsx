@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface DiscogsTableViewProps {
-  collection: void;
+  collection: JSX.Element | JSX.Element[];
 }
 
 const DiscogsTableView = (props: DiscogsTableViewProps) => {

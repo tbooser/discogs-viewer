@@ -8,6 +8,7 @@ const col = dis.user().collection();
 const wantList = dis.user().wantlist();
 
 exports.getMusicByCollection = (req, res) => {
+  console.log('called!!!!');
   col.getReleases('tboos', 0, { page: 1, per_page: 400 }, function (err, data) {
     res.send(data.releases);
   });

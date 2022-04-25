@@ -4,6 +4,7 @@ import { RootState } from '../../reducers';
 import RecordCollectionItem from '../RecordCollectionItem';
 import DiscogsTableView from '../DiscogsTableView';
 import { LOAD_RECORDS_BY_USERNAME_ERROR, LOAD_RECORDS_BY_USERNAME_SUCCESS } from '../../constants';
+import Loading from '../Loading';
 
 type RecordType = {
   response: Array<object>; // Don't use object
@@ -21,59 +22,59 @@ type RecordItemType = {
   };
 };
 
-const DiscogsTable = () => {
+const DiscogsTable = (): any => {
   const dispatch = useDispatch();
   const [recordsList, setRecordsList] = useState([]);
-
-  const { records } = useSelector((state: RootState) => state.loadRecordsByUsername);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    const fetchRecordsByUsername = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch('/music', {
+          method: 'GET',
+        });
+        const response_json = await response.json();
+        setRecordsList(response_json);
+        setIsLoading(false);
+        dispatch({ type: LOAD_RECORDS_BY_USERNAME_SUCCESS, response_json });
+      } catch (error) {
+        dispatch({ type: LOAD_RECORDS_BY_USERNAME_ERROR, error });
+        // Redirect to error message here
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     fetchRecordsByUsername();
-  });
+  }, []);
 
-  useEffect(() => {
-    setRecordsList(records);
-    console.log('RECORDS!', records);
-  }, [records]);
-
-  const fetchRecordsByUsername = async () => {
-    try {
-      const response = await fetch('/music', {
-        method: 'GET',
-      });
-      const response_json = await response.json();
-      dispatch({ type: LOAD_RECORDS_BY_USERNAME_SUCCESS, response_json });
-    } catch (error) {
-      dispatch({ type: LOAD_RECORDS_BY_USERNAME_ERROR, error });
-    }
-  };
+  if (isLoading) {
+    return <Loading />;
+  }
 
   const renderCollection = () => {
-    // console.log('recordsList', recordsList);
-    if (records.length > 1) {
-      console.log('sdfsdfs', records);
-      return records.map((record: RecordItemType) => {
+    if (recordsList.length > 1) {
+      return recordsList.map((record: RecordItemType) => {
+        const { id, basic_information } = record;
+        const { year, title, cover_image, labels, resource_url, artists } = basic_information;
         return (
           <RecordCollectionItem
-            id={record.id}
+            id={id}
             key={Math.random()}
-            year={record.basic_information.year}
-            recordTitle={record.basic_information.title}
-            imgSrc={record.basic_information.cover_image}
-            label={record.basic_information.labels[0].name}
-            resource_url={record.basic_information.resource_url}
-            artistName={record.basic_information.artists[0].name}
+            year={year}
+            recordTitle={title}
+            imgSrc={cover_image}
+            label={labels[0].name}
+            resource_url={resource_url}
+            artistName={artists[0].name}
           />
         );
       });
     }
-
-    return (
-      <>
-        <DiscogsTableView collection={renderCollection()} />;
-      </>
-    );
   };
+
+  return <DiscogsTableView collection={renderCollection()} />;
 };
 
 export default DiscogsTable;
