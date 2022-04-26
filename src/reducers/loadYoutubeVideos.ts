@@ -5,7 +5,7 @@ const videoList = {
   currentImage: null,
 };
 
-function loadYoutubeVideos(state = videoList, action: { type: string; response: any; img_url: any; error: any }) {
+function loadYoutubeVideos(state = videoList, action: { type: string; response_json: any; img_url: any; error: any }) {
   switch (action.type) {
     case RECEIVE_YOUTUBE_VIDEOS_SUCCESS:
       console.log('Success', action);
@@ -13,7 +13,7 @@ function loadYoutubeVideos(state = videoList, action: { type: string; response: 
         videos: [
           ...state.videos,
           {
-            response: action.response,
+            response: action.response_json,
           },
         ],
         currentImage: action.img_url,

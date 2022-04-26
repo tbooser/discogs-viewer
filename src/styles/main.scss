@@ -4,6 +4,7 @@ html {
 
 body {
   min-height: 100%;
+  overflow: hidden;
 }
 
 #root {
@@ -101,16 +102,6 @@ body {
   }
 }
 
-.music-player-bar {
-  background: grey;
-  bottom: 0;
-  color: #fff;
-  height: 80px;
-  background: #000;
-  position: fixed;
-  width: 100%;
-}
-
 .music-player-button {
   color: #fff;
   cursor: pointer;
@@ -139,7 +130,8 @@ body {
 }
 
 .progress-bar {
-  background-color: #42e8f4;
+  // background-color: #42e8f4;
+  background-color: #37276e;
   height: 3px;
 }
 
@@ -153,27 +145,64 @@ body {
 $lv: '.list-view';
 
 #{$lv}__container-main {
-  background-color: #f7f6f1;
+  // background-color: #f7f6f1;
+  // background-color: #37276e;
+  background: linear-gradient(
+    90deg,
+    rgba(50, 182, 149, 0.4976584383753502) 1%,
+    rgba(0, 144, 255, 0.5004595588235294) 100%
+  );
   display: flex;
+  min-height: 100%;
   justify-content: center;
+  flex-direction: column;
 
   #{$lv}__collection-container {
+    display: flex;
+    flex-direction: column;
     font-weight: 700;
-    margin: 30px 0 100px;
-    width: 70vw;
+    width: 90vw;
+    margin: 0 auto;
+    background: transparent;
+    border-radius: 5px;
+    height: 100vh;
+    animation: fadein 0.5s;
+
+    @keyframes fadein {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
 
     #{$lv}__sort-bar {
       align-items: center;
+      background: #fff;
+      box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+        0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+        0 100px 80px rgba(0, 0, 0, 0.12);
       display: grid;
       font-family: 'Teko', sans-serif;
-      font-size: 45px;
+      font-size: 2rem;
       grid-template-columns: repeat(6, 1fr);
-      height: 3em;
-      margin: 0 0 30px;
+      height: 2em;
+      margin: 1rem 0;
 
       span {
         text-align: center;
       }
+    }
+
+    #{$lv}__records-container {
+      background: #fff;
+      box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+        0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+        0 100px 80px rgba(0, 0, 0, 0.12);
+      padding: 0;
+      overflow: scroll;
+      height: 90%;
     }
 
     #{$lv}__record-item {
@@ -184,9 +213,24 @@ $lv: '.list-view';
       font-size: 20px;
       height: 7em;
 
+      .record-table-item-image {
+        box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+          0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+          0 100px 80px rgba(0, 0, 0, 0.12);
+      }
+
       span {
         text-align: center;
       }
     }
   }
+}
+
+#{$lv}__music-player-bar {
+  background: #fff;
+  height: 10vh;
+  width: 90vw;
+  margin: 1rem 0;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
 }

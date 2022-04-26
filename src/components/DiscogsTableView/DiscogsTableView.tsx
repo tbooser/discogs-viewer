@@ -1,4 +1,5 @@
 import React from 'react';
+import MusicPlayerBar from '../MusicPlayerBar';
 
 interface DiscogsTableViewProps {
   collection: JSX.Element | JSX.Element[];
@@ -16,7 +17,10 @@ const DiscogsTableView = (props: DiscogsTableViewProps) => {
         <span>Label</span>
         <span>Year</span>
       </div>
-      {collection}
+      <div className="list-view__records-container">
+        <ul>{collection}</ul>
+      </div>
+      <MusicPlayerBar key={Math.random()} />
     </div>
   );
 };

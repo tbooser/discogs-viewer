@@ -10,6 +10,8 @@ const MusicPlayerBar = () => {
 
   useEffect(() => {
     getVideoId();
+    // console.log(currentVideoIndex);
+    // console.log(currentVideo);
   });
 
   const getVideoId = () => {
@@ -17,7 +19,7 @@ const MusicPlayerBar = () => {
       // If no videos have been uploaded to Discogs for this record
       // TODO: update this to a modal
       if (currentVideo.videos === undefined) {
-        alert('No videos have been uploaded for this record!');
+        console.log('No videos have been uploaded for this record!');
         return;
       }
 
@@ -37,13 +39,7 @@ const MusicPlayerBar = () => {
     }
   };
 
-  return videoId ? (
-    <div className="music-player-bar">
-      <Youtube videoId={videoId} />
-    </div>
-  ) : (
-    <div />
-  );
+  return <div className="list-view__music-player-bar">{videoId ? <Youtube videoId={videoId} /> : null}</div>;
 };
 
 export default MusicPlayerBar;

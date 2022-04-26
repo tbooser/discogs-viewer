@@ -8,7 +8,7 @@ interface YoutubeProps {
 
 const Youtube = (props: YoutubeProps) => {
   const { videoId } = props;
-  const [player, setPlayer] = useState<null | any>(null);
+  const [player, setPlayer] = useState(null);
   const [paused, setPaused] = useState(false);
   const [volume, setVolume] = useState<number>(100);
   const [currentTimeRounded, setCurrentTimeRounded] = useState<number>(0);
@@ -18,46 +18,36 @@ const Youtube = (props: YoutubeProps) => {
   const { currentImage } = appData;
 
   useEffect(() => {
-    createYTIframePlayer();
+    if (!(window as any).YT) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      (window as any).onYouTubeIframeAPIReady = loadVideo;
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    } else {
+      loadVideo();
+    }
   });
 
-  const createYTIframePlayer = () => {
-    if (!player) {
-      const newPlayer = new Promise(() => {
-        let tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-        let firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-      });
-
-      setPlayer(newPlayer);
-    }
-    player.then((YT) => {
-      const onYouTubeIframeAPIReady = () => {
-        const initializedYTPlayer = new YT.Player('yt-player', {
-          height: 0.01,
-          width: 0.01,
-          videoId: videoId,
-          events: {
-            onStateChange: onPlayerStateChange,
-            onReady: onReady,
-          },
-          playerVars: {
-            autoplay: 1,
-            controls: 1,
-            showinfo: 1,
-          },
-        });
-
-        setPlayer(initializedYTPlayer);
-      };
-
-      onYouTubeIframeAPIReady();
+  const loadVideo = () => {
+    const newPlayer = new (window as any).YT.Player('yt-player', {
+      videoId: videoId,
+      events: {
+        onStateChange: onPlayerStateChange,
+        onReady: onPlayerReady,
+      },
+      playerVars: {
+        autoplay: 1,
+        controls: 1,
+        showinfo: 1,
+      },
     });
+
+    setPlayer(newPlayer);
   };
 
-  const onReady = (e) => {
-    setPlayer(e.target);
+  const onPlayerReady = (e) => {
+    e.target.playVideo();
   };
 
   const onPlayerStateChange = (e: any) => {
@@ -97,11 +87,11 @@ const Youtube = (props: YoutubeProps) => {
     setCurrentTimeRounded(time);
   };
 
-  const getArtistAndTrackTitle = () => {
-    const videoData = player.getVideoData();
-    const { title } = videoData;
-    return title;
-  };
+  // const getArtistAndTrackTitle = () => {
+  // const videoData = player.getVideoData();
+  // const { title } = videoData;
+  // return title;
+  // };
 
   const handleVolumeChange = (event) => {
     setVolume(event.target.value);
@@ -129,9 +119,6 @@ const Youtube = (props: YoutubeProps) => {
       <div className="yt-player-video-info row h-100">
         <div className=" col-md-1 my-auto" key={Math.random()}>
           <img alt="music-bar-record-album-cover" className="music-bar-item-image" src={currentImage} />
-        </div>
-        <div className="col-md-3 my-auto" key={Math.random()}>
-          {getArtistAndTrackTitle()}
         </div>
         <div className="offset-md-1 col-md-1 my-auto d-flex align-items-center" key={Math.random()}>
           {toggleVideoPlay()}

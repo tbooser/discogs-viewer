@@ -36,7 +36,7 @@ const RecordCollectionItem = (props: RecordCollectionItemProps) => {
   };
 
   return (
-    <div className="list-view__record-item">
+    <li className="list-view__record-item">
       <span>
         <img alt="record-album-cover" className="record-table-item-image" src={imgSrc} />
       </span>
@@ -47,7 +47,7 @@ const RecordCollectionItem = (props: RecordCollectionItemProps) => {
       <span onClick={handleOnClick}>
         <i className="fas fa-headphones" />
       </span>
-    </div>
+    </li>
   );
 };
 
