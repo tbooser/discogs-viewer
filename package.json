@@ -3,19 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "disconnect": "^1.2.1",
-    "global": "^4.3.2",
-    "moment": "^2.22.1",
-    "nodemon": "^1.17.4",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-redux": "^5.0.6",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "0.9.x",
-    "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0",
-    "underscore": "^1.8.3",
-    "why-did-you-update": "^0.1.1"
+    "disconnect": "1.2.2",
+    "global": "4.4.0",
+    "moment": "2.29.1",
+    "nodemon": "2.0.15",
+    "postcss-normalize": "^10.0.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-redux": "7.2.6",
+    "react-router-dom": "6.2.2",
+    "react-scripts": "5.0.0",
+    "redux": "4.1.2",
+    "redux-thunk": "2.4.1",
+    "underscore": "1.13.2"
   },
   "scripts": {
     "build-css": "node-sass src/ -o src/",
@@ -25,14 +25,28 @@
     "server": "nodemon server/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "restart": "yarn build-css && yarn build && yarn start",
+    "clean": "rm -rf package-lock.json && rm -rf node_modules && rm -rf build/ && npm i && npm run build"
   },
-  "proxy": "http://localhost:3001/",
+  "proxy": "http://127.0.0.1:3001",
   "devDependencies": {
-    "babel-preset-env": "^1.6.1",
-    "node-sass": "^4.7.2"
+    "babel-preset-env": "1.7.0",
+    "node-sass": "7.0.1"
   },
   "engines": {
-    "node": "6.11.4"
+    "node": "16.14.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

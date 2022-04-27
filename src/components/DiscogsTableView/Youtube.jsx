@@ -105,7 +105,9 @@ export class Youtube extends Component {
 	}
 
 	getArtistAndTrackTitle() {
-		return this.state.player.j.videoData.title;
+		const videoData = this.state.player.getVideoData();
+		const { title } = videoData;
+		return title;
 	}
 
 	handleVolumeChange(event) {

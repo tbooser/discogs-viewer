@@ -8,27 +8,25 @@ body {
   height: 100vh; }
 
 .App {
-  font-family: "Rubik", sans-serif;
+  font-family: 'Teko', sans-serif;
   padding: 50px 30px;
   min-height: 100%; }
 
 .loading-spinner-container {
   margin: 0 auto;
-  padding-top: 150px; }
+  padding-top: 450px; }
 
 .bg-color {
   background: #bfd8d2; }
 
 .header {
-  font-family: "Rubik", sans-serif; }
-
-.header .header-image {
-  height: 120px;
-  width: 200px; }
-
-.header .header-image img {
-  height: auto;
-  width: 100%; }
+  font-family: 'Teko', sans-serif; }
+  .header .header-image {
+    height: 120px;
+    width: 200px; }
+  .header .header-image img {
+    height: auto;
+    width: 100%; }
 
 .discogs-header-gh-link img {
   height: 50px;
@@ -54,20 +52,19 @@ body {
   margin-top: 15px;
   top: 0;
   width: 100%; }
-
-.record-image:hover {
-  cursor: pointer; }
+  .record-image:hover {
+    cursor: pointer; }
 
 .record-text {
   color: #9e5a75;
   opacity: 1; }
 
 .record-table-item-image {
-  max-height: 75px;
-  max-width: 75px; }
+  max-height: 100px;
+  max-width: 100px; }
 
-.record-table-item th {
-  vertical-align: baseline !important; }
+.record-table-item-info {
+  padding: 0 10px 0 0; }
 
 .table-head-column-name:hover {
   cursor: pointer; }
@@ -80,7 +77,7 @@ body {
   bottom: 0;
   color: #fff;
   height: 80px;
-  background: #333333;
+  background: #000;
   position: fixed;
   width: 100%; }
 
@@ -113,3 +110,31 @@ body {
 .music-bar-item-image {
   max-height: 60px;
   max-width: 60px; }
+
+.list-view__container-main {
+  background-color: #f7f6f1;
+  display: flex;
+  justify-content: center; }
+  .list-view__container-main .list-view__collection-container {
+    font-weight: 700;
+    margin: 30px 0 100px;
+    width: 70vw; }
+    .list-view__container-main .list-view__collection-container .list-view__sort-bar {
+      align-items: center;
+      display: grid;
+      font-family: 'Teko', sans-serif;
+      font-size: 45px;
+      grid-template-columns: repeat(6, 1fr);
+      height: 3em;
+      margin: 0 0 30px; }
+      .list-view__container-main .list-view__collection-container .list-view__sort-bar span {
+        text-align: center; }
+    .list-view__container-main .list-view__collection-container .list-view__record-item {
+      align-items: center;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      font-family: 'Teko', sans-serif;
+      font-size: 20px;
+      height: 7em; }
+      .list-view__container-main .list-view__collection-container .list-view__record-item span {
+        text-align: center; }

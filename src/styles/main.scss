@@ -11,14 +11,14 @@ body {
 }
 
 .App {
-  font-family: "Rubik", sans-serif;
+  font-family: 'Teko', sans-serif;
   padding: 50px 30px;
   min-height: 100%;
 }
 
 .loading-spinner-container {
   margin: 0 auto;
-  padding-top: 150px;
+  padding-top: 450px;
 }
 
 .bg-color {
@@ -26,7 +26,7 @@ body {
 }
 
 .header {
-  font-family: "Rubik", sans-serif;
+  font-family: 'Teko', sans-serif;
 
   .header-image {
     height: 120px;
@@ -50,9 +50,6 @@ body {
   font-size: 21px;
   font-weight: 700;
   text-align: center;
-}
-
-.record-list-container {
 }
 
 .record-image-container {
@@ -84,18 +81,12 @@ body {
 }
 
 .record-table-item-image {
-  max-height: 75px;
-  max-width: 75px;
+  max-height: 100px;
+  max-width: 100px;
 }
 
-.record-table-item {
-  th {
-    vertical-align: baseline !important; // This overrides the vertical-align: top that comes with the th element
-  }
-}
-
-.table-container {
-  // background: #3cc4c7;
+.record-table-item-info {
+  padding: 0 10px 0 0;
 }
 
 .table-head-column-name {
@@ -115,8 +106,7 @@ body {
   bottom: 0;
   color: #fff;
   height: 80px;
-  // background: rgba(0, 0, 0, 0.9);
-  background: #333333;
+  background: #000;
   position: fixed;
   width: 100%;
 }
@@ -157,3 +147,48 @@ body {
   max-height: 60px;
   max-width: 60px;
 }
+
+// List view
+
+$lv: '.list-view';
+
+#{$lv}__container-main {
+  background-color: #f7f6f1;
+  display: flex;
+  justify-content: center;
+
+  #{$lv}__collection-container {
+    font-weight: 700;
+    margin: 30px 0 100px;
+    width: 70vw;
+
+    #{$lv}__sort-bar {
+      align-items: center;
+      display: grid;
+      font-family: 'Teko', sans-serif;
+      font-size: 45px;
+      grid-template-columns: repeat(6, 1fr);
+      height: 3em;
+      margin: 0 0 30px;
+
+      span {
+        text-align: center;
+      }
+    }
+    
+    #{$lv}__record-item {
+      align-items: center;
+      display: grid;
+      grid-template-columns: repeat(6,1fr);
+      font-family: 'Teko', sans-serif;
+      font-size: 20px;
+      height: 7em;
+
+      span {
+        text-align: center;
+      }
+    }
+  }
+}
+
+

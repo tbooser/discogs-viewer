@@ -37,10 +37,8 @@ export class DiscogsTableContainer extends Component {
       );
     } else {
       return [
-        <div className="table-container pt-4 container" key={Math.random()}>
-          <div className="row">
-            <DiscogsTable />
-          </div>
+        <div className="list-view__container-main" key={Math.random()}>
+          <DiscogsTable />
         </div>,
         <MusicPlayerBar key={Math.random()} />
       ];
