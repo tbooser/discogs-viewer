@@ -11,13 +11,15 @@ interface RecordCollectionItemProps {
   recordTitle: string;
   label: string;
   year: number;
+  styles: Array<string>;
 }
 
 const RecordCollectionItem = (props: RecordCollectionItemProps) => {
-  const { resource_url, imgSrc, artistName, recordTitle, label, year } = props;
+  const { resource_url, imgSrc, artistName, recordTitle, label, year, styles } = props;
+  const formattedStyles = styles.join(',').replace(/,/g, '/').split('');
   // const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
-
+  // console.log('resource_url', resource_url);
   const fetchYoutubeVideos = async (resource_url: RequestInfo, img_url: any) => {
     // TODO: Add isFetching action
     try {
@@ -44,6 +46,7 @@ const RecordCollectionItem = (props: RecordCollectionItemProps) => {
       <span className="record-table-item-info">{recordTitle}</span>
       <span className="record-table-item-info">{label}</span>
       <span className="record-table-item-info">{year}</span>
+      <span className="record-table-item-info">{formattedStyles}</span>
       <span onClick={handleOnClick}>
         <i className="fas fa-headphones" />
       </span>

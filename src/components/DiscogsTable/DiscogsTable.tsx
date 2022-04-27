@@ -19,6 +19,7 @@ type RecordItemType = {
     labels: { name: string }[];
     resource_url: string;
     artists: { name: string }[];
+    styles: Array<string>;
   };
 };
 
@@ -57,7 +58,7 @@ const DiscogsTable = (): any => {
     if (recordsList.length > 1) {
       return recordsList.map((record: RecordItemType) => {
         const { id, basic_information } = record;
-        const { year, title, cover_image, labels, resource_url, artists } = basic_information;
+        const { year, title, cover_image, labels, resource_url, artists, styles } = basic_information;
         return (
           <RecordCollectionItem
             id={id}
@@ -68,6 +69,7 @@ const DiscogsTable = (): any => {
             label={labels[0].name}
             resource_url={resource_url}
             artistName={artists[0].name}
+            styles={styles}
           />
         );
       });

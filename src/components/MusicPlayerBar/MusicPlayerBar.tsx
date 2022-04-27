@@ -5,23 +5,28 @@ import { RootState } from '../../reducers';
 
 const MusicPlayerBar = () => {
   const [videoId, setVideoId] = useState<null | number>(null);
+  const [artistName, setArtistName] = useState<null | string>(null);
+  const [trackTitle, setTrackTitle] = useState<null | string>(null);
   let currentVideoIndex = useSelector((state: RootState) => state.loadYoutubeVideos.videos.length - 1);
   let currentVideo = useSelector((state: RootState) => state.loadYoutubeVideos.videos[currentVideoIndex].response);
 
   useEffect(() => {
     getVideoId();
-    // console.log(currentVideoIndex);
-    // console.log(currentVideo);
-  });
+  }, [currentVideo]);
 
   const getVideoId = () => {
     if (currentVideo) {
       // If no videos have been uploaded to Discogs for this record
-      // TODO: update this to a modal
+      // TODO: update this to better messaging
       if (currentVideo.videos === undefined) {
         console.log('No videos have been uploaded for this record!');
         return;
       }
+
+      const name = currentVideo.artists_sort;
+      const title = currentVideo.title;
+      setArtistName(name);
+      setTrackTitle(title);
 
       if (currentVideo.videos.length > 1) {
         // If there is more than one video uploaded for this record, i.e. for multiple tracks, select one randomly to open
@@ -39,7 +44,11 @@ const MusicPlayerBar = () => {
     }
   };
 
-  return <div className="list-view__music-player-bar">{videoId ? <Youtube videoId={videoId} /> : null}</div>;
+  return (
+    <div className="list-view__music-player-bar">
+      {videoId ? <Youtube videoId={videoId} artistName={artistName} trackTitle={trackTitle} /> : null}
+    </div>
+  );
 };
 
 export default MusicPlayerBar;

@@ -8,7 +8,7 @@ const videoList = {
 function loadYoutubeVideos(state = videoList, action: { type: string; response_json: any; img_url: any; error: any }) {
   switch (action.type) {
     case RECEIVE_YOUTUBE_VIDEOS_SUCCESS:
-      console.log('Success', action);
+      // console.log('Success', action);
       return Object.assign({}, state, {
         videos: [
           ...state.videos,

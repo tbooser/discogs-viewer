@@ -16,6 +16,7 @@ const DiscogsTableView = (props: DiscogsTableViewProps) => {
         <span>Title</span>
         <span>Label</span>
         <span>Year</span>
+        <span>Genres</span>
       </div>
       <div className="list-view__records-container">
         <ul>{collection}</ul>
