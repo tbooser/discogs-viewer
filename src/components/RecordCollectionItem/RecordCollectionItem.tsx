@@ -1,6 +1,5 @@
-import React from 'react';
 import { useDispatch } from 'react-redux';
-import { RECEIVE_YOUTUBE_VIDEOS_ERROR, RECEIVE_YOUTUBE_VIDEOS_SUCCESS } from '../../constants';
+import { receiveYoutubeVideos, receiveYoutubeVideosError } from '../../reducers/youtubeVideosReducer';
 
 interface RecordCollectionItemProps {
   id: number;
@@ -16,7 +15,7 @@ interface RecordCollectionItemProps {
 
 const RecordCollectionItem = (props: RecordCollectionItemProps) => {
   const { resource_url, imgSrc, artistName, recordTitle, label, year, styles } = props;
-  const formattedStyles = styles.join(',').replace(/,/g, '/').split('');
+  const formattedStyles = styles.join(',').replace(/,/g, ' | ').split('');
   // const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
   // console.log('resource_url', resource_url);
@@ -27,9 +26,9 @@ const RecordCollectionItem = (props: RecordCollectionItemProps) => {
         method: 'GET',
       });
       const response_json = await response.json();
-      dispatch({ type: RECEIVE_YOUTUBE_VIDEOS_SUCCESS, response_json, img_url });
+      dispatch(receiveYoutubeVideos(response_json, img_url));
     } catch (error) {
-      dispatch({ type: RECEIVE_YOUTUBE_VIDEOS_ERROR, error });
+      dispatch(receiveYoutubeVideosError);
     }
   };
 

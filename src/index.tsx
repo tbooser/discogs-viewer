@@ -1,23 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
+import youtubeVideosReducer from './reducers/youtubeVideosReducer';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import ReduxThunk from 'redux-thunk';
-import { rootReducer } from './reducers';
 import DiscogsTableContainer from './components/DiscogsTableContainer';
 import './styles/main.css';
 
-const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+const store = configureStore({
+  reducer: {
+    youtubeVideosReducer,
+  },
+});
 // console.log('Store --->>> ', store.getState());
 
-ReactDOM.render(
+// non-null assertion (!)
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+
+root.render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<DiscogsTableContainer />} />
       </Routes>
     </BrowserRouter>
-  </Provider>,
-  document.getElementById('root')
+  </Provider>
 );

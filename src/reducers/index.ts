@@ -1,12 +1,8 @@
 import { combineReducers } from 'redux';
-import loadRecordsByUsername from './loadRecordsByUsername';
-import loadRecordById from './loadRecordById';
-import loadYoutubeVideos from './loadYoutubeVideos';
+import youtubeVideosReducer from './youtubeVideosReducer';
 
 export const rootReducer = combineReducers({
-  loadRecordsByUsername,
-  loadRecordById,
-  loadYoutubeVideos,
+  youtubeVideosReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

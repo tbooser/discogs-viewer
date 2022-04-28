@@ -2,7 +2,7 @@ import React from 'react';
 import MusicPlayerBar from '../MusicPlayerBar';
 
 interface DiscogsTableViewProps {
-  collection: JSX.Element | JSX.Element[];
+  collection: JSX.Element[] | undefined;
 }
 
 const DiscogsTableView = (props: DiscogsTableViewProps) => {
