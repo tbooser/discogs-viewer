@@ -7,34 +7,34 @@ const MusicPlayerBar = () => {
   const [videoId, setVideoId] = useState<null | string>(null);
   const [artistName, setArtistName] = useState<null | string>(null);
   const [trackTitle, setTrackTitle] = useState<null | string>(null);
-  const currentVideoIndex = useSelector((state: RootState) => state.youtubeVideosReducer.videos.length - 1);
-  const currentVideo = useSelector(
-    (state: RootState) => state.youtubeVideosReducer.videos[currentVideoIndex].response_json
-  );
-
+  const videoListState = useSelector((state: RootState) => state.youtubeVideosReducer.videosList);
+  const currentVideoIndex = videoListState.length - 1;
+  const chosenVideo = videoListState[currentVideoIndex];
+  console.log('chosen video line 27', chosenVideo);
   useEffect(() => {
     getVideoId();
-  }, [currentVideo]);
+  }, [chosenVideo]);
 
   const getVideoId = () => {
-    if (currentVideo) {
+    if (chosenVideo) {
       // TODO: update this to better messaging
-      if (currentVideo === undefined) {
+      if (chosenVideo === undefined) {
         console.log('No videos have been uploaded for this record!');
         return;
       }
 
-      const name = currentVideo !== undefined ? currentVideo.artists_sort : '';
-      const title = currentVideo !== undefined ? currentVideo.title : '';
+      const name = chosenVideo.response_json.artists_sort;
+      const title = chosenVideo.response_json.title;
       const randomVideo =
-        currentVideo !== undefined
-          ? currentVideo.videos[Math.floor(Math.random() * currentVideo.videos.length)].uri
-          : '';
-      const slicedRandomVideo =
-        currentVideo !== undefined ? randomVideo.slice(randomVideo.indexOf('=') + 1, randomVideo.length) : '';
-      setArtistName(artistName !== name ? name : artistName);
-      setTrackTitle(trackTitle !== title ? title : trackTitle);
-      setVideoId(videoId !== slicedRandomVideo ? slicedRandomVideo : videoId);
+        chosenVideo.response_json.videos[Math.floor(Math.random() * chosenVideo.response_json.videos.length)].uri;
+      const slicedRandomVideo = randomVideo.slice(randomVideo.indexOf('=') + 1, randomVideo.length);
+      console.log(name);
+      console.log(title);
+      console.log(randomVideo);
+      console.log(slicedRandomVideo);
+      setArtistName(name);
+      setTrackTitle(title);
+      setVideoId(slicedRandomVideo);
     }
   };
 

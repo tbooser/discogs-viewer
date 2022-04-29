@@ -20,6 +20,8 @@ const Youtube = (props: YoutubeProps) => {
   const { currentImage } = appData;
 
   useEffect(() => {
+    console.log('youtube?');
+    console.log('appData', appData);
     let player;
     const ytPlayer = new Promise((resolve, reject) => {
       let tag = document.createElement('script');
@@ -50,6 +52,7 @@ const Youtube = (props: YoutubeProps) => {
     if (playerState) {
       (playerState as any).loadVideoById(videoId);
     }
+    console.log(videoId);
   }, [videoId]);
 
   const onPlayerReady = (e: { target: React.SetStateAction<null> }) => {

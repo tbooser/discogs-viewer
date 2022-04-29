@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { receiveYoutubeVideos, receiveYoutubeVideosError } from '../../reducers/youtubeVideosReducer';
+import { receiveYoutubeVideos, receiveYoutubeVideosError } from '../../reducers/Youtube';
 
 interface RecordCollectionItemProps {
   id: number;
@@ -16,9 +16,7 @@ interface RecordCollectionItemProps {
 const RecordCollectionItem = (props: RecordCollectionItemProps) => {
   const { resource_url, imgSrc, artistName, recordTitle, label, year, styles } = props;
   const formattedStyles = styles.join(',').replace(/,/g, ' | ').split('');
-  // const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
-  // console.log('resource_url', resource_url);
   const fetchYoutubeVideos = async (resource_url: RequestInfo, img_url: any) => {
     // TODO: Add isFetching action
     try {

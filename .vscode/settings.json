@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["fadein", "reduxjs", "showinfo", "tboos"],
+  "cSpell.words": ["extraartists", "fadein", "immer", "reduxjs", "showinfo", "tboos", "tracklist"],
 
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
