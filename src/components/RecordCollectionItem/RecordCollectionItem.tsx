@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { receiveYoutubeVideos, receiveYoutubeVideosError } from '../../reducers/Youtube';
+import { receiveYoutubeVideos, receiveYoutubeVideosError } from '../../reducers/Youtube/actionCreators';
 
 interface RecordCollectionItemProps {
   id: number;

@@ -1,8 +1,3 @@
-export interface PayloadTypes {
-  response_json: ResourceUrlResponseTypes;
-  img_url: string;
-}
-
 export interface InitialStateTypes {
   videosList: Array<PayloadTypes>;
   currentImage: string | undefined;
@@ -41,4 +36,9 @@ export interface ResourceUrlResponseTypes {
   uri: string;
   videos: Array<any>;
   year: number | undefined;
+}
+
+export interface PayloadTypes {
+  response_json: ResourceUrlResponseTypes;
+  img_url: string;
 }

@@ -19,14 +19,12 @@ interface RecordResponseTypes {
 }
 
 exports.getMusicByCollection = (_req: any, res: { send: (arg0: any[]) => void }) => {
-  console.log('hit getMusicByCollection');
   col.getReleases(
     username,
     0,
     { page: 1, per_page: 400 },
     (_err: any, data: { [s: string]: unknown } | ArrayLike<unknown>) => {
       const responseArray: Array<RecordResponseTypes> = [];
-      console.log(Object.entries(data)[1][1]);
       const iterableData: any = Object.entries(data)[1][1];
 
       iterableData.forEach((record: { id: number; basic_information: any }) => {
@@ -45,7 +43,7 @@ exports.getMusicByCollection = (_req: any, res: { send: (arg0: any[]) => void })
 
         responseArray.push(recordResponseObject);
       });
-      console.log('responseArray', responseArray);
+
       res.send(responseArray);
     }
   );

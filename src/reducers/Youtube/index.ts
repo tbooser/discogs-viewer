@@ -10,9 +10,8 @@ const youtubeVideosReducer = createReducer(initialState, (builder) => {
       const { payload } = action;
 
       // This is not actually mutating the state https://redux-toolkit.js.org/usage/immer-reducers
-      state.videosList.push(payload.response_json);
+      state.videosList.push(payload);
       state.currentImage = payload.img_url;
-      console.log('state in reducer', state.videosList);
     })
     .addCase(receiveYoutubeVideosError, (state, action) => {
       const videoDataPayload = action.payload;

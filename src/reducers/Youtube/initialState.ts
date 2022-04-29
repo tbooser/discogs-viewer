@@ -34,7 +34,7 @@ export const initialState: InitialStateTypes = {
         title: '',
         tracklist: [],
         uri: '',
-        videos: [],
+        videos: [{ uri: '' }],
         year: undefined,
       },
       img_url: '',

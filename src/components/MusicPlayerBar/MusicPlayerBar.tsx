@@ -10,7 +10,7 @@ const MusicPlayerBar = () => {
   const videoListState = useSelector((state: RootState) => state.youtubeVideosReducer.videosList);
   const currentVideoIndex = videoListState.length - 1;
   const chosenVideo = videoListState[currentVideoIndex];
-  console.log('chosen video line 27', chosenVideo);
+
   useEffect(() => {
     getVideoId();
   }, [chosenVideo]);
@@ -28,10 +28,7 @@ const MusicPlayerBar = () => {
       const randomVideo =
         chosenVideo.response_json.videos[Math.floor(Math.random() * chosenVideo.response_json.videos.length)].uri;
       const slicedRandomVideo = randomVideo.slice(randomVideo.indexOf('=') + 1, randomVideo.length);
-      console.log(name);
-      console.log(title);
-      console.log(randomVideo);
-      console.log(slicedRandomVideo);
+
       setArtistName(name);
       setTrackTitle(title);
       setVideoId(slicedRandomVideo);

@@ -11,7 +11,6 @@ const staticFiles = express.static(path.join(__dirname, '../build'));
 app.use(staticFiles);
 
 app.get('/music', (req: any, res: any) => {
-  console.log('hit /music');
   musicController.getMusicByCollection(req, res);
 });
 
