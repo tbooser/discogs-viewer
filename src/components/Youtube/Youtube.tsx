@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../reducers';
 
 interface YoutubeProps {
-  videoId: number;
-  artistName: string;
-  trackTitle: string;
+  videoId: string | undefined;
+  artistName: string | null;
+  trackTitle: string | null;
 }
 
 const Youtube = (props: YoutubeProps) => {
@@ -16,7 +16,7 @@ const Youtube = (props: YoutubeProps) => {
   const [currentTimeRounded, setCurrentTimeRounded] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
-  const appData = useSelector((state: RootState) => state.loadYoutubeVideos);
+  const appData = useSelector((state: RootState) => state.youtubeVideosReducer);
   const { currentImage } = appData;
 
   useEffect(() => {
@@ -25,7 +25,8 @@ const Youtube = (props: YoutubeProps) => {
       let tag = document.createElement('script');
       tag.src = 'https://www.youtube.com/iframe_api';
       let firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      // Short circuit if object === null {?}
+      firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
       (window as any).onYouTubeIframeAPIReady = () => resolve((window as any).YT);
     });
 
@@ -47,56 +48,56 @@ const Youtube = (props: YoutubeProps) => {
 
   useEffect(() => {
     if (playerState) {
-      playerState.loadVideoById(videoId);
+      (playerState as any).loadVideoById(videoId);
     }
   }, [videoId]);
 
-  const onPlayerReady = (e) => {
+  const onPlayerReady = (e: { target: React.SetStateAction<null> }) => {
     setPlayerState(e.target);
   };
 
   const onPlayerStateChange = (e: any) => {};
 
   const playVideo = () => {
-    playerState.playVideo();
+    (playerState as any).playVideo();
     setPaused(false);
   };
 
   const pauseVideo = () => {
-    playerState.pauseVideo();
+    (playerState as any).pauseVideo();
     setPaused(true);
   };
 
-  const setVolumeLevel = (volume) => {
-    playerState.setVolume(volume);
+  const setVolumeLevel = (volume: any) => {
+    (playerState as any).setVolume(volume);
   };
 
   const getCurrentTime = () => {
-    setCurrentTime(playerState.getCurrentTime());
+    setCurrentTime((playerState as any).getCurrentTime());
   };
 
   const getDuration = () => {
-    setDuration(playerState.getDuration());
+    setDuration((playerState as any).getDuration());
   };
 
-  const formatTime = (time) => {
-    if (time / 60 >= 1) {
-      return (time = time / 60 + ':' + time);
+  const formatTime = (time: string | number) => {
+    if ((time as number) / 60 >= 1) {
+      return (time = (time as number) / 60 + ':' + time);
     }
   };
 
   const getCurrentTimeRounded = () => {
-    let time = Math.floor(playerState.getCurrentTime());
+    let time = Math.floor((playerState as any).getCurrentTime());
     setCurrentTimeRounded(time);
   };
 
   const getArtistAndTrackTitle = () => {
-    const videoData = playerState.getVideoData();
+    const videoData = (playerState as any).getVideoData();
     const { title } = videoData;
     return title;
   };
 
-  const handleVolumeChange = (event) => {
+  const handleVolumeChange = (event: { target: { value: React.SetStateAction<number> } }) => {
     setVolume(event.target.value);
     setVolumeLevel(event.target.value);
   };
@@ -129,7 +130,7 @@ const Youtube = (props: YoutubeProps) => {
           {toggleVideoPlay()}
         </span>
         <span className="music-player-bar__volume-control" key={Math.random()}>
-          <input type="range" value={volume} onChange={handleVolumeChange} />
+          <input type="range" value={volume} onChange={() => handleVolumeChange} />
         </span>
       </div>
       <div id="yt-player" />
