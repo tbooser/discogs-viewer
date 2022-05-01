@@ -10,8 +10,12 @@ const musicController = require('./api/musicController.ts');
 const staticFiles = express.static(path.join(__dirname, '../build'));
 app.use(staticFiles);
 
-app.get('/music', (req: any, res: any) => {
-  musicController.getMusicByCollection(req, res);
+app.get('/collection', (req: any, res: any) => {
+  musicController.getMusicByCategory(req, res, 'collection');
+});
+
+app.get('/wantlist', (req: any, res: any) => {
+  musicController.getMusicByCategory(req, res, 'wantlist');
 });
 
 app.get('*', (_req: any, res: { sendFile: (arg0: any) => void }) => {
