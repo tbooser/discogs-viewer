@@ -1,17 +1,37 @@
-import React from 'react';
+import { useEffect } from 'react';
+import ListTypeToggle from '../ListTypeToggle';
 import MusicPlayerBar from '../MusicPlayerBar';
 
 interface DiscogsTableViewProps {
   collection: JSX.Element[] | undefined;
+  listType: string;
+  listTypeClickHandler: (event: any) => void;
+  collectionListLength: number;
 }
 
 const DiscogsTableView = (props: DiscogsTableViewProps) => {
-  const { collection } = props;
+  const { collection, listType, listTypeClickHandler, collectionListLength } = props;
+  const listTypeButtons = document.querySelectorAll('.list-view__type span');
+
+  useEffect(() => {
+    listTypeButtons.forEach((button) => {
+      console.log(button);
+      if (button.classList.contains(listType)) {
+        button.classList.add('selected');
+      }
+    });
+  }, []);
 
   return (
     <div className="list-view__collection-container">
       <div className="list-view__sort-bar">
-        <span></span>
+        <div className="list-view__type">
+          <ListTypeToggle
+            listTypeClickHandler={listTypeClickHandler}
+            listType={listType}
+            collectionListLength={collectionListLength}
+          />
+        </div>
         <span>Artist</span>
         <span>Title</span>
         <span>Label</span>

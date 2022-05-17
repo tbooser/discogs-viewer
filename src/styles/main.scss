@@ -64,9 +64,9 @@ body {
   max-width: 100px;
 }
 
-.record-table-item-info {
-  padding: 0 10px 0 0;
-}
+// .record-table-item-info {
+//   padding: 0 10px 0 0;
+// }
 
 .table-head-column-name {
   &:hover {
@@ -139,14 +139,15 @@ body {
   flex-direction: column;
 
   #{$lv}__collection-container {
+    align-self: center;
     display: flex;
     flex-direction: column;
     font-weight: 700;
-    width: 90vw;
-    margin: 1rem auto;
+    width: 99vw;
+    margin: 0;
     background: transparent;
     border-radius: 5px;
-    height: 95vh;
+    height: 98vh;
     animation: fadein 0.5s;
 
     @keyframes fadein {
@@ -155,6 +156,36 @@ body {
       }
       to {
         opacity: 1;
+      }
+    }
+
+    #{$lv}__type {
+      display: flex;
+      justify-content: center;
+    }
+
+    #{$lv}__type-toggle {
+      display: flex;
+      box-shadow: 0 0 4px 1px grey;
+      border-radius: 15px;
+      justify-content: space-between;
+      padding: 0.2rem;
+    }
+
+    #{$lv}__type-toggle > span {
+      background: #fff;
+      cursor: pointer;
+      font-size: 0.75rem;
+      padding: 0.25rem;
+      border-radius: 15px;
+      padding: 0.2rem 0.5rem;
+
+      &.selected {
+        background: rgba(24, 92, 180, 0.33);
+      }
+
+      span {
+        color: #1876db;
       }
     }
 
@@ -167,9 +198,10 @@ body {
       border-top: 2px solid black;
       display: grid;
       font-family: 'Teko', sans-serif;
-      font-size: 2rem;
+      font-size: 1.6rem;
       grid-template-columns: repeat($grid-column-count, 1fr);
       padding: 1rem 0;
+      // position: relative;
 
       span {
         text-align: center;

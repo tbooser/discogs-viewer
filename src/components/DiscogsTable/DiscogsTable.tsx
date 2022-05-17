@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import RecordCollectionItem from '../RecordCollectionItem';
 import DiscogsTableView from '../DiscogsTableView';
 import Loading from '../Loading';
-import useGetRecords from '../../hooks/useGetRecords';
+import useGetRecords, { getRecordsCollectionByUsernameReturnTypes } from '../../hooks/useGetRecords';
 
-interface getRecordsCollectionByUsernameReturnTypes extends Array<any> {
-  response: Array<object>; // Don't use object
+interface RecordRequestResponseTypes {
+  collection: Array<object>;
+  wantlist: Array<object>;
 }
 
 type RecordItemType = {
@@ -18,24 +19,37 @@ type RecordItemType = {
   artists: { name: string }[];
   styles: Array<string>;
 };
-
+// Left off refactoring to accommodate both wantlist and collection fields in response
 const DiscogsTable = (): any => {
-  const [recordsList, setRecordsList] = useState<[] | getRecordsCollectionByUsernameReturnTypes>([]);
+  const [recordsList, setRecordsList] = useState<getRecordsCollectionByUsernameReturnTypes>([]);
+  const [listType, setListType] = useState<string>('collection');
+  const [collectionListLength, setCollectionListLength] = useState<number>(0);
+  const [wantlistLength, setWantlistLength] = useState<number>(0);
   const { getRecordsCollectionByUsername, getRecordsWantlistByUsername, isPending, isSuccessful, isFailed } =
     useGetRecords();
 
   useEffect(() => {
     const getRecords = async () => {
-      return await getRecordsWantlistByUsername();
+      const requestFunction = listType === 'collection' ? getRecordsCollectionByUsername : getRecordsWantlistByUsername;
+      return await requestFunction();
     };
 
     getRecords().then((response_json) => {
+      console.log(response_json);
       setRecordsList(response_json);
+      setCollectionListLength(response_json.length);
     });
-  }, []);
+  }, [listType]);
+
+  const listTypeClickHandler = (event: any) => {
+    event.preventDefault();
+    const currentListType = event.target.classList[0];
+    setListType(currentListType);
+  };
 
   const renderCollection = () => {
-    return recordsList.map((record: RecordItemType) => {
+    let list = listType === 'collection' ? recordsList.collection : recordsList.wantlist;
+    return list.map((record: RecordItemType) => {
       const { id, resource_url, cover_image, artists, title, labels, year, styles } = record;
 
       return (
@@ -59,7 +73,14 @@ const DiscogsTable = (): any => {
   }
 
   if (isSuccessful) {
-    return <DiscogsTableView collection={renderCollection()} />;
+    return (
+      <DiscogsTableView
+        listTypeClickHandler={listTypeClickHandler}
+        listType={listType}
+        collection={renderCollection()}
+        collectionListLength={collectionListLength}
+      />
+    );
   }
 
   return <div></div>;

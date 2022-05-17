@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-interface getRecordsCollectionByUsernameReturnTypes extends Array<any> {
+export interface getRecordsCollectionByUsernameReturnTypes extends Array<any> {
   response: Array<object>; // Don't use object
 }
 
@@ -19,6 +19,7 @@ const useGetRecords = (): useGetRecordsReturnTypes => {
 
   // const getRecordsCollectionByUsername = async (): Promise<getRecordsCollectionByUsernameReturnTypes> => {
   const getRecordsCollectionByUsername = async () => {
+    // Delete the other function and just pass either collection or wantlist in here as a parameter since the rest of the function and response is the same
     setIsPending(true);
     setIsSuccessful(false);
     setIsFailed(false);
