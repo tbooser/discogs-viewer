@@ -6,11 +6,12 @@ interface DiscogsTableViewProps {
   collection: JSX.Element[] | undefined;
   listType: string;
   listTypeClickHandler: (event: any) => void;
-  collectionListLength: number;
+  collectionSize: number;
+  wantlistSize: number;
 }
 
 const DiscogsTableView = (props: DiscogsTableViewProps) => {
-  const { collection, listType, listTypeClickHandler, collectionListLength } = props;
+  const { collection, listType, listTypeClickHandler, collectionSize, wantlistSize } = props;
   const listTypeButtons = document.querySelectorAll('.list-view__type span');
 
   useEffect(() => {
@@ -29,7 +30,8 @@ const DiscogsTableView = (props: DiscogsTableViewProps) => {
           <ListTypeToggle
             listTypeClickHandler={listTypeClickHandler}
             listType={listType}
-            collectionListLength={collectionListLength}
+            collectionSize={collectionSize}
+            wantlistSize={wantlistSize}
           />
         </div>
         <span>Artist</span>

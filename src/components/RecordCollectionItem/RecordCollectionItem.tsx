@@ -14,7 +14,7 @@ interface RecordCollectionItemProps {
 }
 
 const RecordCollectionItem = (props: RecordCollectionItemProps) => {
-  const { resource_url, imgSrc, artistName, recordTitle, label, year, styles } = props;
+  const { resource_url, imgSrc, artistName, recordTitle, label, year, styles, key } = props;
   const formattedStyles = styles.join(',').replace(/,/g, ' | ').split('');
   const dispatch = useDispatch();
   const fetchYoutubeVideos = async (resource_url: RequestInfo, img_url: any) => {
@@ -35,7 +35,7 @@ const RecordCollectionItem = (props: RecordCollectionItemProps) => {
   };
 
   return (
-    <li className="list-view__record-item">
+    <li data-index={key} className="list-view__record-item">
       <span>
         <img alt="record-album-cover" className="record-table-item-image" src={imgSrc} />
       </span>

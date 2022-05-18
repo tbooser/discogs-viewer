@@ -1,5 +1,7 @@
 'use strict';
 
+import writeToFile from '../utils/writeToFile';
+
 const config = require('./config');
 const Discogs = require('disconnect').Client;
 const dis = new Discogs(config);
@@ -28,89 +30,70 @@ interface ResponseObjectTypes {
   wantlist: Array<RecordResponseTypes>;
 }
 
-// const responseObject = {
-//   'collection': collection.getReleases(username, 0, { page: 1, per_page: 400 }, callback),
-//   'wantlist' : wantlist.getReleases(username, { page: 1, per_page: 400 }, callback),
-// }
+const processResponse = (data: { id: number; basic_information: any }[]) => {
+  const arr: any = [];
+  data.forEach((record: { id: number; basic_information: any }) => {
+    const { id, basic_information } = record;
+    const { year, title, cover_image, labels, resource_url, artists, styles } = basic_information;
+    const recordResponseObject: RecordResponseTypes = {
+      id,
+      resource_url,
+      cover_image,
+      artists,
+      title,
+      labels,
+      year,
+      styles,
+    };
 
-exports.getMusicByCategory = (_req: any, res: { send: (arg0: any[]) => void }) => {
-  let responseObject: any = {
-    collection: [],
-    wantlist: [],
-  };
+    arr.push(recordResponseObject);
+  });
 
-  const callback = (_err: any, data: { [s: string]: unknown } | ArrayLike<unknown>) => {
-    const iterableData: any = Object.entries(data)[1][1];
-    iterableData.forEach((record: { id: number; basic_information: any }) => {
-      const { id, basic_information } = record;
-      const { year, title, cover_image, labels, resource_url, artists, styles } = basic_information;
-      const recordResponseObject: RecordResponseTypes = {
-        id,
-        resource_url,
-        cover_image,
-        artists,
-        title,
-        labels,
-        year,
-        styles,
-      };
-
-      responseObject.collection.push(recordResponseObject);
-    });
-  };
-
-  const wantlistCallback = (_err: any, data: { [s: string]: unknown } | ArrayLike<unknown>) => {
-    const iterableData: any = Object.entries(data)[1][1];
-    iterableData.forEach((record: { id: number; basic_information: any }) => {
-      const { id, basic_information } = record;
-      const { year, title, cover_image, labels, resource_url, artists, styles } = basic_information;
-      const recordResponseObject: RecordResponseTypes = {
-        id,
-        resource_url,
-        cover_image,
-        artists,
-        title,
-        labels,
-        year,
-        styles,
-      };
-
-      responseObject.wantlist.push(recordResponseObject);
-    });
-  };
-
-  discogsCollection.getReleases(username, 0, { page: 1, per_page: 400 }, callback);
-  discogsWantlist.getReleases(username, { page: 1, per_page: 400 }, wantlistCallback);
-
-  res.send(responseObject);
+  return arr;
 };
 
-// exports.getMusicByCategory = (_req: any, res: { send: (arg0: any[]) => void }, category: string) => {
-//   const reqCategory: any = categories[category];
-//   const callback = (_err: any, data: { [s: string]: unknown } | ArrayLike<unknown>) => {
-//     const responseArray: Array<RecordResponseTypes> = [];
-//     const iterableData: any = Object.entries(data)[1][1];
-//     iterableData.forEach((record: { id: number; basic_information: any }) => {
-//       const { id, basic_information } = record;
-//       const { year, title, cover_image, labels, resource_url, artists, styles } = basic_information;
-//       const recordResponseObject: RecordResponseTypes = {
-//         id,
-//         resource_url,
-//         cover_image,
-//         artists,
-//         title,
-//         labels,
-//         year,
-//         styles,
-//       };
+exports.getMusicByCategory = (
+  _req: any,
+  res: {
+    send: (arg0: {
+      collection: undefined;
+      collectionSize: undefined;
+      wantlist: undefined;
+      wantlistSize: undefined;
+    }) => void;
+  }
+) => {
+  const responseObject = {
+    collection: undefined,
+    collectionSize: undefined,
+    wantlist: undefined,
+    wantlistSize: undefined,
+  };
 
-//       responseArray.push(recordResponseObject);
-//     });
+  const collectionData = discogsCollection.getReleases(username, 0, { page: 1, per_page: 400 }).then((data: any) => {
+    const { releases, pagination } = data;
+    const processedReleases = processResponse(releases);
+    const collectionSize = pagination.items;
+    responseObject.collection = processedReleases;
+    responseObject.collectionSize = collectionSize;
+    return { processedReleases, collectionSize };
+  });
 
-//     res.send(responseArray);
-//   };
+  const wantlistData = discogsWantlist.getReleases(username, { page: 1, per_page: 400 }).then((data: any) => {
+    const { wants, pagination } = data;
+    const processedReleases = processResponse(wants);
+    const wantlistSize = pagination.items;
+    responseObject.wantlist = processedReleases;
+    responseObject.wantlistSize = wantlistSize;
+    return { processedReleases, wantlistSize };
+  });
 
-//   category === 'collection' // Find a cleaner way to do this
-//     ? reqCategory.getReleases(username, 0, { page: 1, per_page: 400 }, callback)
-//     : reqCategory.getReleases(username, { page: 1, per_page: 400 }, callback);
-// };
+  Promise.all([collectionData, wantlistData])
+    .then(() => {
+      res.send(responseObject);
+    })
+    .catch((error) => {
+      console.log('err', error);
+      writeToFile(error, 'request_error.txt');
+    });
+};

@@ -1,11 +1,12 @@
 interface ListTypeToggleProps {
   listTypeClickHandler: (event: any) => void;
   listType: string;
-  collectionListLength: number;
+  collectionSize: number;
+  wantlistSize: number;
 }
 
 const ListTypeToggle = (props: ListTypeToggleProps) => {
-  const { listTypeClickHandler, listType, collectionListLength } = props;
+  const { listTypeClickHandler, listType, collectionSize, wantlistSize } = props;
 
   const collectionListClassName = () => {
     let className = 'collection ';
@@ -21,11 +22,11 @@ const ListTypeToggle = (props: ListTypeToggleProps) => {
 
   return (
     <div className="list-view__type-toggle">
-      <span onClick={listTypeClickHandler} className={collectionListClassName()}>
-        Collection <span>&nbsp;{collectionListLength}</span>
+      <span onClick={listTypeClickHandler} data-name="collection" className={collectionListClassName()}>
+        Collection <span data-name="collection">&nbsp;{collectionSize}</span>
       </span>
-      <span onClick={listTypeClickHandler} className={wantlistListClassName()}>
-        Wantlist <span>&nbsp;{collectionListLength}</span>
+      <span onClick={listTypeClickHandler} data-name="wantlist" className={wantlistListClassName()}>
+        Wantlist <span data-name="wantlist">&nbsp;{wantlistSize}</span>
       </span>
     </div>
   );
