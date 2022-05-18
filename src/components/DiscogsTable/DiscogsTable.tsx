@@ -18,6 +18,7 @@ const DiscogsTable = (): any => {
   const [wantlistSize, setWantlistSize] = useState<number>(0);
   const [listType, setListType] = useState<string>('collection');
   const { getRecordsCollectionByUsername, isPending, isSuccessful, isFailed } = useGetRecords();
+  const [currentlyRendered, setCurrentlyRendered] = useState<number>(50);
 
   useEffect(() => {
     const getRecords = async () => {
@@ -46,11 +47,11 @@ const DiscogsTable = (): any => {
 
     return list.map((record, index) => {
       const { id, resource_url, cover_image, artists, title, labels, year, styles } = record;
-
       return (
         <RecordCollectionItem
           id={id}
           key={index}
+          index={index}
           year={year}
           recordTitle={title}
           imgSrc={cover_image}
@@ -58,6 +59,7 @@ const DiscogsTable = (): any => {
           resource_url={resource_url}
           artistName={artists[0].name}
           styles={styles}
+          hidden={index > currentlyRendered}
         />
       );
     });

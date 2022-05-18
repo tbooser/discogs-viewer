@@ -70,23 +70,35 @@ exports.getMusicByCategory = (
     wantlistSize: undefined,
   };
 
-  const collectionData = discogsCollection.getReleases(username, 0, { page: 1, per_page: 400 }).then((data: any) => {
-    const { releases, pagination } = data;
-    const processedReleases = processResponse(releases);
-    const collectionSize = pagination.items;
-    responseObject.collection = processedReleases;
-    responseObject.collectionSize = collectionSize;
-    return { processedReleases, collectionSize };
-  });
+  const collectionData = discogsCollection
+    .getReleases(username, 0, { page: 1, per_page: 400 })
+    .then((data: any) => {
+      const { releases, pagination } = data;
+      const processedReleases = processResponse(releases);
+      const collectionSize = pagination.items;
+      responseObject.collection = processedReleases;
+      responseObject.collectionSize = collectionSize;
+      return { processedReleases, collectionSize };
+    })
+    .catch((error: any) => {
+      console.log('error with collection data request', error);
+      writeToFile(error, 'collection_data_request_error.txt');
+    });
 
-  const wantlistData = discogsWantlist.getReleases(username, { page: 1, per_page: 400 }).then((data: any) => {
-    const { wants, pagination } = data;
-    const processedReleases = processResponse(wants);
-    const wantlistSize = pagination.items;
-    responseObject.wantlist = processedReleases;
-    responseObject.wantlistSize = wantlistSize;
-    return { processedReleases, wantlistSize };
-  });
+  const wantlistData = discogsWantlist
+    .getReleases(username, { page: 1, per_page: 400 })
+    .then((data: any) => {
+      const { wants, pagination } = data;
+      const processedReleases = processResponse(wants);
+      const wantlistSize = pagination.items;
+      responseObject.wantlist = processedReleases;
+      responseObject.wantlistSize = wantlistSize;
+      return { processedReleases, wantlistSize };
+    })
+    .catch((error: any) => {
+      console.log('error with wantlist data request', error);
+      writeToFile(error, 'wantlist_data_request_error.txt');
+    });
 
   Promise.all([collectionData, wantlistData])
     .then(() => {

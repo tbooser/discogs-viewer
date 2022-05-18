@@ -129,11 +129,11 @@ body {
 // List view
 
 #{$lv}__container-main {
-  background: linear-gradient(
-    90deg,
-    rgba(50, 182, 149, 0.4976584383753502) 1%,
-    rgba(0, 144, 255, 0.5004595588235294) 100%
-  );
+  // background: linear-gradient(
+  //   90deg,
+  //   rgba(50, 182, 149, 0.4976584383753502) 1%,
+  //   rgba(0, 144, 255, 0.5004595588235294) 100%
+  // );
   display: flex;
   min-height: 100%;
   justify-content: center;
@@ -244,6 +244,10 @@ body {
 
       span {
         text-align: center;
+      }
+
+      &.hidden {
+        display: none;
       }
     }
   }

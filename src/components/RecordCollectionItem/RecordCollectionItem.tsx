@@ -3,7 +3,7 @@ import { receiveYoutubeVideos, receiveYoutubeVideosError } from '../../reducers/
 
 interface RecordCollectionItemProps {
   id: number;
-  key: number;
+  index: number;
   resource_url: string;
   imgSrc: string;
   artistName: string;
@@ -11,10 +11,11 @@ interface RecordCollectionItemProps {
   label: string;
   year: number;
   styles: Array<string>;
+  hidden: boolean;
 }
 
 const RecordCollectionItem = (props: RecordCollectionItemProps) => {
-  const { resource_url, imgSrc, artistName, recordTitle, label, year, styles, key } = props;
+  const { resource_url, imgSrc, artistName, recordTitle, label, year, styles, index, hidden } = props;
   const formattedStyles = styles.join(',').replace(/,/g, ' | ').split('');
   const dispatch = useDispatch();
   const fetchYoutubeVideos = async (resource_url: RequestInfo, img_url: any) => {
@@ -35,7 +36,7 @@ const RecordCollectionItem = (props: RecordCollectionItemProps) => {
   };
 
   return (
-    <li data-index={key} className="list-view__record-item">
+    <li data-index={index} className={`list-view__record-item ${hidden === true ? 'hidden' : null}`}>
       <span>
         <img alt="record-album-cover" className="record-table-item-image" src={imgSrc} />
       </span>
