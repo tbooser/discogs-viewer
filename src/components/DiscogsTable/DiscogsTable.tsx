@@ -18,7 +18,8 @@ const DiscogsTable = (): any => {
   const [wantlistSize, setWantlistSize] = useState<number>(0);
   const [listType, setListType] = useState<string>('collection');
   const { getRecordsCollectionByUsername, isPending, isSuccessful, isFailed } = useGetRecords();
-  const [currentlyRendered, setCurrentlyRendered] = useState<number>(50);
+  const [collectionCurrentlyRendered, setCollectionCurrentlyRendered] = useState<number>(50);
+  const [wantlistCurrentlyRendered, setWantlistCurrentlyRendered] = useState<number>(50);
 
   useEffect(() => {
     const getRecords = async () => {
@@ -34,12 +35,18 @@ const DiscogsTable = (): any => {
     });
   }, []);
 
-  useEffect(() => {}, [listType]);
+  const infiniteScrollHandler = () => {
+    listType === 'collection'
+      ? setCollectionCurrentlyRendered(collectionCurrentlyRendered + 50)
+      : setWantlistCurrentlyRendered(wantlistCurrentlyRendered + 50);
+  };
 
   const listTypeClickHandler = (event: any) => {
     event.preventDefault();
     const currentListType = event.target.dataset.name;
     setListType(currentListType);
+    const recordsContainer = document.querySelector('.list-view__records-container');
+    recordsContainer!.scrollTo(0, 0);
   };
 
   const renderCollection = () => {
@@ -59,7 +66,10 @@ const DiscogsTable = (): any => {
           resource_url={resource_url}
           artistName={artists[0].name}
           styles={styles}
-          hidden={index > currentlyRendered}
+          collectionCurrentlyRendered={collectionCurrentlyRendered}
+          wantlistCurrentlyRendered={wantlistCurrentlyRendered}
+          infiniteScrollHandler={infiniteScrollHandler}
+          listType={listType}
         />
       );
     });
