@@ -1,7 +1,20 @@
 import { useState } from 'react';
 
-interface getRecordsCollectionByUsernameReturnTypes extends Array<any> {
-  response: Array<object>; // Don't use object
+export interface RecordItemType {
+  id: number;
+  year: number;
+  title: string;
+  cover_image: string;
+  labels: { name: string }[];
+  resource_url: string;
+  artists: { name: string }[];
+  styles: Array<string>;
+}
+export interface getRecordsCollectionByUsernameReturnTypes {
+  collection: Array<RecordItemType>;
+  collectionSize: number;
+  wantlist: Array<RecordItemType>;
+  wantlistSize: number;
 }
 
 interface useGetRecordsReturnTypes {
@@ -9,7 +22,6 @@ interface useGetRecordsReturnTypes {
   isSuccessful: boolean;
   isFailed: boolean;
   getRecordsCollectionByUsername: () => Promise<getRecordsCollectionByUsernameReturnTypes>;
-  getRecordsWantlistByUsername: () => Promise<getRecordsCollectionByUsernameReturnTypes>;
 }
 
 const useGetRecords = (): useGetRecordsReturnTypes => {
@@ -39,33 +51,11 @@ const useGetRecords = (): useGetRecordsReturnTypes => {
     return {};
   };
 
-  const getRecordsWantlistByUsername = async () => {
-    setIsPending(true);
-    setIsSuccessful(false);
-    setIsFailed(false);
-
-    try {
-      const response = await fetch('/wantlist', {
-        method: 'GET',
-      });
-      const response_json = await response.json();
-      setIsSuccessful(true);
-      return response_json;
-    } catch (error) {
-      setIsFailed(true);
-    } finally {
-      setIsPending(false);
-    }
-
-    return;
-  };
-
   return {
     isPending,
     isSuccessful,
     isFailed,
     getRecordsCollectionByUsername,
-    getRecordsWantlistByUsername,
   };
 };
 

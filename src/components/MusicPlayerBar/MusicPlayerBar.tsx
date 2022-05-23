@@ -8,6 +8,8 @@ const MusicPlayerBar = () => {
   const [artistName, setArtistName] = useState<null | string>(null);
   const [trackTitle, setTrackTitle] = useState<null | string>(null);
   const videoListState = useSelector((state: RootState) => state.youtubeVideosReducer.videosList);
+  const appData = useSelector((state: RootState) => state.youtubeVideosReducer);
+  const { currentImage } = appData;
   const currentVideoIndex = videoListState.length - 1;
   const chosenVideo = videoListState[currentVideoIndex];
 
@@ -37,7 +39,11 @@ const MusicPlayerBar = () => {
 
   return (
     <div className="list-view__music-player-bar">
-      {videoId ? <Youtube videoId={videoId} artistName={artistName} trackTitle={trackTitle} /> : null}
+      {videoId ? (
+        <Youtube videoId={videoId} artistName={artistName} trackTitle={trackTitle} currentImage={currentImage} />
+      ) : (
+        <Youtube videoId="" artistName="" trackTitle="" currentImage="" />
+      )}
     </div>
   );
 };

@@ -11,7 +11,6 @@ const store = configureStore({
     youtubeVideosReducer,
   },
 });
-// console.log('Store --->>> ', store.getState());
 
 // non-null assertion (!)
 const root = ReactDOM.createRoot(document.getElementById('root')!);
