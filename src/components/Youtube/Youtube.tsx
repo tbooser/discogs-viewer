@@ -6,18 +6,17 @@ interface YoutubeProps {
   videoId: string | undefined;
   artistName: string | null;
   trackTitle: string | null;
+  currentImage: string | undefined;
 }
 
 const Youtube = (props: YoutubeProps) => {
-  const { videoId, artistName, trackTitle } = props;
+  const { videoId, artistName, trackTitle, currentImage } = props;
   const [playerState, setPlayerState] = useState(null);
   const [paused, setPaused] = useState(false);
   const [volume, setVolume] = useState<number>(100);
   const [currentTimeRounded, setCurrentTimeRounded] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
-  const appData = useSelector((state: RootState) => state.youtubeVideosReducer);
-  const { currentImage } = appData;
 
   useEffect(() => {
     let player;
@@ -50,9 +49,11 @@ const Youtube = (props: YoutubeProps) => {
     if (playerState) {
       (playerState as any).loadVideoById(videoId);
     }
+    console.log('videoId?', videoId);
   }, [videoId]);
 
   const onPlayerReady = (e: { target: React.SetStateAction<null> }) => {
+    console.log('player ready');
     setPlayerState(e.target);
   };
 
@@ -120,9 +121,10 @@ const Youtube = (props: YoutubeProps) => {
 
   return (
     <>
+      {' '}
       <div className="music-player-bar__info">
         <span className="music-player-bar__album-cover" key={Math.random()}>
-          <img alt="music-bar-record-album-cover" className="music-bar-item-image" src={currentImage} />
+          <img className="music-bar-item-image" src={currentImage} />
         </span>
         <span className="music-player-bar__artist-name">{artistName}</span>
         <span className="music-player-bar__track-title">{trackTitle}</span>

@@ -1,6 +1,10 @@
 $lv: '.list-view';
 $mp: '.music-player';
 $grid-column-count: 7;
+// $box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+//   0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
+
+$box-shadow: 1px 0px 6px 1px rgba(0, 0, 0, 0.47);
 
 html {
   height: 100%;
@@ -61,8 +65,8 @@ body {
 }
 
 .record-table-item-image {
-  max-height: 100px;
-  max-width: 100px;
+  max-height: 4.5rem;
+  max-width: 4.5rem;
 }
 
 // .record-table-item-info {
@@ -101,27 +105,7 @@ body {
   max-width: 50%;
 }
 
-// .music-player-bar__info {
-//   color: #1c1a1a;
-//   font-size: 1.25rem;
-//   opacity: 1;
-//   width: 100%;
-//   display: grid;
-//   grid-template-columns: repeat($grid-column-count, 1fr);
-//   grid-gap: 0.5rem;
-//   align-items: center;
-// }
-
-// justify-content: space-around;
-//   span {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//   }
-// }
-
 .progress-bar {
-  // background-color: #42e8f4;
   background-color: #37276e;
   height: 3px;
 }
@@ -129,11 +113,6 @@ body {
 // List view
 
 #{$lv}__container-main {
-  // background: linear-gradient(
-  //   90deg,
-  //   rgba(50, 182, 149, 0.4976584383753502) 1%,
-  //   rgba(0, 144, 255, 0.5004595588235294) 100%
-  // );
   display: flex;
   min-height: 100%;
   justify-content: center;
@@ -142,14 +121,13 @@ body {
   #{$lv}__collection-container {
     align-self: center;
     display: flex;
-    flex-direction: column;
     font-weight: 700;
-    width: 99vw;
     margin: 0;
     background: transparent;
     border-radius: 5px;
-    height: 98vh;
+    height: 89vh;
     animation: fadein 0.5s;
+    justify-content: flex-end;
 
     @keyframes fadein {
       from {
@@ -160,85 +138,98 @@ body {
       }
     }
 
-    #{$lv}__type {
+    #{$lv}__control-panel {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: $box-shadow;
+      width: 25%;
+      margin: 1rem 1rem 0;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+
+      #{$lv}__title {
+        margin: 0.625rem;
+
+        h1 {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    #{$lv}__type {
+      width: 100%;
     }
 
     #{$lv}__type-toggle {
       display: flex;
-      box-shadow: 0 0 4px 1px grey;
-      border-radius: 15px;
-      justify-content: space-between;
-      padding: 0.2rem;
+      justify-content: space-evenly;
+      margin: 1rem 0 0;
     }
 
     #{$lv}__type-toggle > span {
-      background: #fff;
+      background: #edf1f5;
       cursor: pointer;
-      font-size: 0.75rem;
+      font-size: 1rem;
       padding: 0.25rem;
-      border-radius: 15px;
-      padding: 0.2rem 0.5rem;
+      border-radius: 10px;
+      padding: 0.5rem 1.5rem;
 
       &.selected {
         background: rgba(24, 92, 180, 0.33);
       }
 
       span {
-        color: #1876db;
+        color: #7584f0;
       }
     }
 
     #{$lv}__sort-bar {
       align-items: center;
-      background: #fff;
-      border-bottom: 0.5px solid gray;
-      border-right: 2px solid black;
-      border-left: 2px solid black;
-      border-top: 2px solid black;
+      background: #7584f0;
       display: grid;
       font-family: 'Teko', sans-serif;
       font-size: 1.6rem;
       grid-template-columns: repeat($grid-column-count, 1fr);
       padding: 1rem 0;
-      // position: relative;
+      margin: 0.625rem;
+      border-radius: 10px;
 
       span {
+        color: #4eff45;
         text-align: center;
       }
     }
 
     #{$lv}__records-container {
-      background: #fff;
-      box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),
-        0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-        0 100px 80px rgba(0, 0, 0, 0.12);
-      padding: 0.5rem 0 0;
-      overflow: scroll;
-      height: 90%;
-      border-right: 2px solid black;
-      border-left: 2px solid black;
-      border-bottom: 2px solid black;
+      background: #edf1f5;
+      border-radius: 10px;
+      box-shadow: $box-shadow;
+      width: 75%;
+      display: flex;
+      flex-direction: column;
+      margin: 1rem 1rem 0 0;
 
       ul {
+        overflow: scroll;
         padding: 0;
       }
     }
 
     #{$lv}__record-item {
       align-items: center;
+      background: #fff;
+      border-radius: 10px;
       display: grid;
       grid-template-columns: repeat($grid-column-count, 1fr);
       grid-gap: 0.5rem;
       font-family: 'Teko', sans-serif;
       font-size: 1rem;
-      height: 7em;
+      height: 6rem;
+      margin: 0.625rem;
 
       .record-table-item-image {
-        box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),
-          0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-          0 100px 80px rgba(0, 0, 0, 0.12);
+        box-shadow: $box-shadow;
         border: 0.5px solid black;
       }
 
@@ -251,27 +242,30 @@ body {
       }
     }
   }
-}
 
-#{$lv}__music-player-bar {
-  background: #fff;
-  border: 2px solid black;
-  height: 12%;
-  margin: 1rem 0 0;
-  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
-    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
-  color: #1c1a1a;
-  font-size: 1.25rem;
+  #{$lv}__music-player-bar {
+    background: #fff;
+    border-radius: 10px;
+    height: 8vh;
+    margin: 1rem;
+    box-shadow: $box-shadow;
+    color: #1c1a1a;
+    font-size: 1.25rem;
 
-  .music-player-bar__info {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 100%;
-  }
+    .music-player-bar__info {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 100%;
 
-  iframe {
-    display: none;
+      &.hidden {
+        display: none;
+      }
+    }
+
+    iframe {
+      display: none;
+    }
   }
 }
 
@@ -283,7 +277,6 @@ span {
 }
 
 .music-bar-item-image {
-  border: 0.5px solid black;
   box-shadow: 4px 4px 6px -6px black;
   max-height: 60px;
   max-width: 60px;

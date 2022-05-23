@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
+import ControlPanel from '../ControlPanel';
 import ListTypeToggle from '../ListTypeToggle';
-import MusicPlayerBar from '../MusicPlayerBar';
 
 interface DiscogsTableViewProps {
   collection: JSX.Element[] | undefined;
@@ -25,25 +25,24 @@ const DiscogsTableView = (props: DiscogsTableViewProps) => {
 
   return (
     <div className="list-view__collection-container">
-      <div className="list-view__sort-bar">
-        <div className="list-view__type">
-          <ListTypeToggle
-            listTypeClickHandler={listTypeClickHandler}
-            listType={listType}
-            collectionSize={collectionSize}
-            wantlistSize={wantlistSize}
-          />
-        </div>
-        <span>Artist</span>
-        <span>Title</span>
-        <span>Label</span>
-        <span>Year</span>
-        <span>Genres</span>
-      </div>
+      <ControlPanel
+        listType={listType}
+        listTypeClickHandler={listTypeClickHandler}
+        collectionSize={collectionSize}
+        wantlistSize={wantlistSize}
+      />
       <div className="list-view__records-container">
+        <div className="list-view__sort-bar">
+          <span></span>
+          <span>Artist</span>
+          <span>Title</span>
+          <span>Label</span>
+          <span>Year</span>
+          <span>Genres</span>
+          <span></span>
+        </div>
         <ul>{collection}</ul>
       </div>
-      <MusicPlayerBar key={Math.random()} />
     </div>
   );
 };
