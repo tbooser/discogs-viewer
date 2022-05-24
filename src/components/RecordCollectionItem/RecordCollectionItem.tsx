@@ -33,7 +33,7 @@ const RecordCollectionItem = (props: RecordCollectionItemProps) => {
     infiniteScrollHandler,
     listType,
   } = props;
-  const formattedStyles = styles.join(',').replace(/,/g, ' | ').split('');
+  const formattedGenres = styles.join(',').replace(/,/g, ' | ').split('');
   const dispatch = useDispatch();
   const scrollRef = useRef(null);
 
@@ -102,7 +102,7 @@ const RecordCollectionItem = (props: RecordCollectionItemProps) => {
       <span className="record-table-item-info">{recordTitle}</span>
       <span className="record-table-item-info">{label}</span>
       <span className="record-table-item-info">{year}</span>
-      <span className="record-table-item-info">{formattedStyles}</span>
+      <span className="record-table-item-info">{formattedGenres}</span>
       <span onClick={handleOnClick}>
         <i className="fas fa-headphones" />
       </span>

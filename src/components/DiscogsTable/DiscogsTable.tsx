@@ -16,11 +16,11 @@ const DiscogsTable = (): any => {
   const [collectionGenres, setCollectionGenres] = useState<Array<string>>([]);
   const [wantlistGenres, setWantlistGenres] = useState<Array<string>>([]);
   const [listType, setListType] = useState<string>('collection');
-  const { getRecordsCollectionByUsername, isPending, isSuccessful } = useGetRecords();
   const [collectionCurrentlyRendered, setCollectionCurrentlyRendered] = useState<number>(50);
   const [wantlistCurrentlyRendered, setWantlistCurrentlyRendered] = useState<number>(50);
   const [collectionCurrentGenres, setCollectionCurrentGenres] = useState<Array<string> | undefined>(undefined);
   const [wantlistCurrentGenres, setWantlistCurrentGenres] = useState<Array<string> | undefined>(undefined);
+  const { getRecordsCollectionByUsername, isPending, isSuccessful } = useGetRecords();
   const isMounted = useRef(false);
 
   useEffect(() => {
@@ -46,11 +46,6 @@ const DiscogsTable = (): any => {
     if (isMounted.current) {
       const currentList = listType === 'collection' ? immutableCollectionList : immutableWantlist;
       const currentGenresList = listType === 'collection' ? collectionCurrentGenres : wantlistCurrentGenres;
-
-      if (currentGenresList?.length === 0) {
-        listType === 'collection' ? setCollectionList(immutableCollectionList) : setWantlist(immutableWantlist);
-        return;
-      }
 
       const filteredList = currentList.filter((record: { styles: string[] }) => {
         return currentGenresList?.every((t) => {
