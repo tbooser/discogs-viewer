@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import ControlPanel from '../ControlPanel';
-import ListTypeToggle from '../ListTypeToggle';
 
 interface DiscogsTableViewProps {
   collection: JSX.Element[] | undefined;
@@ -8,15 +7,26 @@ interface DiscogsTableViewProps {
   listTypeClickHandler: (event: any) => void;
   collectionSize: number;
   wantlistSize: number;
+  collectionGenres: Array<string>;
+  wantlistGenres: Array<string>;
+  genreClickHandler: (event: any) => void;
 }
 
 const DiscogsTableView = (props: DiscogsTableViewProps) => {
-  const { collection, listType, listTypeClickHandler, collectionSize, wantlistSize } = props;
+  const {
+    collection,
+    listType,
+    listTypeClickHandler,
+    collectionSize,
+    wantlistSize,
+    collectionGenres,
+    wantlistGenres,
+    genreClickHandler,
+  } = props;
   const listTypeButtons = document.querySelectorAll('.list-view__type span');
 
   useEffect(() => {
     listTypeButtons.forEach((button) => {
-      console.log(button);
       if (button.classList.contains(listType)) {
         button.classList.add('selected');
       }
@@ -30,6 +40,9 @@ const DiscogsTableView = (props: DiscogsTableViewProps) => {
         listTypeClickHandler={listTypeClickHandler}
         collectionSize={collectionSize}
         wantlistSize={wantlistSize}
+        collectionGenres={collectionGenres}
+        wantlistGenres={wantlistGenres}
+        genreClickHandler={genreClickHandler}
       />
       <div className="list-view__records-container">
         <div className="list-view__sort-bar">

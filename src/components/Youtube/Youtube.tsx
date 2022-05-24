@@ -49,11 +49,9 @@ const Youtube = (props: YoutubeProps) => {
     if (playerState) {
       (playerState as any).loadVideoById(videoId);
     }
-    console.log('videoId?', videoId);
   }, [videoId]);
 
   const onPlayerReady = (e: { target: React.SetStateAction<null> }) => {
-    console.log('player ready');
     setPlayerState(e.target);
   };
 

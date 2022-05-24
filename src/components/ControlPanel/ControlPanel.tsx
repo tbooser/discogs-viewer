@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { JSXElementConstructor, Key, ReactElement, ReactFragment, ReactPortal, useEffect } from 'react';
 import ListTypeToggle from '../ListTypeToggle';
 
 interface ControlPanelProps {
@@ -6,10 +6,21 @@ interface ControlPanelProps {
   listTypeClickHandler: (event: any) => void;
   collectionSize: number;
   wantlistSize: number;
+  collectionGenres: Array<string>;
+  wantlistGenres: Array<string>;
+  genreClickHandler: (event: any) => void;
 }
 
 const ControlPanel = (props: ControlPanelProps) => {
-  const { listType, listTypeClickHandler, collectionSize, wantlistSize } = props;
+  const {
+    listType,
+    listTypeClickHandler,
+    collectionSize,
+    wantlistSize,
+    collectionGenres,
+    wantlistGenres,
+    genreClickHandler,
+  } = props;
   const listTypeButtons = document.querySelectorAll('.list-view__type span');
 
   useEffect(() => {
@@ -20,6 +31,25 @@ const ControlPanel = (props: ControlPanelProps) => {
       }
     });
   }, []);
+
+  const renderGenresCloud = (genresList: any) => {
+    return genresList
+      .sort((a: number[], b: number[]) => {
+        return b[1] - a[1];
+      })
+      .map((genre: (string | number)[], index: Key | null | undefined) => {
+        return (
+          <span
+            key={index}
+            onClick={genreClickHandler}
+            className="list-view__control-panel-genre-cloud-item"
+            data-genre={genre[0]}
+          >
+            {genre[0]}&nbsp;<span>{genre[1]}</span>
+          </span>
+        );
+      });
+  };
 
   return (
     <div className="list-view__control-panel">
@@ -33,6 +63,9 @@ const ControlPanel = (props: ControlPanelProps) => {
           collectionSize={collectionSize}
           wantlistSize={wantlistSize}
         />
+      </div>
+      <div className="list-view__control-panel-genre-cloud">
+        {renderGenresCloud(listType === 'collection' ? collectionGenres : wantlistGenres)}
       </div>
     </div>
   );

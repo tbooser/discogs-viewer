@@ -155,6 +155,31 @@ body {
           margin-bottom: 0;
         }
       }
+
+      #{$lv}__control-panel-genre-cloud {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 0 0.5rem;
+        overflow: scroll;
+        margin: 2rem 0 0;
+
+        #{$lv}__control-panel-genre-cloud-item {
+          background: #edf1f5;
+          border-radius: 10px;
+          margin: 0 0.25rem 0.5rem;
+          padding: 0.3rem;
+          font-size: 0.75rem;
+          cursor: pointer;
+
+          span {
+            color: #7584f0;
+          }
+        }
+      }
     }
 
     #{$lv}__type {
@@ -176,7 +201,7 @@ body {
       padding: 0.5rem 1.5rem;
 
       &.selected {
-        background: rgba(24, 92, 180, 0.33);
+        background: rgba(112, 192, 280, 0.5);
       }
 
       span {
