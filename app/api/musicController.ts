@@ -34,6 +34,7 @@ const processResponse = (data: { id: number; basic_information: any }[]) => {
   data.forEach((record: { id: number; basic_information: any }) => {
     const { id, basic_information } = record;
     const { year, title, cover_image, labels, resource_url, artists, styles } = basic_information;
+    // Run function here on artist and label to remove the parentheses with numbers
     const recordResponseObject: RecordResponseTypes = {
       id,
       resource_url,

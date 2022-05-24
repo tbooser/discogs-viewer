@@ -129,12 +129,16 @@ body {
   background: #edf1f5;
   border-radius: 10px;
   margin: 0 0.25rem 0.5rem;
-  padding: 0.3rem;
+  padding: 0.3rem 0.6rem;
   font-size: 0.75rem;
   cursor: pointer; }
 
+.list-view__container-main .list-view__collection-container .list-view__control-panel .list-view__control-panel-genre-cloud .list-view__control-panel-genre-cloud-item.selected {
+  background: rgba(112, 192, 255, 0.5); }
+
 .list-view__container-main .list-view__collection-container .list-view__control-panel .list-view__control-panel-genre-cloud .list-view__control-panel-genre-cloud-item span {
-  color: #7584f0; }
+  color: #7584f0;
+  pointer-events: none; }
 
 .list-view__container-main .list-view__collection-container .list-view__type {
   width: 100%; }
@@ -171,7 +175,8 @@ body {
 
 .list-view__container-main .list-view__collection-container .list-view__sort-bar span {
   color: #4eff45;
-  text-align: center; }
+  text-align: center;
+  letter-spacing: 0.5px; }
 
 .list-view__container-main .list-view__collection-container .list-view__records-container {
   background: #edf1f5;
