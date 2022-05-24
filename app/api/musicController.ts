@@ -9,11 +9,6 @@ const discogsCollection = dis.user().collection();
 const discogsWantlist = dis.user().wantlist();
 const username = 'tboos';
 
-const categories: any = {
-  collection: discogsCollection,
-  wantlist: discogsWantlist,
-};
-
 interface RecordResponseTypes {
   id: number;
   resource_url: string;
@@ -26,8 +21,12 @@ interface RecordResponseTypes {
 }
 
 interface ResponseObjectTypes {
-  collection: Array<RecordResponseTypes>;
-  wantlist: Array<RecordResponseTypes>;
+  collection: undefined | any;
+  collectionSize: undefined | number;
+  collectionGenres: undefined | Array<any>;
+  wantlist: undefined | any;
+  wantlistSize: undefined | number;
+  wantlistGenres: undefined | Array<any>;
 }
 
 const processResponse = (data: { id: number; basic_information: any }[]) => {
@@ -52,22 +51,32 @@ const processResponse = (data: { id: number; basic_information: any }[]) => {
   return arr;
 };
 
-exports.getMusicByCategory = (
-  _req: any,
-  res: {
-    send: (arg0: {
-      collection: undefined;
-      collectionSize: undefined;
-      wantlist: undefined;
-      wantlistSize: undefined;
-    }) => void;
-  }
-) => {
-  const responseObject = {
+const processGenres = (data: { id: number; basic_information: any }[]) => {
+  const stylesObject: Record<string, number> = {};
+  data.forEach((record: { id: number; basic_information: any }) => {
+    const { basic_information } = record;
+    const { styles } = basic_information;
+
+    styles.forEach((style: any) => {
+      if (stylesObject[style]) {
+        stylesObject[style] = stylesObject[style] + 1;
+      } else {
+        stylesObject[style] = 1;
+      }
+    });
+  });
+
+  return stylesObject;
+};
+
+exports.getMusicByCategory = (_req: any, res: { send: (arg0: ResponseObjectTypes) => void }) => {
+  const responseObject: ResponseObjectTypes = {
     collection: undefined,
     collectionSize: undefined,
+    collectionGenres: undefined,
     wantlist: undefined,
     wantlistSize: undefined,
+    wantlistGenres: undefined,
   };
 
   const collectionData = discogsCollection
@@ -75,10 +84,12 @@ exports.getMusicByCategory = (
     .then((data: any) => {
       const { releases, pagination } = data;
       const processedReleases = processResponse(releases);
+      const collectionGenres: [string, unknown][] = Object.entries(processGenres(releases));
       const collectionSize = pagination.items;
       responseObject.collection = processedReleases;
+      responseObject.collectionGenres = collectionGenres;
       responseObject.collectionSize = collectionSize;
-      return { processedReleases, collectionSize };
+      return { processedReleases, collectionGenres, collectionSize };
     })
     .catch((error: any) => {
       console.log('error with collection data request', error);
@@ -90,10 +101,12 @@ exports.getMusicByCategory = (
     .then((data: any) => {
       const { wants, pagination } = data;
       const processedReleases = processResponse(wants);
+      const wantlistGenres: [string, unknown][] = Object.entries(processGenres(wants));
       const wantlistSize = pagination.items;
       responseObject.wantlist = processedReleases;
+      responseObject.wantlistGenres = wantlistGenres;
       responseObject.wantlistSize = wantlistSize;
-      return { processedReleases, wantlistSize };
+      return { processedReleases, wantlistGenres, wantlistSize };
     })
     .catch((error: any) => {
       console.log('error with wantlist data request', error);

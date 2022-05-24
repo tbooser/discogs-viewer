@@ -4,22 +4,19 @@ import DiscogsTableView from '../DiscogsTableView';
 import Loading from '../Loading';
 import useGetRecords, { getRecordsCollectionByUsernameReturnTypes, RecordItemType } from '../../hooks/useGetRecords';
 
-const initialRecordsState: getRecordsCollectionByUsernameReturnTypes = {
-  collection: [],
-  collectionSize: 0,
-  wantlist: [],
-  wantlistSize: 0,
-};
-
 const DiscogsTable = (): any => {
   const [collectionList, setCollectionList] = useState<any | getRecordsCollectionByUsernameReturnTypes>();
   const [collectionSize, setCollectionSize] = useState<number>(0);
   const [wantlist, setWantlist] = useState<any | getRecordsCollectionByUsernameReturnTypes>();
   const [wantlistSize, setWantlistSize] = useState<number>(0);
+  const [collectionGenres, setCollectionGenres] = useState<Array<string>>([]);
+  const [wantlistGenres, setWantlistGenres] = useState<Array<string>>([]);
   const [listType, setListType] = useState<string>('collection');
-  const { getRecordsCollectionByUsername, isPending, isSuccessful, isFailed } = useGetRecords();
+  const { getRecordsCollectionByUsername, isPending, isSuccessful } = useGetRecords();
   const [collectionCurrentlyRendered, setCollectionCurrentlyRendered] = useState<number>(50);
   const [wantlistCurrentlyRendered, setWantlistCurrentlyRendered] = useState<number>(50);
+  const [collectionCurrentGenre, setCollectionCurrentGenre] = useState<string | undefined>(undefined);
+  const [wantlistCurrentGenre, setWantlistCurrentGenre] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     const getRecords = async () => {
@@ -27,13 +24,26 @@ const DiscogsTable = (): any => {
     };
 
     getRecords().then((response_json) => {
-      const { collection, collectionSize, wantlist, wantlistSize } = response_json;
+      const { collection, collectionSize, collectionGenres, wantlist, wantlistSize, wantlistGenres } = response_json;
+
       setCollectionList(collection);
       setCollectionSize(collectionSize);
       setWantlist(wantlist);
       setWantlistSize(wantlistSize);
+      setCollectionGenres(collectionGenres);
+      setWantlistGenres(wantlistGenres);
     });
   }, []);
+
+  useEffect(() => {
+    const currentList = listType === 'collection' ? collectionList : wantlist;
+    // Left off getting the list to filter through when a genre cloud item is clicked
+    // const filteredList = currentList.filter((record: any) => {
+    //   return record;
+    // });
+
+    // console.log(filteredList);
+  }, [collectionCurrentGenre, wantlistCurrentGenre]);
 
   const infiniteScrollHandler = () => {
     listType === 'collection'
@@ -47,6 +57,12 @@ const DiscogsTable = (): any => {
     setListType(currentListType);
     const recordsContainer = document.querySelector('.list-view__records-container');
     recordsContainer!.scrollTo(0, 0);
+  };
+
+  const genreClickHandler = (event: any) => {
+    event.preventDefault();
+    const currentGenre = event.target.dataset.genre;
+    listType === 'collection' ? setCollectionCurrentGenre(currentGenre) : setWantlistCurrentGenre(currentGenre);
   };
 
   const renderCollection = () => {
@@ -87,6 +103,9 @@ const DiscogsTable = (): any => {
         collection={renderCollection()}
         collectionSize={collectionSize}
         wantlistSize={wantlistSize}
+        collectionGenres={collectionGenres}
+        wantlistGenres={wantlistGenres}
+        genreClickHandler={genreClickHandler}
       />
     );
   }

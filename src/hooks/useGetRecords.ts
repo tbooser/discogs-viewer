@@ -13,8 +13,10 @@ export interface RecordItemType {
 export interface getRecordsCollectionByUsernameReturnTypes {
   collection: Array<RecordItemType>;
   collectionSize: number;
+  collectionGenres: Array<string>;
   wantlist: Array<RecordItemType>;
   wantlistSize: number;
+  wantlistGenres: Array<string>;
 }
 
 interface useGetRecordsReturnTypes {
