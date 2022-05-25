@@ -3,14 +3,15 @@
 const port = process.env.PORT;
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const routes = express.Router();
 const path = require('path');
 const musicController = require('./api/musicController.ts');
-
 const staticFiles = express.static(path.join(__dirname, '../build'));
+
 app.use(staticFiles);
 
-app.get('/collection', (req: any, res: any) => {
+app.get('/collection', cors(), (req: any, res: any) => {
   musicController.getMusicByCategory(req, res, 'collection');
 });
 
