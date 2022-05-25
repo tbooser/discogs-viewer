@@ -3,6 +3,7 @@ import RecordCollectionItem from '../RecordCollectionItem';
 import DiscogsTableView from '../DiscogsTableView';
 import Loading from '../Loading';
 import useGetRecords, { getRecordsCollectionByUsernameReturnTypes, RecordItemType } from '../../hooks/useGetRecords';
+import MusicPlayerBar from '../MusicPlayerBar';
 
 const DiscogsTable = (): any => {
   const [collectionList, setCollectionList] = useState<any | getRecordsCollectionByUsernameReturnTypes>();
@@ -122,16 +123,19 @@ const DiscogsTable = (): any => {
 
   if (isSuccessful) {
     return (
-      <DiscogsTableView
-        listTypeClickHandler={listTypeClickHandler}
-        listType={listType}
-        collection={renderCollection()}
-        collectionSize={collectionSize}
-        wantlistSize={wantlistSize}
-        collectionGenres={collectionGenres}
-        wantlistGenres={wantlistGenres}
-        genreClickHandler={genreClickHandler}
-      />
+      <>
+        <DiscogsTableView
+          listTypeClickHandler={listTypeClickHandler}
+          listType={listType}
+          collection={renderCollection()}
+          collectionSize={collectionSize}
+          wantlistSize={wantlistSize}
+          collectionGenres={collectionGenres}
+          wantlistGenres={wantlistGenres}
+          genreClickHandler={genreClickHandler}
+        />
+        <MusicPlayerBar key={Math.random()} />
+      </>
     );
   }
 
