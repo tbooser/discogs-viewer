@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import RecordCollectionItem from '../RecordCollectionItem';
 import DiscogsTableView from '../DiscogsTableView';
 import Loading from '../Loading';
@@ -6,17 +6,22 @@ import useGetRecords, { getRecordsCollectionByUsernameReturnTypes, RecordItemTyp
 
 const DiscogsTable = (): any => {
   const [collectionList, setCollectionList] = useState<any | getRecordsCollectionByUsernameReturnTypes>();
+  const [immutableCollectionList, setImmutableCollectionList] = useState<
+    any | getRecordsCollectionByUsernameReturnTypes
+  >();
   const [collectionSize, setCollectionSize] = useState<number>(0);
   const [wantlist, setWantlist] = useState<any | getRecordsCollectionByUsernameReturnTypes>();
+  const [immutableWantlist, setImmutableWantlist] = useState<any | getRecordsCollectionByUsernameReturnTypes>();
   const [wantlistSize, setWantlistSize] = useState<number>(0);
   const [collectionGenres, setCollectionGenres] = useState<Array<string>>([]);
   const [wantlistGenres, setWantlistGenres] = useState<Array<string>>([]);
   const [listType, setListType] = useState<string>('collection');
-  const { getRecordsCollectionByUsername, isPending, isSuccessful } = useGetRecords();
   const [collectionCurrentlyRendered, setCollectionCurrentlyRendered] = useState<number>(50);
   const [wantlistCurrentlyRendered, setWantlistCurrentlyRendered] = useState<number>(50);
-  const [collectionCurrentGenre, setCollectionCurrentGenre] = useState<string | undefined>(undefined);
-  const [wantlistCurrentGenre, setWantlistCurrentGenre] = useState<string | undefined>(undefined);
+  const [collectionCurrentGenres, setCollectionCurrentGenres] = useState<Array<string> | undefined>(undefined);
+  const [wantlistCurrentGenres, setWantlistCurrentGenres] = useState<Array<string> | undefined>(undefined);
+  const { getRecordsCollectionByUsername, isPending, isSuccessful } = useGetRecords();
+  const isMounted = useRef(false);
 
   useEffect(() => {
     const getRecords = async () => {
@@ -27,8 +32,10 @@ const DiscogsTable = (): any => {
       const { collection, collectionSize, collectionGenres, wantlist, wantlistSize, wantlistGenres } = response_json;
 
       setCollectionList(collection);
+      setImmutableCollectionList(collection);
       setCollectionSize(collectionSize);
       setWantlist(wantlist);
+      setImmutableWantlist(wantlist);
       setWantlistSize(wantlistSize);
       setCollectionGenres(collectionGenres);
       setWantlistGenres(wantlistGenres);
@@ -36,14 +43,21 @@ const DiscogsTable = (): any => {
   }, []);
 
   useEffect(() => {
-    const currentList = listType === 'collection' ? collectionList : wantlist;
-    // Left off getting the list to filter through when a genre cloud item is clicked
-    // const filteredList = currentList.filter((record: any) => {
-    //   return record;
-    // });
+    if (isMounted.current) {
+      const currentList = listType === 'collection' ? immutableCollectionList : immutableWantlist;
+      const currentGenresList = listType === 'collection' ? collectionCurrentGenres : wantlistCurrentGenres;
 
-    // console.log(filteredList);
-  }, [collectionCurrentGenre, wantlistCurrentGenre]);
+      const filteredList = currentList.filter((record: { styles: string[] }) => {
+        return currentGenresList?.every((t) => {
+          return record.styles.includes(t);
+        });
+      });
+
+      listType === 'collection' ? setCollectionList(filteredList) : setWantlist(filteredList);
+    } else {
+      isMounted.current = true;
+    }
+  }, [collectionCurrentGenres, wantlistCurrentGenres]);
 
   const infiniteScrollHandler = () => {
     listType === 'collection'
@@ -61,8 +75,19 @@ const DiscogsTable = (): any => {
 
   const genreClickHandler = (event: any) => {
     event.preventDefault();
-    const currentGenre = event.target.dataset.genre;
-    listType === 'collection' ? setCollectionCurrentGenre(currentGenre) : setWantlistCurrentGenre(currentGenre);
+    const currentGenre = event.currentTarget.dataset.genre;
+    const currentGenresState = listType === 'collection' ? collectionCurrentGenres : wantlistCurrentGenres;
+    let genresArray = currentGenresState === undefined ? [] : currentGenresState;
+
+    if (!event.target.classList.contains('selected')) {
+      event.target.classList.add('selected');
+      genresArray = [...genresArray];
+      genresArray.push(currentGenre);
+    } else {
+      event.target.classList.remove('selected');
+      genresArray = [...genresArray].filter((genre) => genre !== currentGenre);
+    }
+    return listType === 'collection' ? setCollectionCurrentGenres(genresArray) : setWantlistCurrentGenres(genresArray);
   };
 
   const renderCollection = () => {
