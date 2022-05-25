@@ -2,7 +2,10 @@
 
 import writeToFile from '../utils/writeToFile';
 
-const config = require('./config');
+const config = {
+  consumerKey: process.env.CONSUMER_KEY,
+  consumerSecret: process.env.CONSUMER_SECRET,
+};
 const Discogs = require('disconnect').Client;
 const dis = new Discogs(config);
 const discogsCollection = dis.user().collection();
