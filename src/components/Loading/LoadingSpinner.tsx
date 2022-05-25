@@ -1,5 +1,5 @@
 import React from 'react';
-const loadingSpinner = require('../../images/record-232421-bg-9ad1e4.gif');
+const loadingSpinner = require('../../images/record-light-purple.gif');
 
 export default function LoadingSpinner() {
   return (
