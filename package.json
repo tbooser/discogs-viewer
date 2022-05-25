@@ -2,6 +2,7 @@
   "name": "discogs-viewer",
   "version": "0.1.0",
   "private": true,
+  "main": "app/index.ts",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
     "@types/jest": "^27.5.1",

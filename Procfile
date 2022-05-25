@@ -1,1 +1,1 @@
-web: bin/boot
+web: ts-node app/index.ts
