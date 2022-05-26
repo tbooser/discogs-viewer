@@ -1,11 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import RecordCollectionItem from '../RecordCollectionItem';
 import DiscogsTableView from '../DiscogsTableView';
 import Loading from '../Loading';
 import useGetRecords, { getRecordsCollectionByUsernameReturnTypes, RecordItemType } from '../../hooks/useGetRecords';
-import MusicPlayerBar from '../MusicPlayerBar';
+import { requestSuccessful } from '../../reducers/RequestState/actionCreators';
 
-const DiscogsTable = (): any => {
+interface DiscogsTableProps {
+  isMountedHandler: () => void;
+}
+
+const DiscogsTable = (props: DiscogsTableProps): any => {
   const [collectionList, setCollectionList] = useState<any | getRecordsCollectionByUsernameReturnTypes>();
   const [immutableCollectionList, setImmutableCollectionList] = useState<
     any | getRecordsCollectionByUsernameReturnTypes
@@ -22,7 +27,10 @@ const DiscogsTable = (): any => {
   const [collectionCurrentGenres, setCollectionCurrentGenres] = useState<Array<string> | undefined>(undefined);
   const [wantlistCurrentGenres, setWantlistCurrentGenres] = useState<Array<string> | undefined>(undefined);
   const { getRecordsCollectionByUsername, isPending, isSuccessful } = useGetRecords();
-  const isMounted = useRef(false);
+  const dispatch = useDispatch();
+  const isMountedRef = useRef(false);
+  const [isMounted, setIsMounted] = useState(isMountedRef);
+  const { isMountedHandler } = props;
 
   useEffect(() => {
     const getRecords = async () => {
@@ -55,6 +63,7 @@ const DiscogsTable = (): any => {
       });
 
       listType === 'collection' ? setCollectionList(filteredList) : setWantlist(filteredList);
+      isMountedHandler();
     } else {
       isMounted.current = true;
     }
@@ -123,19 +132,16 @@ const DiscogsTable = (): any => {
 
   if (isSuccessful) {
     return (
-      <>
-        <DiscogsTableView
-          listTypeClickHandler={listTypeClickHandler}
-          listType={listType}
-          collection={renderCollection()}
-          collectionSize={collectionSize}
-          wantlistSize={wantlistSize}
-          collectionGenres={collectionGenres}
-          wantlistGenres={wantlistGenres}
-          genreClickHandler={genreClickHandler}
-        />
-        <MusicPlayerBar key={Math.random()} />
-      </>
+      <DiscogsTableView
+        listTypeClickHandler={listTypeClickHandler}
+        listType={listType}
+        collection={renderCollection()}
+        collectionSize={collectionSize}
+        wantlistSize={wantlistSize}
+        collectionGenres={collectionGenres}
+        wantlistGenres={wantlistGenres}
+        genreClickHandler={genreClickHandler}
+      />
     );
   }
 
