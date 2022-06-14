@@ -26,8 +26,6 @@ const DiscogsTableView = (props: DiscogsTableViewProps) => {
     genreClickHandler,
   } = props;
   const listTypeButtons = document.querySelectorAll('.list-view__type span');
-  const ref = useRef();
-  // const isVisible = useOnScreen(ref);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -68,21 +66,5 @@ const DiscogsTableView = (props: DiscogsTableViewProps) => {
     </div>
   );
 };
-
-// export default function useOnScreen(ref) {
-//   const [isIntersecting, setIntersecting] = useState(false);
-
-//   const observer = new IntersectionObserver(([entry]) => setIntersecting(entry.isIntersecting));
-
-//   useEffect(() => {
-//     observer.observe(ref.current);
-//     // Remove the observer as soon as the component is unmounted
-//     return () => {
-//       observer.disconnect();
-//     };
-//   }, []);
-
-//   return isIntersecting;
-// }
 
 export default DiscogsTableView;

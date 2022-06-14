@@ -62,10 +62,6 @@ const DiscogsTable = (): any => {
     }
   }, [collectionCurrentGenres, wantlistCurrentGenres]);
 
-  // useEffect(() => {
-  // dispatch(requestSuccessful(true));
-  // }, [isMountedRef]);
-
   const infiniteScrollHandler = () => {
     listType === 'collection'
       ? setCollectionCurrentlyRendered(collectionCurrentlyRendered + 50)
