@@ -43,12 +43,12 @@ const useGetRecords = (): useGetRecordsReturnTypes => {
         method: 'GET',
       });
       const response_json = await response.json();
-      setIsSuccessful(true);
       return response_json;
     } catch (error) {
       setIsFailed(true);
     } finally {
       setIsPending(false);
+      setIsSuccessful(true);
     }
 
     return {};

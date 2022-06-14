@@ -25,7 +25,6 @@ const ControlPanel = (props: ControlPanelProps) => {
 
   useEffect(() => {
     listTypeButtons.forEach((button) => {
-      console.log(button);
       if (button.classList.contains(listType)) {
         button.classList.add('selected');
       }

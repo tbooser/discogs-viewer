@@ -1,4 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { requestSuccessful } from '../../reducers/RequestState/actionCreators';
 import ControlPanel from '../ControlPanel';
 
 interface DiscogsTableViewProps {
@@ -24,6 +26,7 @@ const DiscogsTableView = (props: DiscogsTableViewProps) => {
     genreClickHandler,
   } = props;
   const listTypeButtons = document.querySelectorAll('.list-view__type span');
+  const dispatch = useDispatch();
 
   useEffect(() => {
     listTypeButtons.forEach((button) => {
@@ -31,6 +34,10 @@ const DiscogsTableView = (props: DiscogsTableViewProps) => {
         button.classList.add('selected');
       }
     });
+  }, []);
+
+  useEffect(() => {
+    dispatch(requestSuccessful(true));
   }, []);
 
   return (
