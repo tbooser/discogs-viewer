@@ -1,4 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { requestSuccessful } from '../../reducers/RequestState/actionCreators';
 import ControlPanel from '../ControlPanel';
 
 interface DiscogsTableViewProps {
@@ -24,6 +26,9 @@ const DiscogsTableView = (props: DiscogsTableViewProps) => {
     genreClickHandler,
   } = props;
   const listTypeButtons = document.querySelectorAll('.list-view__type span');
+  const ref = useRef();
+  // const isVisible = useOnScreen(ref);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     listTypeButtons.forEach((button) => {
@@ -31,6 +36,10 @@ const DiscogsTableView = (props: DiscogsTableViewProps) => {
         button.classList.add('selected');
       }
     });
+  }, []);
+
+  useEffect(() => {
+    dispatch(requestSuccessful(true));
   }, []);
 
   return (
@@ -59,5 +68,21 @@ const DiscogsTableView = (props: DiscogsTableViewProps) => {
     </div>
   );
 };
+
+// export default function useOnScreen(ref) {
+//   const [isIntersecting, setIntersecting] = useState(false);
+
+//   const observer = new IntersectionObserver(([entry]) => setIntersecting(entry.isIntersecting));
+
+//   useEffect(() => {
+//     observer.observe(ref.current);
+//     // Remove the observer as soon as the component is unmounted
+//     return () => {
+//       observer.disconnect();
+//     };
+//   }, []);
+
+//   return isIntersecting;
+// }
 
 export default DiscogsTableView;

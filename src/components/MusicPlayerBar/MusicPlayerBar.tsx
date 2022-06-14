@@ -12,6 +12,8 @@ const MusicPlayerBar = () => {
   const { currentImage } = appData;
   const currentVideoIndex = videoListState.length - 1;
   const chosenVideo = videoListState[currentVideoIndex];
+  const requestSuccessState = useSelector((state: RootState) => state.requestSuccessfulReducer);
+  const { requestSuccessful } = requestSuccessState;
 
   useEffect(() => {
     getVideoId();
@@ -37,8 +39,12 @@ const MusicPlayerBar = () => {
     }
   };
 
+  const isHidden = () => {
+    return requestSuccessful ? 'list-view__music-player-bar' : 'list-view__music-player-bar hidden';
+  };
+
   return (
-    <div className="list-view__music-player-bar">
+    <div className={isHidden()}>
       {videoId ? (
         <Youtube videoId={videoId} artistName={artistName} trackTitle={trackTitle} currentImage={currentImage} />
       ) : (
