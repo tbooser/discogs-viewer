@@ -9,7 +9,7 @@ const Discogs = require('disconnect').Client;
 const dis = new Discogs(config);
 const discogsCollection = dis.user().collection();
 const discogsWantlist = dis.user().wantlist();
-const username = 'tboos';
+const username = 'booserk';
 
 interface RecordResponseTypes {
   id: number;
