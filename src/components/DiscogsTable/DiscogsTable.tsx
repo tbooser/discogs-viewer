@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import RecordCollectionItem from '../RecordCollectionItem';
 import DiscogsTableView from '../DiscogsTableView';
 import Loading from '../Loading';
 import useGetRecords, { getRecordsCollectionByUsernameReturnTypes, RecordItemType } from '../../hooks/useGetRecords';
+import { requestSuccessful } from '../../reducers/RequestState/actionCreators';
 
 const DiscogsTable = (): any => {
   const [collectionList, setCollectionList] = useState<any | getRecordsCollectionByUsernameReturnTypes>();
@@ -21,7 +23,9 @@ const DiscogsTable = (): any => {
   const [collectionCurrentGenres, setCollectionCurrentGenres] = useState<Array<string> | undefined>(undefined);
   const [wantlistCurrentGenres, setWantlistCurrentGenres] = useState<Array<string> | undefined>(undefined);
   const { getRecordsCollectionByUsername, isPending, isSuccessful } = useGetRecords();
-  const isMounted = useRef(false);
+  const isMountedRef = useRef(false);
+  const ref: any = useRef<HTMLDivElement>();
+  const [isMounted, setIsMounted] = useState(isMountedRef);
 
   useEffect(() => {
     const getRecords = async () => {
@@ -52,7 +56,6 @@ const DiscogsTable = (): any => {
           return record.styles.includes(t);
         });
       });
-
       listType === 'collection' ? setCollectionList(filteredList) : setWantlist(filteredList);
     } else {
       isMounted.current = true;

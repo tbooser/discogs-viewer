@@ -4,12 +4,13 @@
   "private": true,
   "main": "app/index.ts",
   "dependencies": {
-    "@reduxjs/toolkit": "^1.8.1",
-    "@types/jest": "^27.5.1",
-    "@types/node": "^17.0.35",
-    "@types/react": "^18.0.9",
+    "@reduxjs/toolkit": "^1.8.2",
+    "@types/jest": "^28.1.1",
+    "@types/node": "^17.0.42",
+    "@types/react": "^18.0.12",
     "@types/react-dom": "^18.0.5",
     "@types/react-redux": "^7.1.24",
+    "cors": "^2.8.5",
     "disconnect": "1.2.2",
     "global": "4.4.0",
     "moment": "2.29.3",
@@ -22,8 +23,8 @@
     "react-scripts": "5.0.1",
     "redux": "4.2.0",
     "redux-thunk": "2.4.1",
-    "ts-node": "^10.8.0",
-    "underscore": "1.13.3"
+    "ts-node": "^10.8.1",
+    "underscore": "1.13.4"
   },
   "scripts": {
     "build-css": "node-sass src/ -o src/",
@@ -34,7 +35,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "clean": "rm -rf package-lock.json && rm -rf yarn.lock && rm -rf node_modules && rm -rf build/ && npm i && npm run build"
+    "clean": "rm -rf package-lock.json && rm -rf node_modules && rm -rf build/ && npm i"
   },
   "devDependencies": {
     "@tsconfig/create-react-app": "^1.0.2",
@@ -42,7 +43,7 @@
     "babel-preset-env": "1.7.0",
     "node-sass": "7.0.1",
     "nodemon": "^2.0.16",
-    "typescript": "^4.7.2"
+    "typescript": "^4.7.3"
   },
   "engines": {
     "node": "16.14.0"

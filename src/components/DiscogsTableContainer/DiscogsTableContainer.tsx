@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import DiscogsTable from '../DiscogsTable';
-import LoadingSpinner from '../Loading';
 import MusicPlayerBar from '../MusicPlayerBar';
+import { RootState } from '../../reducers';
 
 const DiscogsTableContainer = () => {
-  const [isFetching, setIsFetching] = useState(true);
-
   return (
     <div className="list-view__container-main" key={Math.random()}>
       <DiscogsTable />
-      <MusicPlayerBar key={Math.random()} />
+      <MusicPlayerBar />
     </div>
   );
 };

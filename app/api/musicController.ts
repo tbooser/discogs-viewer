@@ -1,7 +1,6 @@
 'use strict';
 
-import writeToFile from '../utils/writeToFile';
-
+const writeToFile = require('../utils/writeToFile');
 const config = {
   consumerKey: process.env.CONSUMER_KEY,
   consumerSecret: process.env.CONSUMER_SECRET,

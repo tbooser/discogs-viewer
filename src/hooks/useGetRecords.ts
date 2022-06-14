@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { API_BASE_URL } from '../constants';
 
 export interface RecordItemType {
   id: number;
@@ -38,16 +39,16 @@ const useGetRecords = (): useGetRecordsReturnTypes => {
     setIsFailed(false);
 
     try {
-      const response = await fetch('/collection', {
+      const response = await fetch(`${API_BASE_URL}/collection`, {
         method: 'GET',
       });
       const response_json = await response.json();
-      setIsSuccessful(true);
       return response_json;
     } catch (error) {
       setIsFailed(true);
     } finally {
       setIsPending(false);
+      setIsSuccessful(true);
     }
 
     return {};
