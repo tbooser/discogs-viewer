@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { createContext, ReactNode, useState } from 'react';
 import { API_BASE_URL } from '../constants';
 
 export interface RecordItemType {
@@ -11,7 +11,13 @@ export interface RecordItemType {
   artists: { name: string }[];
   styles: Array<string>;
 }
-export interface getRecordsCollectionByUsernameReturnTypes {
+
+interface CollectionGenres {
+  genre: string;
+  count: number;
+}
+
+export interface DiscogsDataReturnTypes {
   collection: Array<RecordItemType>;
   collectionSize: number;
   collectionGenres: Array<string>;
@@ -20,24 +26,21 @@ export interface getRecordsCollectionByUsernameReturnTypes {
   wantlistGenres: Array<string>;
 }
 
-interface useGetRecordsReturnTypes {
-  isPending: boolean;
-  isSuccessful: boolean;
-  isFailed: boolean;
-  getRecordsCollectionByUsername: () => Promise<getRecordsCollectionByUsernameReturnTypes>;
+interface DiscogsDataContextProvider {
+  children: ReactNode;
 }
 
-const useGetRecords = (): useGetRecordsReturnTypes => {
-  const [isPending, setIsPending] = useState(false);
-  const [isSuccessful, setIsSuccessful] = useState(false);
-  const [isFailed, setIsFailed] = useState(false);
+export const DiscogsDataContext = createContext<DiscogsDataReturnTypes | null>(null);
 
-  // const getRecordsCollectionByUsername = async (): Promise<getRecordsCollectionByUsernameReturnTypes> => {
-  const getRecordsCollectionByUsername = async () => {
-    setIsPending(true);
-    setIsSuccessful(false);
-    setIsFailed(false);
+const DiscogsDataContextProvider = ({ children }: DiscogsDataContextProvider): JSX.Element => {
+  const [collection, setCollection] = useState<any | DiscogsDataReturnTypes>();
+  const [collectionSize, setCollectionSize] = useState(0);
+  const [collectionGenres, setCollectionGenres] = useState<Array<string>>([]);
+  const [wantlist, setWantlist] = useState<any | DiscogsDataReturnTypes>();
+  const [wantlistSize, setWantlistSize] = useState(0);
+  const [wantlistGenres, setWantlistGenres] = useState<Array<string>>([]);
 
+  const getDiscogsData = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/collection`, {
         method: 'GET',
@@ -45,21 +48,39 @@ const useGetRecords = (): useGetRecordsReturnTypes => {
       const response_json = await response.json();
       return response_json;
     } catch (error) {
-      setIsFailed(true);
+      console.log('request error');
     } finally {
-      setIsPending(false);
-      setIsSuccessful(true);
+      console.log('all done');
     }
 
     return {};
   };
 
-  return {
-    isPending,
-    isSuccessful,
-    isFailed,
-    getRecordsCollectionByUsername,
-  };
+  getDiscogsData().then((data) => {
+    const { collection, collectionSize, collectionGenres, wantlist, wantlistSize, wantlistGenres } = data;
+    console.log(collectionGenres);
+    setCollectionSize(collectionSize);
+    setCollection(collection);
+    setCollectionGenres(collectionGenres);
+    setWantlistSize(wantlistSize);
+    setWantlist(wantlist);
+    setWantlistGenres(wantlistGenres);
+  });
+
+  return (
+    <DiscogsDataContext.Provider
+      value={{
+        collection,
+        collectionSize,
+        collectionGenres,
+        wantlist,
+        wantlistSize,
+        wantlistGenres,
+      }}
+    >
+      {children}
+    </DiscogsDataContext.Provider>
+  );
 };
 
-export default useGetRecords;
+export default DiscogsDataContextProvider;
