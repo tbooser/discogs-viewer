@@ -1,4 +1,4 @@
-import { JSXElementConstructor, Key, ReactElement, ReactFragment, ReactPortal, useEffect } from 'react';
+import { JSXElementConstructor, Key, ReactElement, ReactFragment, ReactPortal, useEffect, useRef } from 'react';
 import ListTypeToggle from '../ListTypeToggle';
 
 interface ControlPanelProps {
@@ -21,6 +21,7 @@ const ControlPanel = (props: ControlPanelProps) => {
     wantlistGenres,
     genreClickHandler,
   } = props;
+  const genreCloudRef: any = useRef<HTMLDivElement>();
   const listTypeButtons = document.querySelectorAll('.list-view__type span');
 
   useEffect(() => {
@@ -30,6 +31,14 @@ const ControlPanel = (props: ControlPanelProps) => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    const selected = Array.from(genreCloudRef.current.children).filter((genre: any) =>
+      genre.classList.contains('selected')
+    );
+    console.log(selected);
+    selected.forEach((button: any) => button.classList.remove('selected'));
+  }, [listType]);
 
   const renderGenresCloud = (genresList: any) => {
     return genresList
@@ -63,7 +72,7 @@ const ControlPanel = (props: ControlPanelProps) => {
           wantlistSize={wantlistSize}
         />
       </div>
-      <div className="list-view__control-panel-genre-cloud">
+      <div className="list-view__control-panel-genre-cloud" ref={genreCloudRef}>
         {renderGenresCloud(listType === 'collection' ? collectionGenres : wantlistGenres)}
       </div>
     </div>

@@ -1,8 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import DiscogsTable from '../DiscogsTable';
 import MusicPlayerBar from '../MusicPlayerBar';
-import { RootState } from '../../reducers';
 
 const DiscogsTableContainer = () => {
   return (
