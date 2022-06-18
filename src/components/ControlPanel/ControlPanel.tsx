@@ -36,7 +36,6 @@ const ControlPanel = (props: ControlPanelProps) => {
     const selected = Array.from(genreCloudRef.current.children).filter((genre: any) =>
       genre.classList.contains('selected')
     );
-    console.log(selected);
     selected.forEach((button: any) => button.classList.remove('selected'));
   }, [listType]);
 
