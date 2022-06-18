@@ -1,30 +1,34 @@
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
 import RecordCollectionItem from '../RecordCollectionItem';
 import DiscogsTableView from '../DiscogsTableView';
 import Loading from '../Loading';
 import useGetRecords, { getRecordsCollectionByUsernameReturnTypes, RecordItemType } from '../../hooks/useGetRecords';
-import { requestSuccessful } from '../../reducers/RequestState/actionCreators';
 
 const DiscogsTable = (): any => {
-  const [collectionList, setCollectionList] = useState<any | getRecordsCollectionByUsernameReturnTypes>();
   const [immutableCollectionList, setImmutableCollectionList] = useState<
     any | getRecordsCollectionByUsernameReturnTypes
   >();
-  const [collectionSize, setCollectionSize] = useState<number>(0);
-  const [wantlist, setWantlist] = useState<any | getRecordsCollectionByUsernameReturnTypes>();
   const [immutableWantlist, setImmutableWantlist] = useState<any | getRecordsCollectionByUsernameReturnTypes>();
+  // List sizes
+  const [collectionSize, setCollectionSize] = useState<number>(0);
   const [wantlistSize, setWantlistSize] = useState<number>(0);
+  // Lists
+  const [collectionList, setCollectionList] = useState<any | getRecordsCollectionByUsernameReturnTypes>();
+  const [wantlist, setWantlist] = useState<any | getRecordsCollectionByUsernameReturnTypes>();
+  // Genres by list
   const [collectionGenres, setCollectionGenres] = useState<Array<string>>([]);
   const [wantlistGenres, setWantlistGenres] = useState<Array<string>>([]);
+  // Current list type
   const [listType, setListType] = useState<string>('collection');
+  // List of the currently rendered records
   const [collectionCurrentlyRendered, setCollectionCurrentlyRendered] = useState<number>(50);
   const [wantlistCurrentlyRendered, setWantlistCurrentlyRendered] = useState<number>(50);
+  // List of the currently selected genres
   const [collectionCurrentGenres, setCollectionCurrentGenres] = useState<Array<string> | undefined>(undefined);
   const [wantlistCurrentGenres, setWantlistCurrentGenres] = useState<Array<string> | undefined>(undefined);
+
   const { getRecordsCollectionByUsername, isPending, isSuccessful } = useGetRecords();
   const isMountedRef = useRef(false);
-  const ref: any = useRef<HTMLDivElement>();
   const [isMounted, setIsMounted] = useState(isMountedRef);
 
   useEffect(() => {
@@ -71,9 +75,11 @@ const DiscogsTable = (): any => {
   const listTypeClickHandler = (event: any) => {
     event.preventDefault();
     const currentListType = event.target.dataset.name;
+    currentListType === 'collection' ? setCollectionList(immutableCollectionList) : setWantlist(immutableWantlist);
     setListType(currentListType);
-    const recordsContainer = document.querySelector('.list-view__records-container');
-    recordsContainer!.scrollTo(0, 0);
+
+    const recordList = document.querySelector('.list-view__record-list');
+    recordList!.scrollTo(0, 0);
   };
 
   const genreClickHandler = (event: any) => {
