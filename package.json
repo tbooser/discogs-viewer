@@ -43,7 +43,7 @@
     "babel-preset-env": "1.7.0",
     "node-sass": "7.0.1",
     "nodemon": "^2.0.16",
-    "typescript": "^4.743"
+    "typescript": "^4.7.4"
   },
   "engines": {
     "node": "16.14.0"
