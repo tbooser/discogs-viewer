@@ -1,23 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import RecordCollectionItem from '../RecordCollectionItem';
 import DiscogsTableView from '../DiscogsTableView';
 import Loading from '../Loading';
-import useGetRecords, { getRecordsCollectionByUsernameReturnTypes, RecordItemType } from '../../hooks/useGetRecords';
+import { DiscogsDataContext, DiscogsDataReturnTypes } from '../../context/DiscogsDataProvider';
 
 const DiscogsTable = (): any => {
-  const [immutableCollectionList, setImmutableCollectionList] = useState<
-    any | getRecordsCollectionByUsernameReturnTypes
-  >();
-  const [immutableWantlist, setImmutableWantlist] = useState<any | getRecordsCollectionByUsernameReturnTypes>();
-  // List sizes
-  const [collectionSize, setCollectionSize] = useState<number>(0);
-  const [wantlistSize, setWantlistSize] = useState<number>(0);
-  // Lists
-  const [collectionList, setCollectionList] = useState<any | getRecordsCollectionByUsernameReturnTypes>();
-  const [wantlist, setWantlist] = useState<any | getRecordsCollectionByUsernameReturnTypes>();
-  // Genres by list
-  const [collectionGenres, setCollectionGenres] = useState<Array<string>>([]);
-  const [wantlistGenres, setWantlistGenres] = useState<Array<string>>([]);
   // Current list type
   const [listType, setListType] = useState<string>('collection');
   // List of the currently rendered records
@@ -27,28 +14,12 @@ const DiscogsTable = (): any => {
   const [collectionCurrentGenres, setCollectionCurrentGenres] = useState<Array<string> | undefined>(undefined);
   const [wantlistCurrentGenres, setWantlistCurrentGenres] = useState<Array<string> | undefined>(undefined);
 
-  const { getRecordsCollectionByUsername, isPending, isSuccessful } = useGetRecords();
   const isMountedRef = useRef(false);
   const [isMounted, setIsMounted] = useState(isMountedRef);
+  const discogsContext = useContext(DiscogsDataContext) as DiscogsDataReturnTypes;
+  const { collectionSize } = discogsContext;
 
-  useEffect(() => {
-    const getRecords = async () => {
-      return await getRecordsCollectionByUsername();
-    };
-
-    getRecords().then((response_json) => {
-      const { collection, collectionSize, collectionGenres, wantlist, wantlistSize, wantlistGenres } = response_json;
-
-      setCollectionList(collection);
-      setImmutableCollectionList(collection);
-      setCollectionSize(collectionSize);
-      setWantlist(wantlist);
-      setImmutableWantlist(wantlist);
-      setWantlistSize(wantlistSize);
-      setCollectionGenres(collectionGenres);
-      setWantlistGenres(wantlistGenres);
-    });
-  }, []);
+  // Left off thinking about how updating the collection state should work
 
   useEffect(() => {
     if (isMounted.current) {

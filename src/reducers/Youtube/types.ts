@@ -3,6 +3,10 @@ export interface InitialStateTypes {
   currentImage: string | undefined;
 }
 
+// const somedownloadedjson = { ... }
+
+// type MyType = typeof somedownloadedjson
+
 export interface ResourceUrlResponseTypes {
   artists: Array<any>;
   artists_sort: string;
