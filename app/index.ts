@@ -10,8 +10,9 @@ const musicController = require('./api/musicController.ts');
 const staticFiles = express.static(path.join(__dirname, '../build'));
 
 app.use(staticFiles);
+app.use(cors());
 
-app.get('/collection', cors(), (req: any, res: any) => {
+app.get('/collection', (req: any, res: any) => {
   musicController.getMusicByCategory(req, res, 'collection');
 });
 
